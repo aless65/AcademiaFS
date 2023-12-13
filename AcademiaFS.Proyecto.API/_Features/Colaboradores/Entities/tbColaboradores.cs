@@ -30,7 +30,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public DateTime? cola_FechaModificacion { get; set; }
 
-        public List<tbSucursalesXColaboradores>? tbSucursalesXColaboradores { get; set; }
+        public List<tbSucursalesXColaboradores>? sucursalesXColaboradores { get; set; }
 
         //[NotMapped]
         //public string muni_Codigo { get; set; }

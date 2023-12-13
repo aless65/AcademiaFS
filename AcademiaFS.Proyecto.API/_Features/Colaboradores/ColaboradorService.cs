@@ -20,7 +20,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             List<tbColaboradores> Colaboradores = _db.Colaboradores.ToList();
             foreach (var item in Colaboradores)
             {
-                item.tbSucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.cola_Id.Equals(item.cola_Id)).ToList();
+                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.cola_Id.Equals(item.cola_Id)).ToList();
             }
             return Colaboradores;
         }
@@ -29,12 +29,28 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
         {
             try
             {
+                //foreach (var item in colaboradores.sucursalesXColaboradores)
+                //{
+                //    if(item.suco_DistanciaKm < 1 || item.suco_DistanciaKm > 50)
+                //    {
+                //        return Respuesta.Fault<object>("Todas las distancias deben ser mayor que 0 y menor que 50", "402");
+                //    }
+                        
+                //}
+
+                if (colaboradores.sucursalesXColaboradores.Count() != colaboradores.sucursalesXColaboradores.Where(x => x.suco_DistanciaKm > 0 && x.suco_DistanciaKm < 51).ToList().Count())
+                    return Respuesta.Fault<object>("Todas las distancias deben ser mayor que 0 y menor que 50", "402");
+
+                if (colaboradores.sucursalesXColaboradores.Count() == colaboradores.sucursalesXColaboradores.GroupBy(i => new {i.sucu_Id})
+                    .Where(g => g.Count() > 1)
+                    .Select(g => g.Key)
+                    .Count())
+                    return Respuesta.Fault<object>("No puede ingresar dos veces la misma sucursal");
+
                 _db.Colaboradores.Add(colaboradores);
 
-                foreach (var item in colaboradores.tbSucursalesXColaboradores)
-                {
-                    _db.SucursalesXColaboradores.Add(item);
-                }
+                _db.SucursalesXColaboradores.AddRange(colaboradores.sucursalesXColaboradores);
+
                 _db.SaveChanges();
 
                 return Respuesta.Success<object>(_db.SucursalesXColaboradores.ToList(), "Operación exitosa", "200"); 
