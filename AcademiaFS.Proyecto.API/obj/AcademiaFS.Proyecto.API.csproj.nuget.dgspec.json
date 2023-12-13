@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[12.0.1, )"
             },
+            "Farsiman.Application.Core.Standard": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
             "Farsiman.AuthServer.Extensions": {
               "target": "Package",
               "version": "[1.0.35371, )"
@@ -62,6 +66,10 @@
             "Farsiman.Extensions.Configuration": {
               "target": "Package",
               "version": "[2.29723.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[7.0.14, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
