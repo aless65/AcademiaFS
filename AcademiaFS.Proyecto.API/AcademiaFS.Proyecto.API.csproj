@@ -6,4 +6,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="Farsiman.AuthServer.Extensions" Version="1.0.35371" />
+    <PackageReference Include="Farsiman.Exceptions" Version="1.0.62594" />
+    <PackageReference Include="Farsiman.Extensions.Configuration" Version="2.29723.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="_Features\" />
+    <Folder Include="_Common\" />
+  </ItemGroup>
+
 </Project>

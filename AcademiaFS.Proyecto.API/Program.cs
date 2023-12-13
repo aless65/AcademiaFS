@@ -1,34 +1,42 @@
+using Farsiman.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-var app = builder.Build();
+builder.Services.AddControllers();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+builder.Services.AddCors(options =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod());
 });
 
-app.Run();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
+//builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddFsAuthService((options) =>
 {
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
+    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
+});
+
+var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseAuthorization();
+app.UseAuthentication();
+app.UseCors("AllowSpecificOrigin");
+app.UseFsAuthService();
+app.MapControllers();
+
+app.Run();
