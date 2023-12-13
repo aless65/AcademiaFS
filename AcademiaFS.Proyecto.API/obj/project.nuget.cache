@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "OMrxdYngCU0lMi64vp3xMZsKoVf1nWFHSxynNGMhnA8+ggy7ANV6NusXyoCwBU+1inss2xGG6R7SEiZFboTUKQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Está ejecutando la operación \"restore\" con un origen \"HTTP\", \"http://sertfs.grupofarsiman.com/FarsimanPackages/nuget\". El acceso que no sea HTTPS se quitará en una versión futura. Considere la posibilidad de migrar a un origen \"HTTPS\"."
+    }
+  ]
+}
