@@ -1,6 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Colaborador;
+using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.SucursalXColaborador;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Usuario;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,11 +19,13 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
         }
 
         public DbSet<tbColaboradores> Colaboradores { get; set; }
+        public DbSet<tbSucursalesXColaboradores> SucursalesXColaboradores { get; set; }
         public DbSet<tbUsuarios> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new tbColaboradoresMap());
+            modelBuilder.ApplyConfiguration(new tbSucursalesXColaboradoresMap());
             modelBuilder.ApplyConfiguration(new tbUsuariosMap());
         }
     }

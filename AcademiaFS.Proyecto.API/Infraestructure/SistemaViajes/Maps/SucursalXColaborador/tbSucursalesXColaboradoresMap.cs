@@ -1,13 +1,13 @@
-﻿namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.SucursalXColaborador
+﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using Microsoft.EntityFrameworkCore;
+
+namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.SucursalXColaborador
 {
-    public class tbSucursalesXColaboradoresMap
+    public class tbSucursalesXColaboradoresMap : IEntityTypeConfiguration<tbSucursalesXColaboradores>
     {
-        public int suco_Id { get; set; }
-
-        public int sucu_Id { get; set; }
-
-        public int cola_Id { get; set; }
-
-        public decimal suco_DistanciaKm { get; set; }
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<tbSucursalesXColaboradores> builder)
+        {
+            builder.HasKey(x => x.suco_Id);
+        }
     }
 }

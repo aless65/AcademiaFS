@@ -8,6 +8,7 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Usuario
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<tbUsuarios> builder)
         {
             builder.HasKey(x => x.usua_Id);
+            builder.HasIndex(x => x.usua_Nombre).IsUnique();
         }
     }
 }

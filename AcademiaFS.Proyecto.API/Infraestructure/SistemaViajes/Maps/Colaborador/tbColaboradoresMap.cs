@@ -7,9 +7,8 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Colaborador
     {
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<tbColaboradores> builder)
         {
-            //builder.ToTable("tbColaboradores");
             builder.HasKey(x => x.cola_Id);
-            //builder.Property(x => x.cola_Nombres).HasC
+            builder.HasIndex(x => x.cola_Identidad).IsUnique();
         }
     }
 }
