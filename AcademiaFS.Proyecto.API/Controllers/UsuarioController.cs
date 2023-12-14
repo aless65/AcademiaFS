@@ -15,7 +15,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpPost("Login")]
+        [HttpPost("Login/{username}/{password}")]
         public IActionResult Login(string username, string password)
         {
             var respuesta = _usuarioService.Login(username, password);
