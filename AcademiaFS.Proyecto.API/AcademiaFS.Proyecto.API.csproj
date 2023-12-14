@@ -9,11 +9,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Farsiman.Application.Core.Standard" Version="3.0.1" />
-    <PackageReference Include="Farsiman.AuthServer.Extensions" Version="1.0.35371" />
-    <PackageReference Include="Farsiman.Exceptions" Version="1.0.62594" />
-    <PackageReference Include="Farsiman.Extensions.Configuration" Version="2.29723.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
@@ -24,6 +22,8 @@
     <Folder Include="_Common\Dto\" />
     <Folder Include="_Common\Entities\" />
     <Folder Include="_Features\Colaboradores\Dtos\" />
+    <Folder Include="_Features\Roles\Dtos\" />
+    <Folder Include="_Features\Roles\Entities\" />
     <Folder Include="_Features\Usuarios\Dtos\" />
   </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
-using Farsiman.Application.Core.Standard.DTOs;
+//using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.API._Features.Usuarios
 {
@@ -13,14 +13,15 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
             _db = db;
         }
 
-        public Respuesta<tbUsuarios?> Login(string username, string password)
+        public Respuesta<UsuariosEntity?> Login(string username, string password)
         {
-            var respuesta = _db.Usuarios.Where(x => x.usua_Nombre.Equals(username) && x.usua_Contrasena.Equals(password)).FirstOrDefault();
+            var respuesta = _db.Usuarios.Where(x => x.Nombre.Equals(username) && x.Contrasena.Equals(password)).FirstOrDefault();
 
             if (respuesta != null)
             {
                 return Respuesta.Success(respuesta, "Éxito", "200");
-            } else
+            }
+            else
             {
                 return Respuesta.Fault("Usuario o contraseña incorrectos", "404", respuesta);
             }

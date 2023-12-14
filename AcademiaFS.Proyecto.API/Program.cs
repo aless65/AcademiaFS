@@ -4,7 +4,7 @@ using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
-using Farsiman.Extensions.Configuration;
+//using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -33,11 +33,11 @@ builder.Services.AddDbContext<SistemaViajesDBContext>(o => o.UseInMemoryDatabase
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddFsAuthService((options) =>
-{
-    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
-    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
-});
+//builder.Services.AddFsAuthService((options) =>
+//{
+//    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
+//    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
+//});
 
 builder.Services.AddTransient<ColaboradorService>();
 builder.Services.AddTransient<UsuarioService>();
@@ -58,7 +58,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseCors("AllowSpecificOrigin");
-app.UseFsAuthService();
+//app.UseFsAuthService();
 app.MapControllers();
 
 app.Run();
@@ -69,15 +69,15 @@ static void AgregarUsuarioParaLogin(WebApplication app)
 
     var db = scope.ServiceProvider.GetService<SistemaViajesDBContext>();
 
-    var usuario = new tbUsuarios
+    var usuario = new UsuariosEntity
     {
-        usua_Id = 1,
-        usua_Nombre = "admin",
-        usua_Contrasena = "123",
-        usua_EsAdmin = true,
-        usua_Estado = true,
-        usua_UsuaCreacion = 1,
-        usua_FechaCreacion = DateTime.Now,
+        Id = 1,
+        Nombre = "admin",
+        Contrasena = "123",
+        Admin = true,
+        Estado = true,
+        UsuaCreacion = 1,
+        FechaCreacion = DateTime.Now,
     };
 
     db.Usuarios.Add(usuario);
