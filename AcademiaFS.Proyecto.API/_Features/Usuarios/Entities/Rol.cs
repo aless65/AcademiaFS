@@ -1,6 +1,6 @@
 ﻿namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 {
-    public class RolesEntity
+    public class Rol
     {
         public int RolId { get; set; }
 
@@ -15,6 +15,6 @@
         public int? RolUsuaModificacion { get; set; }
         public DateTime? RolFechaModificacion { get; set; }
 
-        public virtual ICollection<UsuariosEntity> Usuarios { get; set; } = new List<UsuariosEntity>();
+        public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

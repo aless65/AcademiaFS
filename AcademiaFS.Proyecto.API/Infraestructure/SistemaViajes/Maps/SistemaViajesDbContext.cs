@@ -18,9 +18,9 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
 
         }
 
-        public DbSet<ColaboradoresEntity> Colaboradores { get; set; }
-        public DbSet<tbSucursalesXColaboradores> SucursalesXColaboradores { get; set; }
-        public DbSet<UsuariosEntity> Usuarios { get; set; }
+        public DbSet<_Features.Colaboradores.Entities.Colaborador> Colaboradores { get; set; }
+        public DbSet<_Features.Colaboradores.Entities.SucursalXColaborador> SucursalesXColaboradores { get; set; }
+        public DbSet<_Features.Usuarios.Entities.Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

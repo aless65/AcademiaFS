@@ -25,7 +25,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult Insertar(ColaboradoresEntity colaborador)
+        public IActionResult Insertar(Colaborador colaborador)
         {
             var respuesta = _colaboradorService.InsertarColaboradores(colaborador);
 

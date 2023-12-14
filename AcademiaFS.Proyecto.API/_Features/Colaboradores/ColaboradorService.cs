@@ -15,17 +15,17 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             _db = db;
         }
 
-        public List<ColaboradoresEntity> ListaColaboradores()
+        public List<Colaborador> ListaColaboradores()
         {
-            List<ColaboradoresEntity> Colaboradores = _db.Colaboradores.ToList();
+            List<Colaborador> Colaboradores = _db.Colaboradores.ToList();
             foreach (var item in Colaboradores)
             {
-                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.cola_Id.Equals(item.ColId)).ToList();
+                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.ColId.Equals(item.ColId)).ToList();
             }
             return Colaboradores;
         }
 
-        public Respuesta<object> InsertarColaboradores(ColaboradoresEntity colaboradores)
+        public Respuesta<object> InsertarColaboradores(Colaborador colaboradores)
         {
             try
             {
@@ -38,11 +38,11 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 //}
 
-                if (colaboradores.sucursalesXColaboradores.Count() != colaboradores.sucursalesXColaboradores.Where(x => x.suco_DistanciaKm > 0 && x.suco_DistanciaKm < 51).ToList().Count())
+                if (colaboradores.sucursalesXColaboradores.Count() != colaboradores.sucursalesXColaboradores.Where(x => x.SucoDistanciaKm > 0 && x.SucoDistanciaKm < 51).ToList().Count())
                     return Respuesta.Fault<object>("Todas las distancias deben ser mayor que 0 y menor que 50", "402");
 
-                if (colaboradores.sucursalesXColaboradores.Select(g => g.sucu_Id).Count() !=
-                    colaboradores.sucursalesXColaboradores.Select(g => g.sucu_Id).Distinct().Count())
+                if (colaboradores.sucursalesXColaboradores.Select(g => g.SucuId).Count() !=
+                    colaboradores.sucursalesXColaboradores.Select(g => g.SucuId).Distinct().Count())
                     return Respuesta.Fault<object>("No puede ingresar dos veces la misma sucursal");
 
                 _db.Colaboradores.Add(colaboradores);

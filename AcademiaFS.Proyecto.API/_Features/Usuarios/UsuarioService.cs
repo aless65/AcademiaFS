@@ -13,7 +13,7 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
             _db = db;
         }
 
-        public Respuesta<UsuariosEntity?> Login(string username, string password)
+        public Respuesta<Usuario?> Login(string username, string password)
         {
             var respuesta = _db.Usuarios.Where(x => x.Nombre.Equals(username) && x.Contrasena.Equals(password)).FirstOrDefault();
 

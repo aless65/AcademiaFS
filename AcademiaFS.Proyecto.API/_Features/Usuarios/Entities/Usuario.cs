@@ -1,7 +1,7 @@
 ﻿
 namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 {
-    public class UsuariosEntity
+    public class Usuario
     {
         public int Id { get; set; }
 
@@ -25,6 +25,6 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 
         public DateTime? FechaModificacion { get; set; }
 
-        public virtual RolesEntity? role { get; set; }
+        public virtual Rol? role { get; set; }
     }
 }

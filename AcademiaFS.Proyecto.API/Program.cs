@@ -69,7 +69,7 @@ static void AgregarUsuarioParaLogin(WebApplication app)
 
     var db = scope.ServiceProvider.GetService<SistemaViajesDBContext>();
 
-    var usuario = new UsuariosEntity
+    var usuario = new Usuario
     {
         Id = 1,
         Nombre = "admin",

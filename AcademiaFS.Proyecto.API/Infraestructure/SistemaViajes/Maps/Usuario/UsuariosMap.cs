@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Usuario
 {
-    public class UsuariosMap : IEntityTypeConfiguration<UsuariosEntity>
+    public class UsuariosMap : IEntityTypeConfiguration<_Features.Usuarios.Entities.Usuario>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<UsuariosEntity> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<_Features.Usuarios.Entities.Usuario> builder)
         {
             builder.ToTable("tbUsuarios");
 

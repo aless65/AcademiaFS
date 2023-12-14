@@ -1,7 +1,7 @@
 ﻿
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 {
-    public class ColaboradoresEntity
+    public class Colaborador
     {
         public int ColId { get; set; }
 
@@ -29,7 +29,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public DateTime? ColFechaModificacion { get; set; }
 
-        public List<tbSucursalesXColaboradores>? sucursalesXColaboradores { get; set; }
+        public List<SucursalXColaborador>? sucursalesXColaboradores { get; set; }
     }
 }
 
