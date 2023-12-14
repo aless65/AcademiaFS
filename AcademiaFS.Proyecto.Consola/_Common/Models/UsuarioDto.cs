@@ -10,9 +10,9 @@ namespace AcademiaFS.Proyecto.Consola._Common.Models
     {
         public int Id { get; set; }
 
-        public required string Nombre { get; set; }
+        public string? Nombre { get; set; }
 
-        public required string Contrasena { get; set; }
+        public string? Contrasena { get; set; }
 
         public string? Imagen { get; set; }
 

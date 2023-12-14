@@ -19,7 +19,7 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
 
             if (respuesta != null)
             {
-                return Respuesta.Success(respuesta, "Éxito", "200");
+                return Respuesta.Success(respuesta, "Sesión iniciada", "200");
             }
             else
             {

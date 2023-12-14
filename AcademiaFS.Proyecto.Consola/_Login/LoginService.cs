@@ -1,4 +1,4 @@
-﻿using Farsiman.Application.Core.Standard.DTOs;
+﻿using AcademiaFS.Proyecto.Consola._Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +15,17 @@ namespace AcademiaFS.Proyecto.Consola._Login
             _loginClient = new LoginClient();
         }
 
-        public async Task<bool> IniciarSesion(string username, string password)
+        public async Task<Respuesta> IniciarSesion(string username, string password)
         {
             var respuesta = await _loginClient.IniciarSesion(username, password);
-            Console.WriteLine(respuesta.data + "hola xd");
-            if (respuesta.ok)
-                return true;
-            else return false;
+
+            Console.WriteLine(respuesta.mensaje);
+
+            return respuesta;
+            //Console.WriteLine(respuesta.data + "hola xd");
+            //if (respuesta.ok)
+            //    return true;
+            //else return false;
         }
     }
 }
