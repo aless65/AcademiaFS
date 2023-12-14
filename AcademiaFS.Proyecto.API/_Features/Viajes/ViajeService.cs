@@ -88,5 +88,20 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                 return Respuesta.Fault<object>("Intente más tarde", "500");
             }
         }
+
+        public Respuesta<object> ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
+        {
+            try
+            {
+                var reporteEncabezado = from v in _db.Viajes
+                                        where v.ViajFechaYHora.Date >= fechaInicio && v.ViajFechaYHora.Date <= fechaFinal
+                                        select new { v.ViajId, v.SucuId, v.TranId, v.ViajTotalKm, TotalPagar = v.ViajTarifaActual * v.ViajTotalKm, v.ViajFechaYHora };
+
+                return Respuesta.Success<object>(reporteEncabezado, "Operación exitosa", "200");
+            } catch
+            {
+                return Respuesta.Fault<object>("Ha ocurrido un error, intente más tarde", "500");
+            }
+        }
     }
 }
