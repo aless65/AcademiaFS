@@ -18,15 +18,15 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
 
         }
 
-        public DbSet<tbColaboradores> Colaboradores { get; set; }
+        public DbSet<ColaboradoresEntity> Colaboradores { get; set; }
         public DbSet<tbSucursalesXColaboradores> SucursalesXColaboradores { get; set; }
-        public DbSet<tbUsuarios> Usuarios { get; set; }
+        public DbSet<UsuariosEntity> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new tbColaboradoresMap());
+            modelBuilder.ApplyConfiguration(new ColaboradoresMap());
             modelBuilder.ApplyConfiguration(new tbSucursalesXColaboradoresMap());
-            modelBuilder.ApplyConfiguration(new tbUsuariosMap());
+            modelBuilder.ApplyConfiguration(new UsuariosMap());
         }
     }
 }

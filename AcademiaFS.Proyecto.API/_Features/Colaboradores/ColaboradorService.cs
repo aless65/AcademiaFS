@@ -15,17 +15,17 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             _db = db;
         }
 
-        public List<tbColaboradores> ListaColaboradores()
+        public List<ColaboradoresEntity> ListaColaboradores()
         {
-            List<tbColaboradores> Colaboradores = _db.Colaboradores.ToList();
+            List<ColaboradoresEntity> Colaboradores = _db.Colaboradores.ToList();
             foreach (var item in Colaboradores)
             {
-                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.cola_Id.Equals(item.cola_Id)).ToList();
+                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.cola_Id.Equals(item.ColId)).ToList();
             }
             return Colaboradores;
         }
 
-        public Respuesta<object> InsertarColaboradores(tbColaboradores colaboradores)
+        public Respuesta<object> InsertarColaboradores(ColaboradoresEntity colaboradores)
         {
             try
             {

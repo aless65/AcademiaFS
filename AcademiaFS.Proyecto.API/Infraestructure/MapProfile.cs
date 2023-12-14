@@ -2,5 +2,7 @@
 {
     public class MapProfile
     {
+        //CreateMap<SucursalDto, Sucursal>();
+        //CreateMap<Sucursal, SucursalDto>();
     }
 }
