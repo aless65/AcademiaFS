@@ -63,6 +63,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                         ViajFechaModificacion = viaje.ViajFechaModificacion,
                         ViajFechaYHora = viaje.ViajFechaYHora,
                         ViajTotalKm = viaje.ViajTotalKm,
+                        ViajTarifaActual = viaje.ViajTarifaActual,
                         ViajUsuaCreacion = viaje.ViajUsuaCreacion,
                         ViajUsuaModificacion = viaje.ViajUsuaModificacion
                     };
@@ -94,10 +95,22 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             try
             {
                 var reporteEncabezado = from v in _db.Viajes
-                                        where v.ViajFechaYHora.Date >= fechaInicio && v.ViajFechaYHora.Date <= fechaFinal
-                                        select new { v.ViajId, v.SucuId, v.TranId, v.ViajTotalKm, TotalPagar = v.ViajTarifaActual * v.ViajTotalKm, v.ViajFechaYHora };
+                                        where v.ViajFechaYHora.Date >= fechaInicio.Date && v.ViajFechaYHora.Date <= fechaFinal.Date
+                                        select new { v.ViajId, v.SucuId, v.TranId, v.ViajTarifaActual,
+                                                     v.ViajTotalKm, TotalPagar = v.ViajTarifaActual * v.ViajTotalKm, 
+                                                     v.ViajFechaYHora, Detalles = _db.ViajeDetalles.Where(x => x.ViajId == v.ViajId).ToList()};
 
-                return Respuesta.Success<object>(reporteEncabezado, "Operación exitosa", "200");
+                var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
+
+                var reporteConTotal = new
+                {
+                    totalAPagar = totalAPagar,
+                    reporte = reporteEncabezado
+                };
+
+                //reporteEncabezado = totalAPagar.ToString() + reporteEncabezado;
+
+                return Respuesta.Success<object>(reporteConTotal, "Operación exitosa", "200");
             } catch
             {
                 return Respuesta.Fault<object>("Ha ocurrido un error, intente más tarde", "500");

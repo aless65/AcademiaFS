@@ -34,5 +34,13 @@ namespace AcademiaFS.Proyecto.API.Controllers
 
             return Ok(respuesta);
         }
+
+        [HttpGet("Reporte")]
+        public IActionResult Reporte(DateTime fechaInicio, DateTime fechaFinal)
+        {
+            var respuesta = _viajeService.ReporteViajes(fechaInicio, fechaFinal);
+
+            return Ok(respuesta);
+        }
     }
 }
