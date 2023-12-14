@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "KWKPoDAVb8WM6LcPgTnhgxzOscoboCxtEyX5JJ1fZJ5Yxp1Fk0ASr+hj7KXWhCal1vkIqThPaO6VaHQkoCv5WA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\ViajesDesktop.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1803",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Está ejecutando la operación \"restore\" con un origen \"HTTP\", \"http://sertfs.grupofarsiman.com/FarsimanPackages/nuget\". El acceso que no sea HTTPS se quitará en una versión futura. Considere la posibilidad de migrar a un origen \"HTTPS\"."
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\ViajesDesktop.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\ViajesDesktop.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\ViajesDesktop.csproj",
+        "projectName": "ViajesDesktop",
+        "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\ViajesDesktop.csproj",
+        "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\ViajesDesktop\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\amedina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "http://sertfs.grupofarsiman.com/FarsimanPackages/nuget": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
