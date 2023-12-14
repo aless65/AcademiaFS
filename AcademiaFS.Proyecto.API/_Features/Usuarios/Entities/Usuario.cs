@@ -1,4 +1,6 @@
 ﻿
+using AcademiaFS.Proyecto.API._Features.Roles.Entities;
+
 namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 {
     public class Usuario

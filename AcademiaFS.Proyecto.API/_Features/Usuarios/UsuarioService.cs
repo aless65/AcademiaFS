@@ -1,6 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
-//using Farsiman.Application.Core.Standard.DTOs;
+using Farsiman.Application.Core.Standard.DTOs;
 
 namespace AcademiaFS.Proyecto.API._Features.Usuarios
 {

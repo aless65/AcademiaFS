@@ -1,8 +1,17 @@
-﻿namespace Academia.Proyecto.API.Infraestructure
+﻿using AutoMapper;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
+using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+
+namespace Academia.Proyecto.API.Infraestructure
 {
-    public class MapProfile
+    public class MapProfile : Profile
     {
         //CreateMap<SucursalDto, Sucursal>();
-        //CreateMap<Sucursal, SucursalDto>();
+        public MapProfile() {
+            CreateMap<Usuario, UsuarioAuditoriaDto>().ReverseMap();
+
+            CreateMap<Viaje, ViajeDto>().ReverseMap();
+        }
     }
 }

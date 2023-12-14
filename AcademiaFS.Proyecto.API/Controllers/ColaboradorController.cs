@@ -17,7 +17,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpGet("Listar")]
-        public IActionResult Listar()
+        public IActionResult Index()
         {
             var respuesta = _colaboradorService.ListaColaboradores();
 

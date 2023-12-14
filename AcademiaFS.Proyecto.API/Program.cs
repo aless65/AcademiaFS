@@ -1,8 +1,13 @@
 using Academia.Proyecto.API.Infraestructure;
 using AcademiaFS.Proyecto.API._Features.Colaboradores;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Sucursales;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
+using AcademiaFS.Proyecto.API._Features.Transportistas;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+using AcademiaFS.Proyecto.API._Features.Viajes;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -40,12 +45,15 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 //});
 
 builder.Services.AddTransient<ColaboradorService>();
+builder.Services.AddTransient<SucursalService>();
+builder.Services.AddTransient<TransportistaService>();
 builder.Services.AddTransient<UsuarioService>();
+builder.Services.AddTransient<ViajeService>();
 
 var app = builder.Build();
 
 //AgregarDataColaboradores(app);
-AgregarUsuarioParaLogin(app);
+AgregarDatosDeInicio(app);
 
 //app.UseFsWebApiExceptionHandler(builder.Configuration["seq:url"], builder.Configuration["seq:key"]);
 
@@ -63,7 +71,7 @@ app.MapControllers();
 
 app.Run();
 
-static void AgregarUsuarioParaLogin(WebApplication app)
+static void AgregarDatosDeInicio(WebApplication app)
 {
     var scope = app.Services.CreateScope();
 
@@ -80,47 +88,45 @@ static void AgregarUsuarioParaLogin(WebApplication app)
         FechaCreacion = DateTime.Now,
     };
 
+    var sucursales = new List<Sucursal>
+    {
+        new Sucursal { 
+            //SucuId = 1,
+            SucuNombre = "Sucursal 1",
+            SucuDireccion = "Direccion xd",
+            SucuUsuaCreacion = 1,
+            SucuFechaCreacion = DateTime.Now 
+        },
+
+        new Sucursal {
+            //SucuId = 2,
+            SucuNombre = "Sucursal 2",
+            SucuDireccion = "Direccion xd",
+            SucuUsuaCreacion = 1,
+            SucuFechaCreacion = DateTime.Now
+        }
+    };
+
+    var transportistas = new List<Transportista>
+    {
+        new Transportista {
+            //TranId = 1,
+            TranNombres = "Juan Hernan",
+            TranApellidos = "De la CRUX",
+            TranIdentidad = "03020156546",
+        },
+
+        new Transportista {
+            //TranId = 2,
+            TranNombres = "Marina",
+            TranApellidos = "Saavedra",
+            TranIdentidad = "03020156543",
+        }
+    };
+
     db.Usuarios.Add(usuario);
+    db.Sucursales.AddRange(sucursales);
+    db.Transportistas.AddRange(transportistas);
     db.SaveChanges();
 }
 
-//static void AgregarDataColaboradores(WebApplication app)
-//{
-//    var scope = app.Services.CreateScope();
-//    var db = scope.ServiceProvider.GetService<SistemaViajesDBContext>();
-
-//    var colaborador1 = new tbColaboradores
-//    {
-//        cola_Id = 1,
-//        cola_Nombres = "Andrea",
-//        cola_Apellidos = "Hernández",
-//        cola_Identidad = "0501200506728",
-//        cola_Direccion = "Calle de la chinaaaa",
-//        muni_Id = 1,
-//        cola_FechaNacimiento = new DateTime(2005,02,28),
-//        cola_Sexo = "F",
-//        cola_Estado = true,
-//        cola_UsuaCreacion = 1,
-//        cola_FechaCreacion = DateTime.Now,
-//    };
-
-//    var colaborador2 = new tbColaboradores
-//    {
-//        cola_Id = 2,
-//        cola_Nombres = "Marlon",
-//        cola_Apellidos = "Montecarlo",
-//        cola_Identidad = "0501200006768",
-//        cola_Direccion = "Calle de la chinaaa a",
-//        muni_Id = 1,
-//        cola_FechaNacimiento = new DateTime(2000, 05, 01),
-//        cola_Sexo = "F",
-//        cola_Estado = true,
-//        cola_UsuaCreacion = 1,
-//        cola_FechaCreacion = DateTime.Now,
-//    };
-
-//    db.Colaboradores.Add(colaborador1);
-//    db.Colaboradores.Add(colaborador2);
-
-//    db.SaveChanges();
-//}

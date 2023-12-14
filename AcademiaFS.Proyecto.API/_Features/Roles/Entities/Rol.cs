@@ -1,4 +1,6 @@
-﻿namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
+﻿using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+
+namespace AcademiaFS.Proyecto.API._Features.Roles.Entities
 {
     public class Rol
     {

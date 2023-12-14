@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\AcademiaFS.Proyecto.API.props" />
+</Project>
