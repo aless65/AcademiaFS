@@ -4,6 +4,7 @@ using AcademiaFS.Proyecto.API._Features.Viajes;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult Insertar(Viaje viaje)
+        public IActionResult Insertar(ViajeDto viaje)
         {
             var respuesta = _viajeService.InsertarViaje(viaje);
 

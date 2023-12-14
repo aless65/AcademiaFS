@@ -30,7 +30,6 @@
     <Folder Include="_Features\Sucursales\Dtos\" />
     <Folder Include="_Features\Transportistas\Dtos\" />
     <Folder Include="_Features\Usuarios\Dtos\" />
-    <Folder Include="_Features\Viajes\Dtos\" />
   </ItemGroup>
 
 </Project>

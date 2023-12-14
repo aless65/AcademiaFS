@@ -1,4 +1,6 @@
-﻿namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
+﻿using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+
+namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
     public class ViajeDto
     {
@@ -7,8 +9,7 @@
         public DateTime ViajFechaYHora { get; set; }
 
         public decimal ViajTotalKm { get; set; }
-
-        public decimal ViajPagoTotal { get; set; }
+        public decimal ViajTarifaActual { get; set; }
 
         public int SucuId { get; set; }
 
@@ -24,8 +25,10 @@
 
         public DateTime? ViajFechaModificacion { get; set; }
 
-        public int Id { get; set; }
-        public required string Nombre { get; set; }
+        //Detalles 
+        public List<ViajeDetalles>? ViajeDetalles { get; set; }
+
+        //Info de usuario
         public bool Admin { get; set; }
     }
 }

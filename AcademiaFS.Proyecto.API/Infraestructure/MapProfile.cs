@@ -9,9 +9,9 @@ namespace Academia.Proyecto.API.Infraestructure
     {
         //CreateMap<SucursalDto, Sucursal>();
         public MapProfile() {
-            CreateMap<Usuario, UsuarioAuditoriaDto>().ReverseMap();
+            //CreateMap<Usuario, UsuarioAuditoriaDto>().ReverseMap();
 
-            CreateMap<Viaje, ViajeDto>().ReverseMap();
+            //CreateMap<Viaje, ViajeDto>().ReverseMap();
         }
     }
 }

@@ -8,7 +8,7 @@
 
         public decimal ViajTotalKm { get; set; }
 
-        public decimal ViajPagoTotal { get; set; }
+        public decimal ViajTarifaActual { get; set; }
 
         public int SucuId { get; set; }
 
@@ -23,5 +23,6 @@
         public int? ViajUsuaModificacion { get; set; }
 
         public DateTime? ViajFechaModificacion { get; set; }
+        public List<ViajeDetalles>? ViajeDetalles { get; set; }
     }
 }

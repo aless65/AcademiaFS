@@ -9,6 +9,7 @@ using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.SucursalXColabo
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Transportistas;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Usuarios;
 using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Viajes;
+using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.ViajesDetalles;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
@@ -30,6 +31,7 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
         public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Viaje> Viajes { get; set; }
+        public DbSet<ViajeDetalles> ViajeDetalles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,6 +41,7 @@ namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps
             modelBuilder.ApplyConfiguration(new TransportistaMap());
             modelBuilder.ApplyConfiguration(new UsuariosMap());
             modelBuilder.ApplyConfiguration(new ViajesMap());
+            modelBuilder.ApplyConfiguration(new ViajeDetallesMap());
         }
     }
 }
