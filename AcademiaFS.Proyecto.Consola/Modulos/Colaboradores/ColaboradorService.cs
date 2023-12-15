@@ -58,17 +58,7 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Colaboradores
         {
             Console.Clear();
 
-            ColaboradorDto colaborador = new()
-            {
-                ColId = 0,
-                ColEstado = true,
-                MuniId = 1,
-                ColFechaCreacion = DateTime.Now,
-                ColSexo = null,
-                ColUsuaModificacion = 0,
-                ColFechaModificacion = null,
-                ColFechaNacimiento = DateTime.Now
-            };
+            ColaboradorDto colaborador = new();
 
             Console.Write("Nombres: ");
             colaborador.ColNombres = Console.ReadLine();
@@ -76,20 +66,56 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Colaboradores
             colaborador.ColApellidos = Console.ReadLine();
             Console.Write("Identidad: ");
             colaborador.ColIdentidad = Console.ReadLine();
+            Console.Write("Sexo: ");
+            colaborador.ColSexo = Console.ReadLine();
             Console.Write("Direccion: ");
             colaborador.ColDireccion = Console.ReadLine();
 
+            Console.WriteLine("\nAsignar sucursales");
+
+            colaborador.sucursalesXColaboradores = new List<SucursalXColaboradorDto>();
+
+            bool insertarSucu = true;
+            while (insertarSucu)
+            {
+                SucursalXColaboradorDto sucursalXColaboradorDto = new();
+                Console.Write("Sucursal Id: ");
+                sucursalXColaboradorDto.SucuId = int.Parse(Console.ReadLine());
+                Console.Write("Distancia en Km: ");
+                sucursalXColaboradorDto.SucoDistanciaKm = decimal.Parse(Console.ReadLine());
+
+                colaborador.sucursalesXColaboradores.Add(sucursalXColaboradorDto);
+
+                Console.WriteLine("\n¿Desea seguir asignando? S/N");
+                string seguir = Console.ReadLine();
+
+                switch (seguir.ToUpper())
+                {
+                    case "S":
+                        Console.WriteLine("");
+                        break;
+                    case "N":
+                        insertarSucu = false;
+                        break;
+                    default:
+                        Console.WriteLine("Ingrese una tecla válida");
+                        break;
+                }
+            }
+
             colaborador.ColUsuaCreacion = usuaId;
 
-            colaborador.sucursalesXColaboradores = new List<SucursalXColaboradorDto>
-            {
-                new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 1, SucoDistanciaKm = 20 },
-                new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 2, SucoDistanciaKm = 13 },
-            };
+            //colaborador.sucursalesXColaboradores = new List<SucursalXColaboradorDto>
+            //{
+            //    new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 1, SucoDistanciaKm = 20 },
+            //    new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 2, SucoDistanciaKm = 13 },
+            //};
 
             var respuesta = await _client.AgregarColaboradores(colaborador);
 
+            Console.WriteLine("");
             Console.WriteLine(respuesta.mensaje);
+            Console.WriteLine("");
 
             Console.WriteLine("Toque cualquier tecla para regresar al menú");
             Console.ReadKey();
