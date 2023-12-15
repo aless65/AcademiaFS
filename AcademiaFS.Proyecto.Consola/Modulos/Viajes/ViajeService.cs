@@ -1,4 +1,6 @@
 ﻿using AcademiaFS.Proyecto.Consola.Modulos.Colaboradores;
+using AcademiaFS.Proyecto.Consola.Modulos.Colaboradores._Models;
+using AcademiaFS.Proyecto.Consola.Modulos.Viajes._Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +31,7 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Viajes
                     {
                         Console.WriteLine("-----------------------------------------------------");
                         Console.WriteLine($"{item.TranId} - {item.ViajFechaYHora} - {item.ViajTotalKm} - {item.TranId}\n");
-                        Console.WriteLine("Sucursales asignadas:");
+                        Console.WriteLine("Detalles:");
                         if (item.ViajeDetalles != null)
                             foreach (var item2 in item.ViajeDetalles)
                             {
@@ -50,6 +52,69 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Viajes
                 Console.Clear();
                 break;
             }
+
+            return true;
+        }
+
+        public async Task<bool> InsertarViajes(int usuaId, bool esAdmin)
+        {
+            Console.Clear();
+
+            ViajeDto viaje = new();
+
+            Console.Write("Fecha y hora: ");
+            viaje.ViajFechaYHora = DateTime.Parse(Console.ReadLine());
+            Console.Write("Transportista Id: ");
+            viaje.TranId = int.Parse(Console.ReadLine());
+            Console.Write("Tarifa actual: ");
+            viaje.ViajTarifaActual = decimal.Parse(Console.ReadLine());
+            Console.Write("Sucursal: ");
+            viaje.SucuId = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("\nAsignar detalles");
+
+            viaje.ViajeDetalles = new List<ViajeDetallesDto>();
+
+            bool insertarDetalles = true;
+            while (insertarDetalles)
+            {
+                ViajeDetallesDto viajeDetallesDto = new();
+                Console.Write("Colaborador: ");
+                viajeDetallesDto.ColId = int.Parse(Console.ReadLine());
+                Console.Write("Distancia: ");
+                viajeDetallesDto.VideDistancia = decimal.Parse(Console.ReadLine());
+
+                viaje.ViajeDetalles.Add(viajeDetallesDto);
+
+                Console.WriteLine("\n¿Desea seguir asignando? S/N");
+                string seguir = Console.ReadLine();
+
+                switch (seguir.ToUpper())
+                {
+                    case "S":
+                        Console.WriteLine("");
+                        break;
+                    case "N":
+                        insertarDetalles = false;
+                        break;
+                    default:
+                        Console.WriteLine("Ingrese una tecla válida");
+                        break;
+                }
+            }
+
+            viaje.ViajUsuaCreacion = usuaId;
+            viaje.admin = esAdmin;
+
+            var respuesta = await _client.AgregarViajes(viaje);
+
+            Console.WriteLine("");
+            Console.WriteLine(respuesta.mensaje);
+            Console.WriteLine("");
+
+            Console.WriteLine("Toque cualquier tecla para regresar al menú");
+            Console.ReadKey();
+            Console.Clear();
 
             return true;
         }

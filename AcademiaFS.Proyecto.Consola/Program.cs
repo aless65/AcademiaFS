@@ -61,11 +61,13 @@ if(username != null && password != null)
                     await transportista.ListarTransportistas();
                     break;
                 case "4":
+                    await transportista.InsertarTransportista(usuario.Id);
                     break;
                 case "5":
                     await viaje.ListarViajes();
                     break;
                 case "6":
+                    await viaje.InsertarViajes(usuario.Id, true);
                     break;
                 case "7":
                     await viaje.ReporteViajes();

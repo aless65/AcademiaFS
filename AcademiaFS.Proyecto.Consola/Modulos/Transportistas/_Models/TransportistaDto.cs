@@ -10,11 +10,11 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Transportistas._Models
     {
         public int TranId { get; set; }
 
-        public required string TranNombres { get; set; }
+        public string? TranNombres { get; set; }
 
-        public required string TranApellidos { get; set; }
+        public string? TranApellidos { get; set; }
 
-        public required string TranIdentidad { get; set; }
+        public string? TranIdentidad { get; set; }
 
         public decimal TranTarifaKm { get; set; }
 

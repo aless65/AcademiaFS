@@ -30,5 +30,7 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Viajes._Models
 
         public DateTime? ViajFechaModificacion { get; set; }
         public List<ViajeDetallesDto>? ViajeDetalles { get; set; }
+
+        public bool admin { get; set; }
     }
 }

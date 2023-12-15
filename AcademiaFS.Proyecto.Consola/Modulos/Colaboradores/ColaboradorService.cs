@@ -105,12 +105,6 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Colaboradores
 
             colaborador.ColUsuaCreacion = usuaId;
 
-            //colaborador.sucursalesXColaboradores = new List<SucursalXColaboradorDto>
-            //{
-            //    new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 1, SucoDistanciaKm = 20 },
-            //    new SucursalXColaboradorDto { SucoId = 0, ColId = 0, SucuId = 2, SucoDistanciaKm = 13 },
-            //};
-
             var respuesta = await _client.AgregarColaboradores(colaborador);
 
             Console.WriteLine("");

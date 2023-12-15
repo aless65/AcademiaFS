@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AcademiaFS.Proyecto.Consola.Modulos.Transportistas._Models;
+using AcademiaFS.Proyecto.Consola.Modulos.Viajes._Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,6 +45,39 @@ namespace AcademiaFS.Proyecto.Consola.Modulos.Transportistas
                 Console.Clear();
                 break;
             }
+
+            return true;
+        }
+
+        public async Task<bool> InsertarTransportista(int usuaId)
+        {
+            Console.Clear();
+
+            TransportistaDto trans = new();
+
+            Console.Write("Nombres: ");
+            trans.TranNombres = Console.ReadLine();
+            Console.Write("Apellidos: ");
+            trans.TranApellidos = Console.ReadLine();
+            Console.Write("Identidad: ");
+            trans.TranIdentidad = Console.ReadLine();
+            Console.Write("Tarifa por kilómetro: ");
+            trans.TranTarifaKm = decimal.Parse(Console.ReadLine());
+
+
+
+
+            trans.TranUsuaCreacion = usuaId;
+
+            var respuesta = await _client.AgregarTransportistas(trans);
+
+            Console.WriteLine("");
+            Console.WriteLine(respuesta.mensaje);
+            Console.WriteLine("");
+
+            Console.WriteLine("Toque cualquier tecla para regresar al menú");
+            Console.ReadKey();
+            Console.Clear();
 
             return true;
         }
