@@ -90,7 +90,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             }
         }
 
-        public Respuesta<object> ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
+        public object ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
         {
             try
             {
@@ -110,10 +110,10 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
                 //reporteEncabezado = totalAPagar.ToString() + reporteEncabezado;
 
-                return Respuesta.Success<object>(reporteConTotal, "Operación exitosa", "200");
+                return reporteConTotal;
             } catch
             {
-                return Respuesta.Fault<object>("Ha ocurrido un error, intente más tarde", "500");
+                return null;
             }
         }
     }

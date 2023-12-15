@@ -22,10 +22,6 @@ namespace AcademiaFS.Proyecto.Consola._Login
             Console.WriteLine(respuesta.mensaje);
 
             return respuesta;
-            //Console.WriteLine(respuesta.data + "hola xd");
-            //if (respuesta.ok)
-            //    return true;
-            //else return false;
         }
     }
 }

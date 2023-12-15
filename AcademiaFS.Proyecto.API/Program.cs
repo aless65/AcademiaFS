@@ -114,6 +114,7 @@ static void AgregarDatosDeInicio(WebApplication app)
             TranNombres = "Juan Hernan",
             TranApellidos = "De la CRUX",
             TranIdentidad = "03020156546",
+            TranTarifaKm = 20,
         },
 
         new Transportista {
@@ -121,6 +122,7 @@ static void AgregarDatosDeInicio(WebApplication app)
             TranNombres = "Marina",
             TranApellidos = "Saavedra",
             TranIdentidad = "03020156543",
+            TranTarifaKm = 10,
         }
     };
 
