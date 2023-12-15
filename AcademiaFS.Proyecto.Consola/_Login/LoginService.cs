@@ -19,7 +19,13 @@ namespace AcademiaFS.Proyecto.Consola._Login
         {
             var respuesta = await _loginClient.IniciarSesion(username, password);
 
-            Console.WriteLine(respuesta.mensaje);
+            Console.WriteLine("\n" + respuesta.mensaje);
+
+            if (!respuesta.ok)
+            {
+                Console.WriteLine("\nPresione cualquier tecla para continuar");
+                Console.ReadKey();
+            };
 
             return respuesta;
         }
