@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcademiaFS.Proyecto.Consola")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ae82dfc70275da251f4815b20a4ac5b6108dcbf")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+846c5ec468963801419f99a580796daa94ef92ee")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcademiaFS.Proyecto.Consola")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcademiaFS.Proyecto.Consola")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

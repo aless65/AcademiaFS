@@ -108,8 +108,6 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                     reporte = reporteEncabezado
                 };
 
-                //reporteEncabezado = totalAPagar.ToString() + reporteEncabezado;
-
                 return reporteConTotal;
             } catch
             {
