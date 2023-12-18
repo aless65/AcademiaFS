@@ -1,35 +1,46 @@
 ﻿
+using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure;
+
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 {
-    public class Colaborador
+    public class Colaboradore
     {
-        public int ColId { get; set; }
+        public int IdColaborador { get; set; }
 
-        public required string ColNombres { get; set; }
+        public string Nombres { get; set; } = null!;
 
-        public required string ColApellidos { get; set; }
+        public string Apellidos { get; set; } = null!;
 
-        public required string ColIdentidad { get; set; }
+        public string Identidad { get; set; } = null!;
 
-        public required string ColDireccion { get; set; }
+        public string Direccion { get; set; } = null!;
 
-        public int MuniId { get; set; }
+        public int IdMunicipio { get; set; }
 
-        public DateTime ColFechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
-        public required string ColSexo { get; set; }
+        public string Sexo { get; set; } = null!;
 
-        public bool? ColEstado { get; set; }
+        public bool? Estado { get; set; }
 
-        public int ColUsuaCreacion { get; set; }
+        public int UsuaCreacion { get; set; }
 
-        public DateTime ColFechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-        public int? ColUsuaModificacion { get; set; }
+        public int? UsuaModificacion { get; set; }
 
-        public DateTime? ColFechaModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
 
-        public List<SucursalXColaborador>? sucursalesXColaboradores { get; set; }
+        //public virtual Municipio IdMunicipioNavigation { get; set; } = null!;
+
+        public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
+
+        //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+
+        //public virtual Usuario? UsuaModificacionNavigation { get; set; }
+
+        public virtual ICollection<ViajesDetalle> ViajesDetalles { get; set; } = new List<ViajesDetalle>();
     }
 }
 

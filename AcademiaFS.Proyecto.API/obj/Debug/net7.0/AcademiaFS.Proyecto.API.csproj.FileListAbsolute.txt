@@ -11,9 +11,8 @@ C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Azure.Identity.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Application.Core.Standard.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.AuthServer.Extensions.dll
-C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Domain.Core.Standard.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Extensions.Configuration.dll
-C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Infraestructure.Core.Entity.Standard.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Humanizer.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\IdentityModel.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\IdentityModel.AspNetCore.OAuth2Introspection.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\IdentityServer6.AccessTokenValidation.dll
@@ -22,9 +21,11 @@ C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
@@ -36,10 +37,12 @@ C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.OpenApi.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Mono.TextTemplating.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Newtonsoft.Json.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\System.CodeDom.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\System.Drawing.Common.dll
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll

@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,25 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult Insertar(Transportista transportista)
+        public IActionResult Insertar(TransportistaDto transportista)
         {
             var respuesta = _transportistaService.InsertarTransportistas(transportista);
+
+            return Ok(respuesta);
+        }
+
+        [HttpPut("Editar")]
+        public IActionResult Editar(Transportista transportista)
+        {
+            var respuesta = _transportistaService.EditarTransportistas(transportista);
+
+            return Ok(respuesta);
+        }
+
+        [HttpPut("Eliminar")]
+        public IActionResult Eliminar(int Id)
+        {
+            var respuesta = _transportistaService.EliminarTransportistas(Id);
 
             return Ok(respuesta);
         }

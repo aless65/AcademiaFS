@@ -1,5 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
-using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 
 namespace AcademiaFS.Proyecto.API._Features.Sucursales
 {
@@ -12,7 +12,7 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales
             _db = db;
         }
 
-        public List<Sucursal> ListarSucursales()
+        public List<Sucursale> ListarSucursales()
         {
             return _db.Sucursales.ToList(); 
         }

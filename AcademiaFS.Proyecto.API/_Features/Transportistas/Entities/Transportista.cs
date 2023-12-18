@@ -2,28 +2,34 @@
 {
     public class Transportista
     {
-        public int TranId { get; set; }
+        public int IdTransportista { get; set; }
 
-        public required string TranNombres { get; set; }
+        public string Nombres { get; set; } = null!;
 
-        public required string TranApellidos { get; set; }
+        public string Apellidos { get; set; } = null!;
 
-        public required string TranIdentidad { get; set; }
+        public string Identidad { get; set; } = null!;
 
-        public decimal TranTarifaKm { get; set; }
+        public decimal TarifaKm { get; set; }
 
-        public DateTime TranFechaNacimiento { get; set; }
+        public DateTime FechaNacimiento { get; set; }
 
-        public string? TranSexo { get; set; }
+        public string Sexo { get; set; } = null!;
 
-        public bool? TranEstado { get; set; }
+        public bool? Estado { get; set; }
 
-        public int TranUsuaCreacion { get; set; }
+        public int UsuaCreacion { get; set; }
 
-        public DateTime TranFechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-        public int? TranUsuaModificacion { get; set; }
+        public int? UsuaModificacion { get; set; }
 
-        public DateTime? TranFechaModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
+
+        //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+
+        //public virtual Usuario? UsuaModificacionNavigation { get; set; }
+
+        //public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
     }
 }

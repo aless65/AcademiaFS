@@ -1,7 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
-using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using Farsiman.Application.Core.Standard.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
             foreach (var item in viajes)
             {
-                item.ViajeDetalles = _db.ViajeDetalles.Where(x => x.ViajId.Equals(item.ViajId)).ToList();
+                item.ViajesDetalles = _db.ViajeDetalles.Where(x => x.IdViaje.Equals(item.IdViaje)).ToList();
             }
 
             return viajes;
@@ -35,19 +35,19 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             {
                 if(viaje.Admin)
                 {
-                    viaje.ViajTotalKm = viaje.ViajeDetalles.Select(x => x.VideDistancia).Sum();
+                    viaje.ViajTotalKm = viaje.ViajeDetalles.Select(x => x.DistanciaActual).Sum();
 
                     if(viaje.ViajTotalKm > 100)
                         return Respuesta.Fault<object>("La distancia total no debe ser mayor a 100Km", "400");
 
-                    List<ViajeDetalles> viajeDetalles = _db.ViajeDetalles.ToList();
+                    List<ViajesDetalle> viajeDetalles = _db.ViajeDetalles.ToList();
 
                     foreach (var item in viaje.ViajeDetalles)
                     {
                         var repiteColaboradorPorDia = from vd in _db.ViajeDetalles
-                                                      join v in _db.Viajes on vd.ViajId equals v.ViajId
-                                                      where vd.ColId == item.ColId
-                                                      && v.ViajFechaYHora.Date == viaje.ViajFechaYHora.Date
+                                                      join v in _db.Viajes on vd.IdViaje equals v.IdViaje
+                                                      where vd.IdColaborador == item.IdColaborador
+                                                      && v.FechaYhora.Date == viaje.ViajFechaYHora.Date
                                                       select vd;
 
                         if (repiteColaboradorPorDia.Count() > 0)
@@ -56,21 +56,21 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
                     Viaje viajeAdd = new()
                     {
-                        SucuId = viaje.SucuId,
-                        TranId = viaje.TranId,
-                        ViajEstado = viaje.ViajEstado,
-                        ViajFechaCreacion = viaje.ViajFechaCreacion,
-                        ViajFechaModificacion = viaje.ViajFechaModificacion,
-                        ViajFechaYHora = viaje.ViajFechaYHora,
-                        ViajTotalKm = viaje.ViajTotalKm,
-                        ViajTarifaActual = viaje.ViajTarifaActual,
-                        ViajUsuaCreacion = viaje.ViajUsuaCreacion,
-                        ViajUsuaModificacion = viaje.ViajUsuaModificacion
+                        IdSucursal = viaje.SucuId,
+                        IdTransportista = viaje.TranId,
+                        Estado = viaje.ViajEstado,
+                        FechaCreacion = viaje.ViajFechaCreacion,
+                        FechaModificacion = viaje.ViajFechaModificacion,
+                        FechaYhora = viaje.ViajFechaYHora,
+                        TotalKm = viaje.ViajTotalKm,
+                        TarifaActual = viaje.ViajTarifaActual,
+                        UsuaCreacion = viaje.ViajUsuaCreacion,
+                        UsuaModificacion = viaje.ViajUsuaModificacion
                     };
 
                     _db.Viajes.Add(viajeAdd);
 
-                    viaje.ViajeDetalles.ForEach(item => item.ViajId = viajeAdd.ViajId);
+                    viaje.ViajeDetalles.ForEach(item => item.IdViaje = viajeAdd.IdViaje);
 
                     _db.ViajeDetalles.AddRange(viaje.ViajeDetalles);
 
@@ -95,10 +95,10 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             try
             {
                 var reporteEncabezado = from v in _db.Viajes
-                                        where v.ViajFechaYHora.Date >= fechaInicio.Date && v.ViajFechaYHora.Date <= fechaFinal.Date
-                                        select new { v.ViajId, v.SucuId, v.TranId, v.ViajTarifaActual,
-                                                     v.ViajTotalKm, TotalPagar = v.ViajTarifaActual * v.ViajTotalKm, 
-                                                     v.ViajFechaYHora, Detalles = _db.ViajeDetalles.Where(x => x.ViajId == v.ViajId).ToList()};
+                                        where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date
+                                        select new { v.IdViaje, v.IdSucursal, v.IdTransportista, v.TarifaActual,
+                                                     v.TotalKm, TotalPagar = v.TarifaActual * v.TotalKm, 
+                                                     v.FechaYhora, Detalles = _db.ViajeDetalles.Where(x => x.IdViaje == v.IdViaje).ToList()};
 
                 var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
 

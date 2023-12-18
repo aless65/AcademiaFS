@@ -26,7 +26,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
         public DateTime? ViajFechaModificacion { get; set; }
 
         //Detalles 
-        public List<ViajeDetalles>? ViajeDetalles { get; set; }
+        public List<ViajesDetalle>? ViajeDetalles { get; set; }
 
         //Info de usuario
         public bool Admin { get; set; }

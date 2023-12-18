@@ -1,7 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps.Usuarios
+namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Usuarios
 {
     public class UsuariosMap : IEntityTypeConfiguration<_Features.Usuarios.Entities.Usuario>
     {

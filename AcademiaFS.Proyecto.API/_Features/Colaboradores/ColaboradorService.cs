@@ -1,5 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
-using AcademiaFS.Proyecto.API.Infraestructure.SistemaViajes.Maps;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 
@@ -18,35 +18,35 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             _db = db;
         }
 
-        public List<Colaborador> ListaColaboradores()
+        public List<Colaboradore> ListaColaboradores()
         {
-            List<Colaborador> Colaboradores = _db.Colaboradores.ToList();
+            List<Colaboradore> Colaboradores = _db.Colaboradores.ToList();
             foreach (var item in Colaboradores)
             {
-                item.sucursalesXColaboradores = _db.SucursalesXColaboradores.Where(x => x.ColId.Equals(item.ColId)).ToList();
+                item.SucursalesXcolaboradores = _db.SucursalesXColaboradores.Where(x => x.IdColaborador.Equals(item.IdColaborador)).ToList();
             }
             return Colaboradores;
         }
 
-        public Respuesta<object> InsertarColaboradores(Colaborador colaboradores)
+        public Respuesta<object> InsertarColaboradores(Colaboradore colaboradores)
         {
             try
             {
-                if (colaboradores.sucursalesXColaboradores.Count() != colaboradores.sucursalesXColaboradores.Where(x => x.SucoDistanciaKm > 0 && x.SucoDistanciaKm < 51).ToList().Count())
+                if (colaboradores.SucursalesXcolaboradores.Count() != colaboradores.SucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count())
                     return Respuesta.Fault<object>("Todas las distancias deben ser mayor que 0 y menor que 50", "402");
 
-                if (colaboradores.sucursalesXColaboradores.Select(g => g.SucuId).Count() !=
-                    colaboradores.sucursalesXColaboradores.Select(g => g.SucuId).Distinct().Count())
+                if (colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Count() !=
+                    colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Distinct().Count())
                     return Respuesta.Fault<object>("No puede ingresar dos veces la misma sucursal");
 
                 _db.Colaboradores.Add(colaboradores);
 
-                foreach (var item in colaboradores.sucursalesXColaboradores)
+                foreach (var item in colaboradores.SucursalesXcolaboradores)
                 {
-                    item.ColId = colaboradores.ColId;
+                    item.IdColaborador = colaboradores.IdColaborador;
                 }
 
-                _db.SucursalesXColaboradores.AddRange(colaboradores.sucursalesXColaboradores);
+                _db.SucursalesXColaboradores.AddRange(colaboradores.SucursalesXcolaboradores);
 
                 _db.SaveChanges();
 
