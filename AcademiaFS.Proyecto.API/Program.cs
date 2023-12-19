@@ -10,6 +10,9 @@ using AcademiaFS.Proyecto.API._Features.Viajes;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+using Farsiman.Domain.Core.Standard.Repositories;
+using Farsiman.Infraestructure.Core.Entity.Standard;
+using Farsiman.Infraestructure.Core.Entity.Standard.Extensions;
 using IdentityModel;
 
 //using Farsiman.Extensions.Configuration;
@@ -40,9 +43,9 @@ builder.Services.AddSwaggerGen();
 var connectionString = builder.Configuration.GetConnectionString("SistemaViaje");
 builder.Services.AddDbContext<SistemaViajesDBContext>(o => o.UseSqlServer(connectionString));
 
-builder.Services.AddAutoMapper(typeof(MapProfile));
+builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
-builder.Services.AddTransient(typeof(IRepository<>), typeof(EntityRepository<>));
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
 //builder.Services.AddFsAuthService((options) =>
 //{
@@ -77,64 +80,5 @@ app.MapControllers();
 
 app.Run();
 
-//static void AgregarDatosDeInicio(WebApplication app)
-//{
-//    var scope = app.Services.CreateScope();
 
-//    var db = scope.ServiceProvider.GetService<SistemaViajesDBContext>();
-
-//    var usuario = new Usuario
-//    {
-//        Id = 1,
-//        Nombre = "admin",
-//        Contrasena = "123",
-//        Admin = true,
-//        Estado = true,
-//        UsuaCreacion = 1,
-//        FechaCreacion = DateTime.Now,
-//    };
-
-//    var sucursales = new List<Sucursal>
-//    {
-//        new Sucursal { 
-//            //SucuId = 1,
-//            SucuNombre = "Sucursal 1",
-//            SucuDireccion = "Direccion xd",
-//            SucuUsuaCreacion = 1,
-//            SucuFechaCreacion = DateTime.Now 
-//        },
-
-//        new Sucursal {
-//            //SucuId = 2,
-//            SucuNombre = "Sucursal 2",
-//            SucuDireccion = "Direccion xd",
-//            SucuUsuaCreacion = 1,
-//            SucuFechaCreacion = DateTime.Now
-//        }
-//    };
-
-//    var transportistas = new List<Transportista>
-//    {
-//        new Transportista {
-//            //TranId = 1,
-//            Nombres = "Juan Hernan",
-//            Apellidos = "De la CRUX",
-//            Identidad = "03020156546",
-//            TarifaKm = 20,
-//        },
-
-//        new Transportista {
-//            //TranId = 2,
-//            Nombres = "Marina",
-//            Apellidos = "Saavedra",
-//            Identidad = "03020156543",
-//            TarifaKm = 10,
-//        }
-//    };
-
-    //db.Usuarios.Add(usuario);
-    //db.Sucursales.AddRange(sucursales);
-    //db.Transportistas.AddRange(transportistas);
-    //db.SaveChanges();
-//}
 

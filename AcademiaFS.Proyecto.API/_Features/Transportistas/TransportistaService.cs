@@ -1,28 +1,28 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
+using Farsiman.Domain.Core.Standard.Repositories;
 
 namespace AcademiaFS.Proyecto.API._Features.Transportistas
 {
     public class TransportistaService
     {
-        private readonly SistemaViajesDBContext _db;
         private readonly IMapper _mapper;
-        private readonly IRepository<Transportista> _repository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TransportistaService(SistemaViajesDBContext db, IMapper mapper, IRepository<Transportista> repository)
+        public TransportistaService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder)
         {
-            _db = db;
             _mapper = mapper;
-            _repository = repository;
+            _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
         }
 
         public List<TransportistaDto> ListarTransportistas()
         {
-            var transportistas = _repository.AsQueryable().Select(x => new TransportistaDto
+            var transportistas = _unitOfWork.Repository<Transportista>().AsQueryable().Select(x => new TransportistaDto
             {
                 Nombres = x.Nombres,
                 Apellidos = x.Apellidos
@@ -35,16 +35,10 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
-                //var transportista = _mapper.Map<Transportista>(transportistaDto);
-
-                //transportista.UsuaModificacion = null;
-                //transportista.FechaModificacion = null;
-
-                //_db.Transportistas.Add(transportista);
-
-                //_db.SaveChanges();
                 var transportista = _mapper.Map<Transportista>(transportistaDto);
-                _repository.Add(transportista);
+                _unitOfWork.Repository<Transportista>().Add(transportista);
+
+                _unitOfWork.SaveChanges();
 
                 return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");
             }
@@ -58,7 +52,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
-                var transportistaAEDitar = _db.Transportistas.Where(x => x.IdTransportista == transportista.IdTransportista).FirstOrDefault();
+                var transportistaAEDitar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == transportista.IdTransportista).FirstOrDefault();
 
                 if (transportista != null)
                 {
@@ -69,7 +63,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                     transportistaAEDitar.UsuaModificacion = transportista.UsuaModificacion;
                     transportistaAEDitar.FechaModificacion = DateTime.Now;
 
-                    _db.SaveChanges();
+                    _unitOfWork.SaveChanges();
                 }
 
 
@@ -85,11 +79,11 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
-                var transportistaAEDitar = _db.Transportistas.Where(x => x.IdTransportista == Id).FirstOrDefault();
+                var transportistaAEDitar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == Id).FirstOrDefault();
 
                 transportistaAEDitar.Estado = false;
 
-                _db.SaveChanges();
+                _unitOfWork.SaveChanges();
 
 
                 return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");

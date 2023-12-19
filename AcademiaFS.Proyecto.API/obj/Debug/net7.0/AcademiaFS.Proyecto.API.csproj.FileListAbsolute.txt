@@ -85,3 +85,5 @@ C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\obj\Debug\net
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\obj\Debug\net7.0\AcademiaFS.Proyecto.API.pdb
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\obj\Debug\net7.0\AcademiaFS.Proyecto.API.genruntimeconfig.cache
 C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\obj\Debug\net7.0\ref\AcademiaFS.Proyecto.API.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Domain.Core.Standard.dll
+C:\Users\amedina\Desktop\GitHub\AcademiaFS\AcademiaFS.Proyecto.API\bin\Debug\net7.0\Farsiman.Infraestructure.Core.Entity.Standard.dll

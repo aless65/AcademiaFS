@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "accPgstegqA9K2Gy/orkh8cZsw6I+4ZjiYREJBxqcgMhUNMSZDC2BYTDfr+H7xYb5k3WMxfhup9itnR/4qM3Eg==",
+  "dgSpecHash": "pAYOStz0xvwr7xAC2o+VYPD/iP8NHw4vn+bgjhWuvpogcGJwfuzeetKGjyvRyAcFFFVAZZCCNwVQ0alr6L1KsA==",
   "success": true,
   "projectFilePath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,9 @@
     "C:\\Users\\amedina\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\farsiman.application.core.standard\\3.0.1\\farsiman.application.core.standard.3.0.1.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\farsiman.authserver.extensions\\1.0.35371\\farsiman.authserver.extensions.1.0.35371.nupkg.sha512",
+    "C:\\Users\\amedina\\.nuget\\packages\\farsiman.dominio.core.standard\\8.0.60114\\farsiman.dominio.core.standard.8.0.60114.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\farsiman.extensions.configuration\\2.29723.0\\farsiman.extensions.configuration.2.29723.0.nupkg.sha512",
+    "C:\\Users\\amedina\\.nuget\\packages\\farsiman.infraestructure.core.entity.standard\\8.0.60115\\farsiman.infraestructure.core.entity.standard.8.0.60115.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\identitymodel\\6.0.0\\identitymodel.6.0.0.nupkg.sha512",
     "C:\\Users\\amedina\\.nuget\\packages\\identitymodel.aspnetcore.oauth2introspection\\6.0.0\\identitymodel.aspnetcore.oauth2introspection.6.0.0.nupkg.sha512",

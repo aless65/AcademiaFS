@@ -103,6 +103,15 @@
           "lib/net6.0/Farsiman.AuthServer.Extensions.dll": {}
         }
       },
+      "Farsiman.Dominio.Core.Standard/8.0.60114": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Farsiman.Domain.Core.Standard.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Farsiman.Domain.Core.Standard.dll": {}
+        }
+      },
       "Farsiman.Extensions.Configuration/2.29723.0": {
         "type": "package",
         "dependencies": {
@@ -113,6 +122,20 @@
         },
         "runtime": {
           "lib/netstandard2.0/Farsiman.Extensions.Configuration.dll": {}
+        }
+      },
+      "Farsiman.Infraestructure.Core.Entity.Standard/8.0.60115": {
+        "type": "package",
+        "dependencies": {
+          "Farsiman.Dominio.Core.Standard": "8.0.60114",
+          "Microsoft.EntityFrameworkCore": "7.0.11",
+          "Microsoft.EntityFrameworkCore.Relational": "7.0.11"
+        },
+        "compile": {
+          "lib/net6.0/Farsiman.Infraestructure.Core.Entity.Standard.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Farsiman.Infraestructure.Core.Entity.Standard.dll": {}
         }
       },
       "Humanizer.Core/2.14.1": {
@@ -1829,6 +1852,17 @@
         "lib/net6.0/Farsiman.AuthServer.Extensions.dll"
       ]
     },
+    "Farsiman.Dominio.Core.Standard/8.0.60114": {
+      "sha512": "MnJOUv3U6itvgXK5JYRreYLmKWzBYMFyFao8Fqaf5Od7lDUzwoKd61qzSp9gI7X6/QiDk5D2hkSaaDd+E08H8w==",
+      "type": "package",
+      "path": "farsiman.dominio.core.standard/8.0.60114",
+      "files": [
+        ".nupkg.metadata",
+        "farsiman.dominio.core.standard.8.0.60114.nupkg.sha512",
+        "farsiman.dominio.core.standard.nuspec",
+        "lib/net6.0/Farsiman.Domain.Core.Standard.dll"
+      ]
+    },
     "Farsiman.Extensions.Configuration/2.29723.0": {
       "sha512": "9uSf5ra27maKdFbrIxJrZ5mVLGi31OWfTJdPNYHt+XVGIeUa5vz9yXZIePWtZGjaOC+SQLBF1f6Zo25ri0/8mQ==",
       "type": "package",
@@ -1838,6 +1872,17 @@
         "farsiman.extensions.configuration.2.29723.0.nupkg.sha512",
         "farsiman.extensions.configuration.nuspec",
         "lib/netstandard2.0/Farsiman.Extensions.Configuration.dll"
+      ]
+    },
+    "Farsiman.Infraestructure.Core.Entity.Standard/8.0.60115": {
+      "sha512": "GiPVwKzfVmf7TOzJ0t5xzdGOz/Yk8AgkZfvcwCJxZh+6i9RFSQEXugYN2/Vni166m569bwEBDx8mjiqOZ9N3zA==",
+      "type": "package",
+      "path": "farsiman.infraestructure.core.entity.standard/8.0.60115",
+      "files": [
+        ".nupkg.metadata",
+        "farsiman.infraestructure.core.entity.standard.8.0.60115.nupkg.sha512",
+        "farsiman.infraestructure.core.entity.standard.nuspec",
+        "lib/net6.0/Farsiman.Infraestructure.Core.Entity.Standard.dll"
       ]
     },
     "Humanizer.Core/2.14.1": {
@@ -4497,6 +4542,7 @@
       "Farsiman.Application.Core.Standard >= 3.0.1",
       "Farsiman.AuthServer.Extensions >= 1.0.35371",
       "Farsiman.Extensions.Configuration >= 2.29723.0",
+      "Farsiman.Infraestructure.Core.Entity.Standard >= 8.0.60115",
       "Microsoft.EntityFrameworkCore >= 7.0.14",
       "Microsoft.EntityFrameworkCore.InMemory >= 7.0.14",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.14",
@@ -4565,6 +4611,10 @@
           "Farsiman.Extensions.Configuration": {
             "target": "Package",
             "version": "[2.29723.0, )"
+          },
+          "Farsiman.Infraestructure.Core.Entity.Standard": {
+            "target": "Package",
+            "version": "[8.0.60115, )"
           },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
