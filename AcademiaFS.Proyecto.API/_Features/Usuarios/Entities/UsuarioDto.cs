@@ -1,9 +1,6 @@
-﻿
-using AcademiaFS.Proyecto.API._Features.Roles.Entities;
-
-namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
+﻿namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 {
-    public class Usuario
+    public class UsuarioDto
     {
         public int IdUsuario { get; set; }
 
@@ -26,7 +23,5 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
         public int? UsuaModificacion { get; set; }
 
         public DateTime? FechaModificacion { get; set; }
-
-        public virtual Rol? role { get; set; }
     }
 }

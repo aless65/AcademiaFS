@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 
 namespace AcademiaFS.Proyecto.API._Features.Sucursales.Entities
 {
@@ -24,7 +25,7 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales.Entities
 
         //public virtual Municipio IdMunicipioNavigation { get; set; } = null!;
 
-        //public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
+        public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
 
         //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
 

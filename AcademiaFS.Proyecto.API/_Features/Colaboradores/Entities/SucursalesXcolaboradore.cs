@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 {
@@ -18,7 +19,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public virtual Colaboradore IdColaboradorNavigation { get; set; } = null!;
 
-        //public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
+        public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
 
         //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
     }

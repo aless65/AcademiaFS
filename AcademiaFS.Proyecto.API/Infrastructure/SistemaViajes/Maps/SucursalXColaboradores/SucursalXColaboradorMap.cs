@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.SucursalXColaboradores
 {
-    public class SucursalXColaboradorMap : IEntityTypeConfiguration<_Features.Colaboradores.Entities.SucursalesXcolaboradore>
+    public class SucursalXColaboradorMap : IEntityTypeConfiguration<SucursalesXcolaboradore>
     {
-        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<_Features.Colaboradores.Entities.SucursalesXcolaboradore> builder)
+        public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<SucursalesXcolaboradore> builder)
         {
             builder.HasKey(e => e.IdSucursalXcolaborador).HasName("PK_SucursalesXColaboradores_IdSucursalXColaborador");
 
@@ -22,9 +22,9 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.SucursalXCol
                 .HasForeignKey(d => d.IdColaborador)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //builder.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.SucursalesXcolaboradores)
-            //    .HasForeignKey(d => d.IdSucursal)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.SucursalesXcolaboradores)
+                .HasForeignKey(d => d.IdSucursal)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             //builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursalesXcolaboradores)
             //    .HasForeignKey(d => d.UsuaCreacion)

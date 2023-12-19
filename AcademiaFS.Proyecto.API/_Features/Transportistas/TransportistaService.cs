@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
@@ -10,30 +11,40 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
     {
         private readonly SistemaViajesDBContext _db;
         private readonly IMapper _mapper;
+        private readonly IRepository<Transportista> _repository;
 
-        public TransportistaService(SistemaViajesDBContext db, IMapper mapper)
+        public TransportistaService(SistemaViajesDBContext db, IMapper mapper, IRepository<Transportista> repository)
         {
             _db = db;
             _mapper = mapper;
+            _repository = repository;
         }
 
-        public List<Transportista> ListarTransportistas()
+        public List<TransportistaDto> ListarTransportistas()
         {
-            return _db.Transportistas.Where(x => x.Estado == true).ToList();
+            var transportistas = _repository.AsQueryable().Select(x => new TransportistaDto
+            {
+                Nombres = x.Nombres,
+                Apellidos = x.Apellidos
+            }).ToList();
+
+            return transportistas;
         }
 
         public Respuesta<object> InsertarTransportistas(TransportistaDto transportistaDto)
         {
             try
             {
+                //var transportista = _mapper.Map<Transportista>(transportistaDto);
+
+                //transportista.UsuaModificacion = null;
+                //transportista.FechaModificacion = null;
+
+                //_db.Transportistas.Add(transportista);
+
+                //_db.SaveChanges();
                 var transportista = _mapper.Map<Transportista>(transportistaDto);
-
-                transportista.UsuaModificacion = null;
-                transportista.FechaModificacion = null;
-
-                _db.Transportistas.Add(transportista);
-
-                _db.SaveChanges();
+                _repository.Add(transportista);
 
                 return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");
             }

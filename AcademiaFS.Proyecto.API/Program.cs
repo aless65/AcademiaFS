@@ -8,7 +8,10 @@ using AcademiaFS.Proyecto.API._Features.Usuarios;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+using IdentityModel;
+
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -38,6 +41,8 @@ var connectionString = builder.Configuration.GetConnectionString("SistemaViaje")
 builder.Services.AddDbContext<SistemaViajesDBContext>(o => o.UseSqlServer(connectionString));
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
+
+builder.Services.AddTransient(typeof(IRepository<>), typeof(EntityRepository<>));
 
 //builder.Services.AddFsAuthService((options) =>
 //{

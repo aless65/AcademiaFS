@@ -32,7 +32,6 @@
     <Folder Include="_Features\EstadosCiviles\Dtos\" />
     <Folder Include="_Features\Roles\Dtos\" />
     <Folder Include="_Features\Sucursales\Dtos\" />
-    <Folder Include="_Features\Transportistas\Dtos\" />
     <Folder Include="_Features\Usuarios\Dtos\" />
   </ItemGroup>
 
