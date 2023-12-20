@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpPost("Insertar")]
-        public IActionResult Insertar(Colaboradore colaborador)
+        public IActionResult Insertar(ColaboradoreDto colaborador)
         {
             var respuesta = _colaboradorService.InsertarColaboradores(colaborador);
 

@@ -153,4 +153,4 @@ INSERT INTO [dbo].[SucursalesXColaboradores](IdSucursal,
 											 DistanciaKm, 
 											 UsuaCreacion, 
 											 FechaCreacion)
-VALUES (2, 2, 13, 1, GETDATE())
+VALUES (2, 1, 13, 1, GETDATE())

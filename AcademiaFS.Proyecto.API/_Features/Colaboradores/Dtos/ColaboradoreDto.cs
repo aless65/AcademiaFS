@@ -2,7 +2,7 @@
 
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos
 {
-    public class ColaboradoreMap
+    public class ColaboradoreDto
     {
         public int IdColaborador { get; set; }
 
@@ -20,16 +20,6 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos
 
         public string Sexo { get; set; } = null!;
 
-        public bool? Estado { get; set; }
-
-        public int UsuaCreacion { get; set; }
-
-        public DateTime FechaCreacion { get; set; }
-
-        public int? UsuaModificacion { get; set; }
-
-        public DateTime? FechaModificacion { get; set; }
-
-        public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
+        public virtual ICollection<SucursalesXcolaboradoreDto>? SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradoreDto>();
     }
 }

@@ -1,4 +1,5 @@
 ﻿
+using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
 
@@ -32,7 +33,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public DateTime? FechaModificacion { get; set; }
 
-        //public virtual Municipio IdMunicipioNavigation { get; set; } = null!;
+        public virtual Municipio IdMunicipioNavigation { get; set; } = null!;
 
         public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
 

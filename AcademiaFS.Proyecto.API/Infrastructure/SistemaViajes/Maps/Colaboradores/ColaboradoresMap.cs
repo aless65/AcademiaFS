@@ -29,9 +29,9 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Colaboradore
                 .IsUnicode(false)
             .IsFixedLength();
 
-            //builder.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Colaboradores)
-            //    .HasForeignKey(d => d.IdMunicipio)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Colaboradores)
+                .HasForeignKey(d => d.IdMunicipio)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             //builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ColaboradoreUsuaCreacionNavigations)
             //    .HasForeignKey(d => d.UsuaCreacion)

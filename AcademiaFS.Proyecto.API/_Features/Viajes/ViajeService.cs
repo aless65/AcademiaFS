@@ -42,7 +42,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             return viajes;
         }
 
-        public Respuesta<object> InsertarViaje(ViajeDto viaje)
+        public Respuesta<ViajeDto> InsertarViaje(ViajeDto viaje)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                     viaje.ViajTotalKm = viaje.ViajeDetalles.Select(x => x.DistanciaActual).Sum();
 
                     if(viaje.ViajTotalKm > 100)
-                        return Respuesta.Fault<object>("La distancia total no debe ser mayor a 100Km", "400");
+                        return Respuesta.Fault<ViajeDto>("La distancia total no debe ser mayor a 100Km", "400");
 
                     List<ViajesDetalle> viajeDetalles = _unitOfWork.Repository<ViajesDetalle>().AsQueryable().ToList();
 
@@ -64,7 +64,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                                       select vd;
 
                         if (repiteColaboradorPorDia.Count() > 0)
-                            return Respuesta.Fault<object>("Se repite", "400");
+                            return Respuesta.Fault<ViajeDto>("Se repite", "400");
                     }
 
                     Viaje viajeAdd = new()
@@ -89,17 +89,17 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
                     _unitOfWork.SaveChanges();
 
-                    return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");
+                    return Respuesta.Success<ViajeDto>(viaje, "Operación exitosa", "200");
 
                 }
                 else
                 {
-                    return Respuesta.Fault<object>("Sólo los administradores pueden registrar viajes", "400");
+                    return Respuesta.Fault<ViajeDto>("Sólo los administradores pueden registrar viajes", "400");
                 }
             }
             catch
             {
-                return Respuesta.Fault<object>("Intente más tarde", "500");
+                return Respuesta.Fault<ViajeDto>("Intente más tarde", "500");
             }
         }
 
