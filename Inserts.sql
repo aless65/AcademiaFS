@@ -147,3 +147,10 @@ INSERT INTO [dbo].[Colaboradores](Nombres,
 								  UsuaCreacion, 
 								  FechaCreacion)
 VALUES ('Hernán', 'De las Grandes Brisas', '0201198054878', 'hacer algo', 1, '1979-01-30', 'M', 1, GETDATE())
+
+INSERT INTO [dbo].[SucursalesXColaboradores](IdSucursal, 
+											 IdColaborador, 
+											 DistanciaKm, 
+											 UsuaCreacion, 
+											 FechaCreacion)
+VALUES (2, 2, 13, 1, GETDATE())
