@@ -1,8 +1,13 @@
-﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
+using Farsiman.Domain.Core.Standard.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
@@ -10,21 +15,29 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 {
     public class ViajeService
     {
-        private readonly SistemaViajesDBContext _db;
 
-        public ViajeService(SistemaViajesDBContext db)
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public ViajeService(UnitOfWorkBuilder unitOfWork, IMapper mapper)
         {
-            _db = db;
-        }   
+            _unitOfWork = unitOfWork.BuilderSistemaViajes();
+            _mapper = mapper;
+        }
 
         public List<Viaje> ListarViajes()
         {
-            List<Viaje> viajes = _db.Viajes.ToList();
+            //List<Viaje> viajes = _unitOfWork.Repository<Viaje>().AsQueryable().ToList();
 
-            foreach (var item in viajes)
-            {
-                item.ViajesDetalles = _db.ViajeDetalles.Where(x => x.IdViaje.Equals(item.IdViaje)).ToList();
-            }
+            List<Viaje> viajes = _unitOfWork.Repository<Viaje>()
+                                                            .AsQueryable()
+                                                            .Include(p => p.ViajesDetalles)
+                                                            .ToList();
+
+            //foreach (var item in viajes)
+            //{
+            //    item.ViajesDetalles = _unitOfWork.Repository<Viaje>().AsQueryable().Where(x => x.IdViaje.Equals(item.IdViaje)).ToList();
+            //}
 
             return viajes;
         }
@@ -40,12 +53,12 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                     if(viaje.ViajTotalKm > 100)
                         return Respuesta.Fault<object>("La distancia total no debe ser mayor a 100Km", "400");
 
-                    List<ViajesDetalle> viajeDetalles = _db.ViajeDetalles.ToList();
+                    List<ViajesDetalle> viajeDetalles = _unitOfWork.Repository<ViajesDetalle>().AsQueryable().ToList();
 
                     foreach (var item in viaje.ViajeDetalles)
                     {
-                        var repiteColaboradorPorDia = from vd in _db.ViajeDetalles
-                                                      join v in _db.Viajes on vd.IdViaje equals v.IdViaje
+                        var repiteColaboradorPorDia = from vd in _unitOfWork.Repository<ViajesDetalle>().AsQueryable()
+                                                      join v in _unitOfWork.Repository<Viaje>().AsQueryable() on vd.IdViaje equals v.IdViaje
                                                       where vd.IdColaborador == item.IdColaborador
                                                       && v.FechaYhora.Date == viaje.ViajFechaYHora.Date
                                                       select vd;
@@ -68,13 +81,13 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                         UsuaModificacion = viaje.ViajUsuaModificacion
                     };
 
-                    _db.Viajes.Add(viajeAdd);
+                    _unitOfWork.Repository<Viaje>().Add(viajeAdd);
 
                     viaje.ViajeDetalles.ForEach(item => item.IdViaje = viajeAdd.IdViaje);
 
-                    _db.ViajeDetalles.AddRange(viaje.ViajeDetalles);
+                    _unitOfWork.Repository<ViajesDetalle>().AddRange(viaje.ViajeDetalles);
 
-                    _db.SaveChanges();
+                    _unitOfWork.SaveChanges();
 
                     return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");
 
@@ -94,11 +107,11 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
         {
             try
             {
-                var reporteEncabezado = from v in _db.Viajes
+                var reporteEncabezado = from v in _unitOfWork.Repository<Viaje>().AsQueryable()
                                         where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date
                                         select new { v.IdViaje, v.IdSucursal, v.IdTransportista, v.TarifaActual,
                                                      v.TotalKm, TotalPagar = v.TarifaActual * v.TotalKm, 
-                                                     v.FechaYhora, Detalles = _db.ViajeDetalles.Where(x => x.IdViaje == v.IdViaje).ToList()};
+                                                     v.FechaYhora, Detalles = _unitOfWork.Repository<ViajesDetalle>().Where(x => x.IdViaje == v.IdViaje).ToList()};
 
                 var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
 

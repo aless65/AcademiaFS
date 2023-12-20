@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+using System.Text.Json.Serialization;
 
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 {
@@ -17,6 +18,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public DateTime FechaCreacion { get; set; }
 
+        [JsonIgnore]
         public virtual Colaboradore IdColaboradorNavigation { get; set; } = null!;
 
         public virtual Sucursale IdSucursalNavigation { get; set; } = null!;

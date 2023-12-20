@@ -34,7 +34,7 @@ namespace AcademiaFS.Proyecto.API.Controllers
         }
 
         [HttpPut("Editar")]
-        public IActionResult Editar(Transportista transportista)
+        public IActionResult Editar(TransportistaDto transportista)
         {
             var respuesta = _transportistaService.EditarTransportistas(transportista);
 

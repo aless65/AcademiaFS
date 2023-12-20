@@ -3,9 +3,9 @@
 --GO
 --DROP DATABASE SistemaViajes
 GO
-CREATE DATABASE SistemaViajesDb
+CREATE DATABASE Transporte_AJM
 GO
-USE SistemaViajesDb
+USE Transporte_AJM
 GO
 --CREATE SCHEMA acce
 --GO

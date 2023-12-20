@@ -1,7 +1,10 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
+using Farsiman.Domain.Core.Standard.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 //using Farsiman.Application.Core.Standard.DTOs;
 using Microsoft.OpenApi.Any;
@@ -11,20 +14,23 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 {
     public class ColaboradorService
     {
-        private readonly SistemaViajesDBContext _db;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ColaboradorService(SistemaViajesDBContext db, IMapper mapper)
+        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper)
         {
-            _db = db;
+            _unitOfWork = unitOfWork.BuilderSistemaViajes();
+            _mapper = mapper;
         }
 
         public List<Colaboradore> ListaColaboradores()
         {
-            List<Colaboradore> Colaboradores = _db.Colaboradores.ToList();
-            foreach (var item in Colaboradores)
-            {
-                item.SucursalesXcolaboradores = _db.SucursalesXColaboradores.Where(x => x.IdColaborador.Equals(item.IdColaborador)).ToList();
-            }
+            List<Colaboradore> Colaboradores = _unitOfWork.Repository<Colaboradore>()
+                                                            .AsQueryable()
+                                                            .Include(p => p.SucursalesXcolaboradores)
+                                                            .ToList();
+
+
             return Colaboradores;
         }
 
@@ -39,16 +45,16 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
                     colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Distinct().Count())
                     return Respuesta.Fault<object>("No puede ingresar dos veces la misma sucursal");
 
-                _db.Colaboradores.Add(colaboradores);
+                _unitOfWork.Repository<Colaboradore>().Add(colaboradores);
 
                 foreach (var item in colaboradores.SucursalesXcolaboradores)
                 {
                     item.IdColaborador = colaboradores.IdColaborador;
                 }
 
-                _db.SucursalesXColaboradores.AddRange(colaboradores.SucursalesXcolaboradores);
+                _unitOfWork.Repository<SucursalesXcolaboradore>().AddRange(colaboradores.SucursalesXcolaboradores);
 
-                _db.SaveChanges();
+                _unitOfWork.SaveChanges();
 
                 return Respuesta.Success<object>("Muy bien", "Operación exitosa", "200");
             }

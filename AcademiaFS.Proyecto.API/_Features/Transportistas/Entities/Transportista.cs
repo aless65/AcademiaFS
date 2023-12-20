@@ -16,7 +16,7 @@
 
         public string Sexo { get; set; } = null!;
 
-        public bool? Estado { get; set; }
+        public bool Estado { get; set; }
 
         public int UsuaCreacion { get; set; }
 

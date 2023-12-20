@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using System.Text.Json.Serialization;
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 {
@@ -24,6 +25,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 
         public virtual Colaboradore IdColaboradorNavigation { get; set; } = null!;
 
+        [JsonIgnore]
         public virtual Viaje IdViajeNavigation { get; set; } = null!;
     }
 }
