@@ -21,9 +21,9 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.ViajesDetall
                 .HasForeignKey(d => d.IdColaborador)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //builder.HasOne(d => d.IdViajeNavigation).WithMany(p => p.ViajesDetalles)
-            //    .HasForeignKey(d => d.IdViaje)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.IdViajeNavigation).WithMany(p => p.ViajesDetalles)
+                .HasForeignKey(d => d.IdViaje)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             //entity.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ViajesDetalleUsuaCreacionNavigations)
             //    .HasForeignKey(d => d.UsuaCreacion)

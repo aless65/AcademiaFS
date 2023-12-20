@@ -459,8 +459,8 @@ namespace AcademiaFS.Proyecto.API.Migrations
                     b.Property<int>("IdViaje")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdViajeNavigationIdViaje")
-                        .HasColumnType("int");
+                    //b.Property<int>("IdViajeNavigationIdViaje")
+                    //    .HasColumnType("int");
 
                     b.Property<int>("UsuaCreacion")
                         .HasColumnType("int");
@@ -473,7 +473,7 @@ namespace AcademiaFS.Proyecto.API.Migrations
 
                     b.HasIndex("IdColaborador");
 
-                    b.HasIndex("IdViajeNavigationIdViaje");
+                    //b.HasIndex("IdViajeNavigationIdViaje");
 
                     b.ToTable("ViajeDetalles");
                 });
@@ -520,11 +520,11 @@ namespace AcademiaFS.Proyecto.API.Migrations
                         .HasForeignKey("IdColaborador")
                         .IsRequired();
 
-                    b.HasOne("AcademiaFS.Proyecto.API._Features.Viajes.Entities.Viaje", "IdViajeNavigation")
-                        .WithMany("ViajesDetalles")
-                        .HasForeignKey("IdViajeNavigationIdViaje")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    //b.HasOne("AcademiaFS.Proyecto.API._Features.Viajes.Entities.Viaje", "IdViajeNavigation")
+                    //    .WithMany("ViajesDetalles")
+                    //    .HasForeignKey("IdViajeNavigationIdViaje")
+                    //    .OnDelete(DeleteBehavior.Cascade)
+                    //    .IsRequired();
 
                     b.Navigation("IdColaboradorNavigation");
 

@@ -29,7 +29,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             _mapper = mapper;
         }
 
-        public List<ViajeListarDto> ListarViajes()
+        public Respuesta<List<ViajeListarDto>> ListarViajes()
         {
             //var viajes = (from viajes in _unitOfWork.Repository<ViajeDto>);
 
@@ -48,17 +48,17 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                   NombreTransportista = $"{tran.Nombres} {tran.Apellidos}",
                                   TarifaActual = viaje.TarifaActual,
                                   TotalKm = viaje.TotalKm,
-                                  ViajeDetalles = (from detalles in viaje.ViajesDetalles.AsQueryable()
-                                                   join colab in _unitOfWork.Repository<Colaboradore>().AsQueryable()
-                                                   on detalles.IdColaborador equals colab.IdColaborador
-                                                   select new ViajesDetalleListarDto
-                                                   {
-                                                       IdViajeDetalle = detalles.IdViajeDetalle,
-                                                       IdViaje = detalles.IdViaje,
-                                                       IdColaborador = colab.IdColaborador,
-                                                       ColaboradorNombre = $"{colab.Nombres} {colab.Apellidos}",
-                                                       DistanciaActual = detalles.DistanciaActual
-                                                   }).ToList(),
+                                  ViajesDetalles = (from detalles in viaje.ViajesDetalles.AsQueryable()
+                                                    join colab in _unitOfWork.Repository<Colaboradore>().AsQueryable()
+                                                    on detalles.IdColaborador equals colab.IdColaborador
+                                                    select new ViajesDetalleListarDto
+                                                    {
+                                                        IdViajeDetalle = detalles.IdViajeDetalle,
+                                                        IdViaje = detalles.IdViaje,
+                                                        IdColaborador = colab.IdColaborador,
+                                                        ColaboradorNombre = colab.Nombres,
+                                                        DistanciaActual = detalles.DistanciaActual
+                                                    }).ToList()
                               }).ToList();  
 
             //List<Viaje> viajes = _unitOfWork.Repository<Viaje>()
@@ -66,7 +66,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             //                                                .Include(p => p.ViajesDetalles)
             //                                                .ToList();
 
-            return viajesList;
+            return Respuesta.Success(viajesList, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
         public Respuesta<ViajeDto> InsertarViaje(ViajeDto viaje)
@@ -75,14 +75,14 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             {
                 if(viaje.Admin)
                 {
-                    viaje.TotalKm = viaje.ViajeDetalles.Select(x => x.DistanciaActual).Sum();
+                    viaje.TotalKm = viaje.ViajesDetalles.Select(x => x.DistanciaActual).Sum();
 
                     if(viaje.TotalKm > 100)
                         return Respuesta.Fault<ViajeDto>("La distancia total no debe ser mayor a 100Km", "400");
 
                     List<ViajesDetalle> viajeDetalles = _unitOfWork.Repository<ViajesDetalle>().AsQueryable().ToList();
 
-                    foreach (var item in viaje.ViajeDetalles)
+                    foreach (var item in viaje.ViajesDetalles)
                     {
                         var repiteColaboradorPorDia = from vd in _unitOfWork.Repository<ViajesDetalle>().AsQueryable()
                                                       join v in _unitOfWork.Repository<Viaje>().AsQueryable() on vd.IdViaje equals v.IdViaje

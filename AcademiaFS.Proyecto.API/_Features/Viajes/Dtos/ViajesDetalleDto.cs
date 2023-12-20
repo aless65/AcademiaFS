@@ -1,6 +1,6 @@
 ﻿namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
-    public class ViajesDetalleDto
+    public class ViajeListarDetalleDto
     {
         public int IdViajeDetalle { get; set; }
 

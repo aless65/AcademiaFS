@@ -37,7 +37,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps
         public DbSet<Transportista> Transportistas { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Viaje> Viajes { get; set; }
-        public DbSet<ViajesDetalle> ViajeDetalles { get; set; }
+        public DbSet<ViajesDetalle> ViajesDetalles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -35,6 +35,6 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 
         //public virtual Usuario? UsuaModificacionNavigation { get; set; }
 
-        public virtual ICollection<ViajesDetalle> ViajesDetalles { get; set; } = new List<ViajesDetalle>();
+        public virtual ICollection<ViajesDetalle>? ViajesDetalles { get; set; } = new List<ViajesDetalle>();
     }
 }

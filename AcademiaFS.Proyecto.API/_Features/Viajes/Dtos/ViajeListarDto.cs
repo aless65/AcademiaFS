@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
+using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
@@ -21,6 +22,6 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
         public string? NombreTransportista { get; set; }
 
         //Detalles 
-        public List<ViajesDetalleListarDto>? ViajeDetalles { get; set; }
+        public List<ViajesDetalleListarDto>? ViajesDetalles { get; set; } = new List<ViajesDetalleListarDto>();
     }
 }

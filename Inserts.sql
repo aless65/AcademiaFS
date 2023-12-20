@@ -154,3 +154,12 @@ INSERT INTO [dbo].[SucursalesXColaboradores](IdSucursal,
 											 UsuaCreacion, 
 											 FechaCreacion)
 VALUES (2, 1, 13, 1, GETDATE())
+
+INSERT INTO [dbo].[Viajes](FechaYHora, 
+						   TarifaActual, 
+						   TotalKm, 
+						   IdSucursal, 
+						   IdTransportista, 
+						   UsuaCreacion, 
+						   FechaCreacion)
+VALUES ('2023-12-14', 21, 10, 2, 5, 1, GETDATE())
