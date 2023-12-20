@@ -20,6 +20,6 @@
 
         public string Sexo { get; set; } = null!;
 
-        public virtual ICollection<SucursalesXcolaboradoreDto>? SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradoreDto>();
+        public virtual ICollection<SucursalesXcolaboradoreListarDto>? SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradoreListarDto>();
     }
 }

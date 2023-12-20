@@ -1,6 +1,8 @@
-﻿using AcademiaFS.Proyecto.API._Common.Entities;
+﻿using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
@@ -40,14 +42,25 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
                                          Sexo = colaboradores.Sexo,
                                          IdMunicipio = colaboradores.IdMunicipio,
                                          Direccion = colaboradores.Direccion,
-                                         NombreMunicipio = muni.Nombre
-                                     });
+                                         NombreMunicipio = muni.Nombre,
+                                         SucursalesXcolaboradores = (from detalles in colaboradores.SucursalesXcolaboradores.AsQueryable()
+                                                                     join colab in _unitOfWork.Repository<Colaboradore>().AsQueryable()
+                                                                     on detalles.IdColaborador equals colab.IdColaborador
+                                                                     join sucu in _unitOfWork.Repository<Sucursale>().AsQueryable()
+                                                                     on detalles.IdSucursal equals sucu.IdSucursal
+                                                                     select new SucursalesXcolaboradoreListarDto
+                                                                     {
+                                                                         IdSucursalXcolaborador = detalles.IdSucursalXcolaborador,
+                                                                         IdSucursal = sucu.IdSucursal,
+                                                                         NombreSucursal = sucu.Nombre,
+                                                                         IdColaborador = colab.IdColaborador,
+                                                                         NombreColaborador = $"{colab.Nombres} {colab.Apellidos}",
+                                                                         DistanciaKm = detalles.DistanciaKm
+                                                                     }).ToList()
+                                     }).ToList();
 
-            colaboradoresList.Include(p => p.SucursalesXcolaboradores).ToList();
 
-            var colaboradoresMapeado = _mapper.Map<List<ColaboradoreListarDto>>(colaboradoresList);
-
-            return Respuesta.Success(colaboradoresMapeado, "Todo bien", "200");
+            return Respuesta.Success(colaboradoresList, Mensajes.PROCESO_EXITOSO, Codigos.Error);
         }
 
         public Respuesta<ColaboradoreDto> InsertarColaboradores(ColaboradoreDto colaboradoresDto)
@@ -56,12 +69,15 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             {
                 var colaboradores = _mapper.Map<Colaboradore>(colaboradoresDto);
 
+                if(ColaboradorExiste(colaboradores.Identidad))
+                    return Respuesta.Fault<ColaboradoreDto>("El colaborador ya existe", Codigos.BadRequest);
+
                 if (colaboradores.SucursalesXcolaboradores.Count() != colaboradores.SucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count())
-                    return Respuesta.Fault<ColaboradoreDto>("Todas las distancias deben ser mayor que 0 y menor que 50", "402");
+                    return Respuesta.Fault<ColaboradoreDto>("Todas las distancias deben ser mayor que 0 y menor o igual que 50", Codigos.BadRequest);
 
                 if (colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Count() !=
                     colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Distinct().Count())
-                    return Respuesta.Fault<ColaboradoreDto>("No puede ingresar dos veces la misma sucursal");
+                    return Respuesta.Fault<ColaboradoreDto>("No puede ingresar dos veces la misma sucursal", Codigos.BadRequest);
 
                 //Solución temporal XD
                 colaboradores.UsuaCreacion = 1;
@@ -78,13 +94,23 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 _unitOfWork.SaveChanges();
 
-                return Respuesta.Success(_mapper.Map<ColaboradoreDto>(colaboradores), "Operación exitosa", "200");
+                return Respuesta.Success(_mapper.Map<ColaboradoreDto>(colaboradores), Mensajes.PROCESO_EXITOSO, Codigos.Error);
             }
-            catch
+            catch(Exception ex) 
             {
-                return Respuesta.Fault<ColaboradoreDto>("Intente más tarde", "500"); 
+                if (ex.Message.Contains("saving the entity changes"))
+                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.DATOS_INCORRECTOS, Codigos.BadRequest);
+                else
+                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error); 
             }
-}
+        }
+
+        private bool ColaboradorExiste(string identidad)
+        {
+            bool existe = _unitOfWork.Repository<Colaboradore>().Where(x => x.Identidad == identidad).Any();
+
+            return existe;
+        }
     }
 }
  

@@ -1,4 +1,7 @@
-﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
+﻿using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
@@ -47,7 +50,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                                       FechaModificacion = transportista.FechaModificacion
                                   }).ToList();
 
-            return Respuesta.Success<List<TransportistaAuditoriaDto>>(transportistas, "Bien", "200");
+            return Respuesta.Success<List<TransportistaAuditoriaDto>>(transportistas, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
         public Respuesta<TransportistaDto> InsertarTransportistas(TransportistaDto transportistaDto)
@@ -55,18 +58,18 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
             try
             {
                 var transportista = _mapper.Map<Transportista>(transportistaDto);
-                transportista.Estado = true;
+                transportista.UsuaCreacion = 1;
+                transportista.FechaCreacion = DateTime.Now;
+
                 _unitOfWork.Repository<Transportista>().Add(transportista);
-
                 _unitOfWork.SaveChanges();
-
                 transportistaDto.IdTransportista = transportista.IdTransportista;
 
-                return Respuesta.Success<TransportistaDto>(transportistaDto, "Operación exitosa", "200");
+                return Respuesta.Success(_mapper.Map<TransportistaDto>(transportista), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch
             {
-                return Respuesta.Fault<TransportistaDto>("Intente más tarde", "500");
+                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
 
@@ -82,18 +85,18 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                     transportistaAEditar.Apellidos = transportista.Apellidos;
                     transportistaAEditar.Identidad = transportista.Identidad;
                     transportistaAEditar.TarifaKm = transportista.TarifaKm;
-                    transportistaAEditar.UsuaModificacion = transportista.UsuaModificacion;
+                    transportistaAEditar.UsuaModificacion = 1;
                     transportistaAEditar.FechaModificacion = DateTime.Now;
 
                     _unitOfWork.SaveChanges();
                 }
 
 
-                return Respuesta.Success<TransportistaDto>(transportista, "Operación exitosa", "200");
+                return Respuesta.Success(_mapper.Map<TransportistaDto>(transportistaAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch
             {
-                return Respuesta.Fault<TransportistaDto>("Intente más tarde", "500");
+                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
 
@@ -101,18 +104,18 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
-                var transportistaAEDitar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == Id).FirstOrDefault();
+                var transportistaAEliminar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == Id).FirstOrDefault();
 
-                transportistaAEDitar.Estado = false;
+                transportistaAEliminar.Estado = false;
 
                 _unitOfWork.SaveChanges();
 
 
-                return Respuesta.Success<string>("Se ha eliminado el registro", "Operación exitosa", "200");
+                return Respuesta.Success<string>(Mensajes.PROCESO_EXITOSO, Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch
             {
-                return Respuesta.Fault<string>("Intente más tarde", "500");
+                return Respuesta.Fault<string>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
     }

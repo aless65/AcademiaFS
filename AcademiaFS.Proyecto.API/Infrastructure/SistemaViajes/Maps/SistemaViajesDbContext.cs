@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+﻿using AcademiaFS.Proyecto.API._Common.Entities;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.EstadosCiviles.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
@@ -6,6 +7,7 @@ using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Colaboradores;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.EstadosCiviles;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Municipios;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Sucursales;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.SucursalXColaboradores;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Transportistas;
@@ -29,6 +31,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps
 
         public DbSet<Colaboradore> Colaboradores { get; set; }
         public DbSet<EstadoCivil> EstadosCiviles { get; set; }
+        public DbSet<Municipio> Municipios { get; set; }
         public DbSet<Sucursale> Sucursales { get; set; }
         public DbSet<SucursalesXcolaboradore> SucursalesXColaboradores { get; set; }
         public DbSet<Transportista> Transportistas { get; set; }
@@ -40,6 +43,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps
         {
             modelBuilder.ApplyConfiguration(new ColaboradoresMap());
             modelBuilder.ApplyConfiguration(new EstadoCivilMap());
+            modelBuilder.ApplyConfiguration(new MunicipioMap());
             modelBuilder.ApplyConfiguration(new SucursalMap());
             modelBuilder.ApplyConfiguration(new SucursalXColaboradorMap());
             modelBuilder.ApplyConfiguration(new TransportistaMap());

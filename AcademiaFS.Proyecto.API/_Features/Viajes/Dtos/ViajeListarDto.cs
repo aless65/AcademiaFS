@@ -2,7 +2,7 @@
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
-    public class ViajeDto
+    public class ViajeListarDto
     {
         public int IdViaje { get; set; }
 
@@ -14,12 +14,13 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 
         public int IdSucursal { get; set; }
 
+        public string? NombreSucursal { get; set; }
+
         public int IdTransportista { get; set; }
 
-        //Detalles 
-        public List<ViajesDetalleDto>? ViajeDetalles { get; set; }
+        public string? NombreTransportista { get; set; }
 
-        //Info de usuario
-        public bool Admin { get; set; }
+        //Detalles 
+        public List<ViajesDetalleListarDto>? ViajeDetalles { get; set; }
     }
 }

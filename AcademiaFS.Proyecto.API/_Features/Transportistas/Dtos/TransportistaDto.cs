@@ -15,15 +15,5 @@
         public DateTime FechaNacimiento { get; set; }
 
         public string Sexo { get; set; } = null!;
-
-        public bool Estado { get; set; }
-
-        public int UsuaCreacion { get; set; }
-
-        public DateTime FechaCreacion { get; set; }
-
-        public int? UsuaModificacion { get; set; }
-
-        public DateTime? FechaModificacion { get; set; }
     }
 }

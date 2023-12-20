@@ -1,6 +1,6 @@
 ﻿namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
-    public class ViajesDetalleDto
+    public class ViajesDetalleListarDto
     {
         public int IdViajeDetalle { get; set; }
 
@@ -8,7 +8,8 @@
 
         public int IdColaborador { get; set; }
 
-        public decimal DistanciaActual { get; set; }
+        public string? ColaboradorNombre { get; set; }
 
+        public decimal DistanciaActual { get; set; }
     }
 }
