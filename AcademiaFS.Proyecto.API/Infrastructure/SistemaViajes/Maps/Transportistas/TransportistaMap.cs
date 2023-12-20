@@ -1,5 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
-using IdentityModel;
+using System.IdentityModel;
 using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Transportistas

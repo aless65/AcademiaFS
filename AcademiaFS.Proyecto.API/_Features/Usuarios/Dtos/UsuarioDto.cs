@@ -1,4 +1,4 @@
-﻿namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
+﻿namespace AcademiaFS.Proyecto.API._Features.Usuarios.Dtos
 {
     public class UsuarioDto
     {

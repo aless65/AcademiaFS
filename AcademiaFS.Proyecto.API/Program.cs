@@ -13,7 +13,7 @@ using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using Farsiman.Domain.Core.Standard.Repositories;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using Farsiman.Infraestructure.Core.Entity.Standard.Extensions;
-using IdentityModel;
+using System.IdentityModel;
 
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;

@@ -1,5 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
-using IdentityModel;
+using System.IdentityModel;
 using System.Linq.Expressions;
 
 namespace AcademiaFS.Proyecto.API.Infrastructure.Repositories
