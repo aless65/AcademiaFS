@@ -21,9 +21,14 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Viajes
             builder.Property(e => e.TarifaActual).HasColumnType("decimal(18, 2)");
             builder.Property(e => e.TotalKm).HasColumnType("decimal(18, 2)");
 
-            //builder.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.Viajes)
-            //    .HasForeignKey(d => d.IdSucursal)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.IdSucursalNavigation).WithMany(p => p.Viajes)
+                .HasForeignKey(d => d.IdSucursal)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.HasOne(d => d.IdTransportistaNavigation).WithMany(p => p.Viajes)
+                .HasForeignKey(d => d.IdTransportista)
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
         }
     }
 }

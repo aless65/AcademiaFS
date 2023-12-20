@@ -23,7 +23,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 
         public DateTime? FechaModificacion { get; set; }
 
-        public virtual Colaboradore IdColaboradorNavigation { get; set; } = null!;
+        public virtual Colaboradore? IdColaboradorNavigation { get; set; }
 
         [JsonIgnore]
         public virtual Viaje IdViajeNavigation { get; set; } = null!;

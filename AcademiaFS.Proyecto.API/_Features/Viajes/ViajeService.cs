@@ -61,24 +61,24 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                                     }).ToList()
                               }).ToList();  
 
-            //List<Viaje> viajes = _unitOfWork.Repository<Viaje>()
-            //                                                .AsQueryable()
-            //                                                .Include(p => p.ViajesDetalles)
-            //                                                .ToList();
 
             return Respuesta.Success(viajesList, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
-        public Respuesta<ViajeDto> InsertarViaje(ViajeDto viaje)
+        public Respuesta<ViajeDto> InsertarViaje(ViajeDto viajeDto)
         {
             try
             {
-                if(viaje.Admin)
+                if(viajeDto.Admin)
                 {
+                    var viaje = _mapper.Map<Viaje>(viajeDto);
+                    viaje.UsuaCreacion = 1;
+                    viaje.FechaCreacion = DateTime.Now;
+
                     viaje.TotalKm = viaje.ViajesDetalles.Select(x => x.DistanciaActual).Sum();
 
                     if(viaje.TotalKm > 100)
-                        return Respuesta.Fault<ViajeDto>("La distancia total no debe ser mayor a 100Km", "400");
+                        return Respuesta.Fault<ViajeDto>("La distancia total no debe ser mayor a 100Km", Codigos.BadRequest);
 
                     List<ViajesDetalle> viajeDetalles = _unitOfWork.Repository<ViajesDetalle>().AsQueryable().ToList();
 
@@ -91,62 +91,64 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                                       select vd;
 
                         if (repiteColaboradorPorDia.Count() > 0)
-                            return Respuesta.Fault<ViajeDto>("Se repite", "400");
+                            return Respuesta.Fault<ViajeDto>("Se repite", Codigos.BadRequest);
+                        else
+                        {
+                            item.UsuaCreacion = viaje.UsuaCreacion;
+                            item.FechaCreacion = DateTime.Now;
+                        }
                     }
 
-                    Viaje viajeAdd = new()
-                    {
-                        IdSucursal = viaje.IdSucursal,
-                        IdTransportista = viaje.IdTransportista,
-                        FechaYhora = viaje.FechaYhora,
-                        TotalKm = viaje.TotalKm,
-                        TarifaActual = viaje.TarifaActual,
-                    };
-
-                    _unitOfWork.Repository<Viaje>().Add(viajeAdd);
-
-                    //viaje.ViajeDetalles.ForEach(item => item.IdViaje = viajeAdd.IdViaje);
-
-                    //_unitOfWork.Repository<ViajesDetalle>().AddRange(viaje.ViajeDetalles);
+                    _unitOfWork.Repository<Viaje>().Add(viaje);
 
                     _unitOfWork.SaveChanges();
 
-                    return Respuesta.Success<ViajeDto>(viaje, "Operación exitosa", "200");
+                    return Respuesta.Success(_mapper.Map<ViajeDto>(viaje), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
                 }
                 else
                 {
-                    return Respuesta.Fault<ViajeDto>("Sólo los administradores pueden registrar viajes", "400");
+                    return Respuesta.Fault<ViajeDto>("Sólo los administradores pueden registrar viajes", Codigos.Unauthorized);
                 }
             }
-            catch
+            catch(Exception ex) 
             {
-                return Respuesta.Fault<ViajeDto>("Intente más tarde", "500");
+                if (ex.Message.Contains("saving the entity changes"))
+                    return Respuesta.Fault<ViajeDto>(Mensajes.DATOS_INCORRECTOS, Codigos.BadRequest);
+                else
+                    return Respuesta.Fault<ViajeDto>("Intente más tarde", Codigos.Error);
             }
         }
 
-        public object ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
+        public Respuesta<ViajeReporteRangoFechaDto> ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
         {
             try
             {
                 var reporteEncabezado = from v in _unitOfWork.Repository<Viaje>().AsQueryable()
                                         where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date
-                                        select new { v.IdViaje, v.IdSucursal, v.IdTransportista, v.TarifaActual,
-                                                     v.TotalKm, TotalPagar = v.TarifaActual * v.TotalKm, 
-                                                     v.FechaYhora, Detalles = _unitOfWork.Repository<ViajesDetalle>().Where(x => x.IdViaje == v.IdViaje).ToList()};
+                                        select new ViajeListarDto 
+                                        { IdViaje = v.IdViaje, 
+                                          IdSucursal = v.IdSucursal, 
+                                          IdTransportista = v.IdTransportista, 
+                                          TarifaActual = v.TarifaActual,
+                                          TotalKm = v.TotalKm, 
+                                          TotalPagar = v.TarifaActual * v.TotalKm, 
+                                          FechaYhora = v.FechaYhora, 
+                                          //ViajesDetalles = _mapper.Map<ViajeListarDetalleDto>(_unitOfWork.Repository<ViajesDetalle>().Where(x => x.IdViaje == v.IdViaje).ToList())
+                                        };
 
                 var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
 
-                var reporteConTotal = new
+                ViajeReporteRangoFechaDto reporteTotal = new ViajeReporteRangoFechaDto
                 {
                     totalAPagar = totalAPagar,
                     reporte = reporteEncabezado
                 };
 
-                return reporteConTotal;
+                return Respuesta.Success<ViajeReporteRangoFechaDto>(reporteTotal, Mensajes.PROCESO_EXITOSO, Codigos.Success);
             } catch
             {
-                return null;
+                return Respuesta.Fault<ViajeReporteRangoFechaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
     }

@@ -10,6 +10,6 @@
 
         public const string PROCESO_EXITOSO = "Operación exitosa";
         public const string PROCESO_FALLIDO = "Error. Intente más tarde";
-        public const string DATOS_INCORRECTOS = "Los datos se han enviado de forma incorrecta. Revise llaves foráneas, constraints, límites, etc";
+        public const string DATOS_INCORRECTOS = "Los datos se han enviado de forma incorrecta. Revise llaves foráneas, constraints, nulos, etc";
     }
 }

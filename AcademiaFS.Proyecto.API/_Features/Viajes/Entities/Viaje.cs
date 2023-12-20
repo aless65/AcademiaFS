@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
@@ -27,7 +28,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 
         public DateTime? FechaModificacion { get; set; }
 
-        //public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
+        public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
 
         public virtual Transportista IdTransportistaNavigation { get; set; } = null!;
 

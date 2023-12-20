@@ -21,6 +21,8 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 
         public string? NombreTransportista { get; set; }
 
+        public decimal TotalPagar { get; set; }
+
         //Detalles 
         public List<ViajesDetalleListarDto>? ViajesDetalles { get; set; } = new List<ViajesDetalleListarDto>();
     }

@@ -286,10 +286,10 @@ namespace AcademiaFS.Proyecto.API.Migrations
                 table: "ViajeDetalles",
                 column: "IdViajeNavigationIdViaje");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Viajes_IdTransportistaNavigationIdTransportista",
-                table: "Viajes",
-                column: "IdTransportistaNavigationIdTransportista");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_Viajes_IdTransportistaNavigationIdTransportista",
+            //    table: "Viajes",
+            //    column: "IdTransportistaNavigationIdTransportista");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Viajes_SucursaleIdSucursal",

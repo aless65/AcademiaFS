@@ -1,4 +1,6 @@
-﻿namespace AcademiaFS.Proyecto.API._Features.Transportistas.Entities
+﻿using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+
+namespace AcademiaFS.Proyecto.API._Features.Transportistas.Entities
 {
     public class Transportista
     {
@@ -31,5 +33,6 @@
         //public virtual Usuario? UsuaModificacionNavigation { get; set; }
 
         //public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
+        public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
     }
 }

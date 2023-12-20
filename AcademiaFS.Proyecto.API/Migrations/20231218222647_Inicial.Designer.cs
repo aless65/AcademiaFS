@@ -405,8 +405,8 @@ namespace AcademiaFS.Proyecto.API.Migrations
                     b.Property<int>("IdTransportista")
                         .HasColumnType("int");
 
-                    b.Property<int>("IdTransportistaNavigationIdTransportista")
-                        .HasColumnType("int");
+                    //b.Property<int>("IdTransportistaNavigationIdTransportista")
+                    //    .HasColumnType("int");
 
                     b.Property<int?>("SucursaleIdSucursal")
                         .HasColumnType("int");
@@ -426,7 +426,7 @@ namespace AcademiaFS.Proyecto.API.Migrations
                     b.HasKey("IdViaje")
                         .HasName("PK_Viajes_IdViaje");
 
-                    b.HasIndex("IdTransportistaNavigationIdTransportista");
+                    //b.HasIndex("IdTransportistaNavigationIdTransportista");
 
                     b.HasIndex("SucursaleIdSucursal");
 
@@ -503,11 +503,11 @@ namespace AcademiaFS.Proyecto.API.Migrations
 
             modelBuilder.Entity("AcademiaFS.Proyecto.API._Features.Viajes.Entities.Viaje", b =>
                 {
-                    b.HasOne("AcademiaFS.Proyecto.API._Features.Transportistas.Entities.Transportista", "IdTransportistaNavigation")
-                        .WithMany()
-                        .HasForeignKey("IdTransportistaNavigationIdTransportista")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    //b.HasOne("AcademiaFS.Proyecto.API._Features.Transportistas.Entities.Transportista", "IdTransportistaNavigation")
+                    //    .WithMany()
+                    //    .HasForeignKey("IdTransportistaNavigationIdTransportista")
+                    //    .OnDelete(DeleteBehavior.Cascade)
+                    //    .IsRequired();
 
                     b.HasOne("AcademiaFS.Proyecto.API._Features.Sucursales.Entities.Sucursale", null)
                         .WithMany("Viajes")
