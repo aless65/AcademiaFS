@@ -162,4 +162,4 @@ INSERT INTO [dbo].[Viajes](FechaYHora,
 						   IdTransportista, 
 						   UsuaCreacion, 
 						   FechaCreacion)
-VALUES ('2023-12-14', 21, 10, 2, 5, 1, GETDATE())
+VALUES ('2023-12-14', 21, 10, 2, 1, 1, GETDATE())
