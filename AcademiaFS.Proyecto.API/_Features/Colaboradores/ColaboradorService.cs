@@ -86,8 +86,11 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
                     return Respuesta.Fault<ColaboradoreDto>(menssageValidation, Codigos.BadRequest);
                 }
 
-                if (ColaboradorExiste(colaboradores.Identidad))
-                    return Respuesta.Fault<ColaboradoreDto>("El colaborador ya existe", Codigos.BadRequest);
+                if (_domainService.ColaboradorExiste(colaboradores.Identidad))
+                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.REPETIDO("Colaborador"), Codigos.Error);
+
+                if (!_domainService.MunicipioExiste(colaboradores.IdMunicipio))
+                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.NO_EXISTE("Municipio"), Codigos.Error);
 
                 if (colaboradores.SucursalesXcolaboradores.Count() != colaboradores.SucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count())
                     return Respuesta.Fault<ColaboradoreDto>("Todas las distancias deben ser mayor que 0 y menor o igual que 50", Codigos.BadRequest);
@@ -103,6 +106,9 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 foreach (var item in colaboradores.SucursalesXcolaboradores)
                 {
+                    if(!_domainService.SucursalExiste(item.IdSucursal))
+                        return Respuesta.Fault<ColaboradoreDto>(Mensajes.NO_EXISTE("Sucursal"), Codigos.BadRequest);
+
                     item.FechaCreacion = colaboradores.FechaCreacion;
                     item.UsuaCreacion = colaboradores.UsuaCreacion;
                 }
@@ -111,19 +117,12 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 _unitOfWork.SaveChanges();
 
-                return Respuesta.Success(_mapper.Map<ColaboradoreDto>(colaboradores), Mensajes.PROCESO_EXITOSO, Codigos.Error);
+                return Respuesta.Success(_mapper.Map<ColaboradoreDto>(colaboradores), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch(Exception ex) 
             {
                 return _domainService.ValidacionCambiosBase<ColaboradoreDto>(ex);
             }
-        }
-
-        private bool ColaboradorExiste(string identidad)
-        {
-            bool existe = _unitOfWork.Repository<Colaboradore>().Where(x => x.Identidad == identidad).Any();
-
-            return existe;
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
+﻿using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using FluentValidation;
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
 {
@@ -37,5 +40,15 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Entities
         //public virtual Usuario? UsuaModificacionNavigation { get; set; }
 
         public virtual ICollection<ViajesDetalle>? ViajesDetalles { get; set; } = new List<ViajesDetalle>();
+    }
+
+    public class ViajeValidator : AbstractValidator<Viaje>
+    {
+        public ViajeValidator()
+        {
+            RuleFor(r => r.FechaYhora).NotEmpty().WithMessage(Mensajes.CAMPO_VACIO("Nombres"));
+            RuleFor(r => r.TarifaActual).NotEmpty().GreaterThan(0);
+            RuleFor(r => r.TotalKm).NotEmpty().GreaterThan(0).LessThanOrEqualTo(100);
+        }
     }
 }

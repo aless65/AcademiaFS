@@ -21,13 +21,13 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly DomainService _validacionesDomain;
+        private readonly DomainService _domainService;
 
         public TransportistaService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, DomainService domainService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
-            _validacionesDomain = domainService;
+            _domainService = domainService;
         }
 
         public Respuesta<List<TransportistaListarDto>> ListarTransportistas()
@@ -52,6 +52,9 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
+                if (_domainService.TransportistaExiste(transportistaDto.Identidad))
+                    return Respuesta.Fault<TransportistaDto>(Mensajes.REPETIDO("Transportista"), Codigos.Error);
+
                 var transportista = _mapper.Map<Transportista>(transportistaDto);
                 transportista.UsuaCreacion = 1;
                 transportista.FechaCreacion = DateTime.Now;
@@ -136,5 +139,12 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                 return Respuesta.Fault<string>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
+
+        //private bool TransportistaExiste(string identidad)
+        //{
+        //    bool existe = _unitOfWork.Repository<Transportista>().Where(x => x.Identidad == identidad).Any();
+
+        //    return existe;
+        //}
     }
 }

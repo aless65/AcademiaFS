@@ -74,6 +74,12 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             {
                 if(viajeDto.Admin)
                 {
+                    if(!_domainService.SucursalExiste(viajeDto.IdSucursal))
+                        return Respuesta.Fault<ViajeListarDto>(Mensajes.NO_EXISTE("Sucursal"), Codigos.Error);
+
+                    if (!_domainService.TransportistaExisteId(viajeDto.IdTransportista))
+                        return Respuesta.Fault<ViajeListarDto>(Mensajes.NO_EXISTE("Transportista"), Codigos.Error);
+
                     var viaje = _mapper.Map<Viaje>(viajeDto);
                     viaje.UsuaCreacion = 1;
                     viaje.FechaCreacion = DateTime.Now;
@@ -93,6 +99,9 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
                     foreach (var item in viaje.ViajesDetalles)
                     {
+                        if (!_domainService.ColaboradorExisteId(item.IdColaborador))
+                            return Respuesta.Fault<ViajeListarDto>(Mensajes.NO_EXISTE("Colaborador"), Codigos.Error);
+
                         var repiteColaboradorPorDia = from vd in _unitOfWork.Repository<ViajesDetalle>().AsQueryable()
                                                       join v in _unitOfWork.Repository<Viaje>().AsQueryable() on vd.IdViaje equals v.IdViaje
                                                       where vd.IdColaborador == item.IdColaborador
@@ -136,16 +145,22 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             }
         }
 
-        public Respuesta<ViajeReporteRangoFechaDto> ReporteViajes(DateTime fechaInicio, DateTime fechaFinal)
+        public Respuesta<ViajeReporteRangoFechaDto> ReporteViajes(DateTime fechaInicio, DateTime fechaFinal, int transportista)
         {
             try
             {
                 var reporteEncabezado = from v in _unitOfWork.Repository<Viaje>().AsQueryable()
-                                        where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date
+                                        join tran in _unitOfWork.Repository<Transportista>().AsQueryable()
+                                        on v.IdTransportista equals tran.IdTransportista
+                                        join sucu in _unitOfWork.Repository<Sucursale>().AsQueryable()
+                                        on v.IdSucursal equals sucu.IdSucursal
+                                        where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date && v.IdTransportista == transportista
                                         select new ViajeListarDto 
                                         { IdViaje = v.IdViaje, 
                                           IdSucursal = v.IdSucursal, 
+                                          NombreSucursal = sucu.Nombre,
                                           IdTransportista = v.IdTransportista, 
+                                          NombreTransportista = $"{tran.Nombres} {tran.Apellidos}",
                                           TarifaActual = v.TarifaActual,
                                           TotalKm = v.TotalKm, 
                                           TotalPagar = v.TarifaActual * v.TotalKm, 

@@ -35,10 +35,10 @@ namespace AcademiaFS.Proyecto.API.Controllers
             return Ok(respuesta);
         }
 
-        [HttpGet("Reporte/{fechaInicio}/{fechaFinal}")]
-        public IActionResult Reporte(DateTime fechaInicio, DateTime fechaFinal)
+        [HttpGet("Reporte/{fechaInicio}/{fechaFinal}/{transportista}")]
+        public IActionResult Reporte(DateTime fechaInicio, DateTime fechaFinal, int transportista)
         {
-            var respuesta = _viajeService.ReporteViajes(fechaInicio, fechaFinal);
+            var respuesta = _viajeService.ReporteViajes(fechaInicio, fechaFinal, transportista);
 
             return Ok(respuesta);
         }

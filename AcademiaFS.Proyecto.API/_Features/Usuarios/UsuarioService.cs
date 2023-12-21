@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Dtos;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
@@ -19,9 +20,17 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
             _mapper = mapper;
         }
 
-        public Respuesta<Usuario?> Login(string username, string password)
+        public Respuesta<UsuarioDto?> Login(string username, string password)
         {
-            var respuesta = _unitOfWork.Repository<Usuario>().Where(x => x.Nombre.Equals(username) && x.Contrasena.Equals(password)).FirstOrDefault();
+            var respuesta = (from usuario in _unitOfWork.Repository<Usuario>().AsQueryable()
+                             where usuario.Nombre == username && usuario.Contrasena == password && usuario.Estado == true
+                             select new UsuarioDto
+                             {
+                                 Nombre = usuario.Nombre,
+                                 EsAdmin = usuario.EsAdmin,
+                                 IdUsuario = usuario.IdUsuario,
+                                 IdRol = usuario.IdRol,
+                             }).FirstOrDefault();
 
             if (respuesta != null)
             {
