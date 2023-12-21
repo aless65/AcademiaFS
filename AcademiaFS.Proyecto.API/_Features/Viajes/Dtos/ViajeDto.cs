@@ -9,16 +9,12 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 
         public DateTime FechaYhora { get; set; }
 
-        public decimal TarifaActual { get; set; }
-
-        public decimal TotalKm { get; set; }
-
         public int IdSucursal { get; set; }
 
         public int IdTransportista { get; set; }
 
         //Detalles 
-        public List<ViajeListarDetalleDto>? ViajesDetalles { get; set; } = new List<ViajeListarDetalleDto>();
+        public List<ViajesDetalleDto>? ViajesDetalles { get; set; } = new List<ViajesDetalleDto>();
 
         //Info de usuario
         public bool Admin { get; set; }

@@ -1,30 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj": {}
+    "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj": {
+    "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
         "projectName": "AcademiaFS.Proyecto.API",
-        "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
-        "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.Proyecto.API\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.Proyecto.API\\AcademiaFS.Proyecto.API.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.Proyecto.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amedina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://sertfs.grupofarsiman.com/FarsimanPackages/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -50,18 +47,6 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.1, )"
-            },
-            "Farsiman.Application.Core.Standard": {
-              "target": "Package",
-              "version": "[3.0.1, )"
-            },
-            "Farsiman.Domain.Core.Validations.Standard": {
-              "target": "Package",
-              "version": "[1.0.0, )"
-            },
-            "Farsiman.Infraestructure.Core.Entity.Standard": {
-              "target": "Package",
-              "version": "[8.0.60115, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -105,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

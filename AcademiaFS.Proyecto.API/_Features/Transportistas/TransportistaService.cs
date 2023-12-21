@@ -4,6 +4,8 @@ using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
+using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
+using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
@@ -17,11 +19,13 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DomainService _validacionesDomain;
 
-        public TransportistaService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder)
+        public TransportistaService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, DomainService domainService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
+            _validacionesDomain = domainService;
         }
 
         public Respuesta<List<TransportistaAuditoriaDto>> ListarTransportistas()
@@ -67,9 +71,9 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
 
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportista), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch
+            catch (Exception ex)
             {
-                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
+                return _validacionesDomain.ValidacionCambiosBase<TransportistaDto>(ex);
             }
         }
 
@@ -94,9 +98,9 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
 
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportistaAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch
+            catch (Exception ex)
             {
-                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
+                return _validacionesDomain.ValidacionCambiosBase<TransportistaDto>(ex);
             }
         }
 

@@ -18,6 +18,7 @@ using System.IdentityModel;
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
+using AcademiaFS.Proyecto.API.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +59,8 @@ builder.Services.AddTransient<SucursalService>();
 builder.Services.AddTransient<TransportistaService>();
 builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<ViajeService>();
+
+builder.Services.AddTransient<DomainService>();
 
 var app = builder.Build();
 

@@ -16,9 +16,9 @@ namespace AcademiaFS.Proyecto.API.Infrastructure
             CreateMap<Colaboradore, ColaboradoreDto>().ReverseMap();
             CreateMap<SucursalesXcolaboradore, SucursalesXcolaboradoreDto>().ReverseMap();
             CreateMap<Viaje, ViajeDto>().ReverseMap();
-            CreateMap<ViajesDetalle, ViajeListarDetalleDto>().ReverseMap();
+            CreateMap<ViajesDetalle, ViajesDetalleListarDto>().ReverseMap();
             CreateMap<Viaje, ViajeListarDto>().ReverseMap();
-            CreateMap<ViajesDetalle, ViajeListarDetalleDto>().ReverseMap();
+            CreateMap<ViajesDetalle, ViajesDetalleDto>().ReverseMap();
 
         }
     }

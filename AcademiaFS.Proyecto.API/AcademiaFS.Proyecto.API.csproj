@@ -9,9 +9,6 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="Farsiman.Application.Core.Standard" Version="3.0.1" />
-    <PackageReference Include="Farsiman.Domain.Core.Validations.Standard" Version="1.0.0" />
-    <PackageReference Include="Farsiman.Infraestructure.Core.Entity.Standard" Version="8.0.60115" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="7.0.14" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.14" />
@@ -25,7 +22,6 @@
   <ItemGroup>
     <Folder Include="Utility\" />
     <Folder Include="kubernetes\" />
-    <Folder Include="Domain\" />
     <Folder Include="_Common\Dto\" />
     <Folder Include="_Common\Entities\" />
     <Folder Include="_Features\EstadosCiviles\Dtos\" />

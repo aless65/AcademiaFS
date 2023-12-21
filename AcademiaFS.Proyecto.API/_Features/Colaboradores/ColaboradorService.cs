@@ -3,6 +3,8 @@ using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
+using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
@@ -20,11 +22,13 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DomainService _domainService;
 
-        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper)
+        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper, DomainService domainService)
         {
             _unitOfWork = unitOfWork.BuilderSistemaViajes();
             _mapper = mapper;
+            _domainService = domainService;
         }
 
         public Respuesta<List<ColaboradoreListarDto>> ListaColaboradores()
@@ -98,10 +102,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             }
             catch(Exception ex) 
             {
-                if (ex.Message.Contains("saving the entity changes"))
-                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.DATOS_INCORRECTOS, Codigos.BadRequest);
-                else
-                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error); 
+                return _domainService.ValidacionCambiosBase<ColaboradoreDto>(ex);
             }
         }
 

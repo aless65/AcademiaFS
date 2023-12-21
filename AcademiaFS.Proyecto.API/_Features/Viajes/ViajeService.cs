@@ -14,6 +14,8 @@ using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Farsiman.Infraestructure.Core.Entity.Standard;
+using AcademiaFS.Proyecto.API.Domain;
 
 namespace AcademiaFS.Proyecto.API._Features.Viajes
 {
@@ -22,16 +24,17 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DomainService _domainService;
 
-        public ViajeService(UnitOfWorkBuilder unitOfWork, IMapper mapper)
+        public ViajeService(UnitOfWorkBuilder unitOfWork, IMapper mapper, DomainService validacionesDomain)
         {
             _unitOfWork = unitOfWork.BuilderSistemaViajes();
             _mapper = mapper;
+            _domainService = validacionesDomain;
         }
 
         public Respuesta<List<ViajeListarDto>> ListarViajes()
         {
-            //var viajes = (from viajes in _unitOfWork.Repository<ViajeDto>);
 
             var viajesList = (from viaje in _unitOfWork.Repository<Viaje>().AsQueryable()
                               join tran in _unitOfWork.Repository<Transportista>().AsQueryable()
@@ -65,7 +68,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
             return Respuesta.Success(viajesList, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
-        public Respuesta<ViajeDto> InsertarViaje(ViajeDto viajeDto)
+        public Respuesta<ViajeListarDto> InsertarViaje(ViajeDto viajeDto)
         {
             try
             {
@@ -77,10 +80,16 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
 
                     viaje.TotalKm = viaje.ViajesDetalles.Select(x => x.DistanciaActual).Sum();
 
-                    if(viaje.TotalKm > 100)
-                        return Respuesta.Fault<ViajeDto>("La distancia total no debe ser mayor a 100Km", Codigos.BadRequest);
+                    if (viaje.ViajesDetalles.Select(g => g.IdColaborador).Count() !=
+                    viaje.ViajesDetalles.Select(g => g.IdColaborador).Distinct().Count())
+                        return Respuesta.Fault<ViajeListarDto>("No puede ingresar dos veces el mismo colaborador", Codigos.BadRequest);
 
-                    List<ViajesDetalle> viajeDetalles = _unitOfWork.Repository<ViajesDetalle>().AsQueryable().ToList();
+                    if (viaje.TotalKm > 100)
+                        return Respuesta.Fault<ViajeListarDto>("La distancia total no debe ser mayor a 100Km", Codigos.BadRequest);
+
+                    viaje.TarifaActual = (from tran in _unitOfWork.Repository<Transportista>().AsQueryable()
+                                          where tran.IdTransportista == viaje.IdTransportista
+                                          select tran.TarifaKm).FirstOrDefault();
 
                     foreach (var item in viaje.ViajesDetalles)
                     {
@@ -91,32 +100,39 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                                       select vd;
 
                         if (repiteColaboradorPorDia.Count() > 0)
-                            return Respuesta.Fault<ViajeDto>("Se repite", Codigos.BadRequest);
+                            return Respuesta.Fault<ViajeListarDto>("Uno de los colaboradores ya tiene un viaje en esa fecha", Codigos.BadRequest);
                         else
                         {
+                            item.DistanciaActual = (from colab in _unitOfWork.Repository<Colaboradore>().AsQueryable()
+                                                    join colabXsucu in _unitOfWork.Repository<SucursalesXcolaboradore>().AsQueryable()
+                                                    on colab.IdColaborador equals colabXsucu.IdColaborador
+                                                    where colab.IdColaborador == item.IdColaborador 
+                                                    && colabXsucu.IdSucursal == viaje.IdSucursal
+                                                    select colabXsucu.DistanciaKm).FirstOrDefault();
+
+                            viaje.TotalKm += item.DistanciaActual;
+
                             item.UsuaCreacion = viaje.UsuaCreacion;
                             item.FechaCreacion = DateTime.Now;
                         }
                     }
 
+
                     _unitOfWork.Repository<Viaje>().Add(viaje);
 
                     _unitOfWork.SaveChanges();
 
-                    return Respuesta.Success(_mapper.Map<ViajeDto>(viaje), Mensajes.PROCESO_EXITOSO, Codigos.Success);
+                    return Respuesta.Success(_mapper.Map<ViajeListarDto>(_unitOfWork.Repository<Viaje>().Where(x => x.IdViaje == viaje.IdViaje).FirstOrDefault()), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
                 }
                 else
                 {
-                    return Respuesta.Fault<ViajeDto>("Sólo los administradores pueden registrar viajes", Codigos.Unauthorized);
+                    return Respuesta.Fault<ViajeListarDto>("Sólo los administradores pueden registrar viajes", Codigos.Unauthorized);
                 }
             }
             catch(Exception ex) 
             {
-                if (ex.Message.Contains("saving the entity changes"))
-                    return Respuesta.Fault<ViajeDto>(Mensajes.DATOS_INCORRECTOS, Codigos.BadRequest);
-                else
-                    return Respuesta.Fault<ViajeDto>("Intente más tarde", Codigos.Error);
+                return _domainService.ValidacionCambiosBase<ViajeListarDto>(ex);
             }
         }
 
@@ -133,8 +149,8 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                                           TarifaActual = v.TarifaActual,
                                           TotalKm = v.TotalKm, 
                                           TotalPagar = v.TarifaActual * v.TotalKm, 
-                                          FechaYhora = v.FechaYhora, 
-                                          //ViajesDetalles = _mapper.Map<ViajeListarDetalleDto>(_unitOfWork.Repository<ViajesDetalle>().Where(x => x.IdViaje == v.IdViaje).ToList())
+                                          FechaYhora = v.FechaYhora,
+                                          ViajesDetalles = _mapper.Map<List<ViajesDetalleListarDto>>(v.ViajesDetalles)
                                         };
 
                 var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
@@ -145,7 +161,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                     reporte = reporteEncabezado
                 };
 
-                return Respuesta.Success<ViajeReporteRangoFechaDto>(reporteTotal, Mensajes.PROCESO_EXITOSO, Codigos.Success);
+                return Respuesta.Success(reporteTotal, Mensajes.PROCESO_EXITOSO, Codigos.Success);
             } catch
             {
                 return Respuesta.Fault<ViajeReporteRangoFechaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
