@@ -1,24 +1,16 @@
 using AcademiaFS.Proyecto.API._Features.Colaboradores;
-using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales;
-using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Usuarios;
-using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes;
 using AcademiaFS.Proyecto.API.Infrastructure;
-using AcademiaFS.Proyecto.API.Infrastructure.Repositories;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
-using Farsiman.Domain.Core.Standard.Repositories;
-using Farsiman.Infraestructure.Core.Entity.Standard;
-using Farsiman.Infraestructure.Core.Entity.Standard.Extensions;
-using System.IdentityModel;
 
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System;
 using AcademiaFS.Proyecto.API.Domain;
+using Farsiman.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +29,13 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSwaggerForFsIdentityServer(opt =>
+{
+    opt.Title = "Transporte";
+    opt.Description = "Wow";
+    opt.Version = "v1";
+});
+
 //builder.Services.AddDbContext<ContextBellacoXD>(o => o.UseSqlServer(
 //        builder.Configuration.GetConnectionStringFromENV("BELLACA")
 //    ));
@@ -48,11 +47,11 @@ builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-//builder.Services.AddFsAuthService((options) =>
-//{
-//    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
-//    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
-//});
+builder.Services.AddFsAuthService((options) =>
+{
+    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
+    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
+});
 
 builder.Services.AddTransient<ColaboradorService>();
 builder.Services.AddTransient<SucursalService>();
@@ -71,14 +70,14 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
+    app.UseSwaggerWithFsIdentityServer();
     app.UseSwaggerUI();
 }
 
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseCors("AllowSpecificOrigin");
-//app.UseFsAuthService();
+app.UseFsAuthService();
 app.MapControllers();
 
 app.Run();

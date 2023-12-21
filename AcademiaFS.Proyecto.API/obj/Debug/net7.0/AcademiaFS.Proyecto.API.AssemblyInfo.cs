@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcademiaFS.Proyecto.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+81954b1c47606aec31260a45b0ec32adea64fd69")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcademiaFS.Proyecto.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcademiaFS.Proyecto.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

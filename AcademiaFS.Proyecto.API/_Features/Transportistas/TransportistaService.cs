@@ -12,6 +12,8 @@ using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace AcademiaFS.Proyecto.API._Features.Transportistas
 {
@@ -28,16 +30,11 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
             _validacionesDomain = domainService;
         }
 
-        public Respuesta<List<TransportistaAuditoriaDto>> ListarTransportistas()
+        public Respuesta<List<TransportistaListarDto>> ListarTransportistas()
         {
             var transportistas = (from transportista in _unitOfWork.Repository<Transportista>().AsQueryable()
-                                  join usuarioCrea in _unitOfWork.Repository<Usuario>().AsQueryable()
-                                  on transportista.UsuaCreacion equals usuarioCrea.IdUsuario
-                                  join usuarioModifica in _unitOfWork.Repository<Usuario>().AsQueryable()
-                                  on transportista.UsuaModificacion equals usuarioModifica.IdUsuario into umGroup
-                                  from usuarioModifica in umGroup.DefaultIfEmpty()
                                   where transportista.Estado
-                                  select new TransportistaAuditoriaDto
+                                  select new TransportistaListarDto
                                   {
                                       IdTransportista = transportista.IdTransportista,
                                       Nombres = transportista.Nombres,
@@ -45,16 +42,10 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                                       Identidad = transportista.Identidad,
                                       TarifaKm = transportista.TarifaKm,
                                       FechaNacimiento = transportista.FechaNacimiento,
-                                      Sexo = transportista.Sexo,
-                                      UsuaCreacion = transportista.UsuaCreacion,
-                                      UsuaCreacionNombre = usuarioCrea.Nombre,
-                                      FechaCreacion = transportista.FechaCreacion,
-                                      UsuaModificacion = transportista.UsuaModificacion,
-                                      UsuaModificacionNombre = usuarioModifica.Nombre,
-                                      FechaModificacion = transportista.FechaModificacion
+                                      Sexo = transportista.Sexo
                                   }).ToList();
 
-            return Respuesta.Success<List<TransportistaAuditoriaDto>>(transportistas, Mensajes.PROCESO_EXITOSO, Codigos.Success);
+            return Respuesta.Success<List<TransportistaListarDto>>(transportistas, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
         public Respuesta<TransportistaDto> InsertarTransportistas(TransportistaDto transportistaDto)
@@ -65,22 +56,46 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                 transportista.UsuaCreacion = 1;
                 transportista.FechaCreacion = DateTime.Now;
 
+                TransportistaValidator validator = new TransportistaValidator();
+
+                ValidationResult validationResult = validator.Validate(transportista);
+
+                if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string menssageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Fault<TransportistaDto>(menssageValidation, Codigos.BadRequest);
+                }
+
                 _unitOfWork.Repository<Transportista>().Add(transportista);
                 _unitOfWork.SaveChanges();
-                transportistaDto.IdTransportista = transportista.IdTransportista;
 
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportista), Mensajes.PROCESO_EXITOSO, Codigos.Success);
+                
             }
             catch (Exception ex)
             {
-                return _validacionesDomain.ValidacionCambiosBase<TransportistaDto>(ex);
+                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
 
-        public Respuesta<TransportistaDto> EditarTransportistas(TransportistaDto transportista)
+        public Respuesta<TransportistaDto> EditarTransportistas(TransportistaDto transportistaDto)
         {
             try
             {
+                var transportista = _mapper.Map<Transportista>(transportistaDto);
+
+                TransportistaValidator validator = new TransportistaValidator();
+
+                ValidationResult validationResult = validator.Validate(transportista);
+
+                if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string menssageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Fault<TransportistaDto>(menssageValidation, Codigos.BadRequest);
+                }
+
                 var transportistaAEditar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == transportista.IdTransportista).FirstOrDefault();
 
                 if (transportista != null)
@@ -95,12 +110,11 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                     _unitOfWork.SaveChanges();
                 }
 
-
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportistaAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch (Exception ex)
             {
-                return _validacionesDomain.ValidacionCambiosBase<TransportistaDto>(ex);
+                return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
 

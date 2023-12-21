@@ -4,12 +4,14 @@ using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
+using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 
 //using Farsiman.Application.Core.Standard.DTOs;
@@ -73,7 +75,18 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             {
                 var colaboradores = _mapper.Map<Colaboradore>(colaboradoresDto);
 
-                if(ColaboradorExiste(colaboradores.Identidad))
+                ColaboradoreValidator validator = new ColaboradoreValidator();
+
+                ValidationResult validationResult = validator.Validate(colaboradores);
+
+                if (!validationResult.IsValid)
+                {
+                    IEnumerable<string> errores = validationResult.Errors.Select(s => s.ErrorMessage);
+                    string menssageValidation = string.Join(Environment.NewLine, errores);
+                    return Respuesta.Fault<ColaboradoreDto>(menssageValidation, Codigos.BadRequest);
+                }
+
+                if (ColaboradorExiste(colaboradores.Identidad))
                     return Respuesta.Fault<ColaboradoreDto>("El colaborador ya existe", Codigos.BadRequest);
 
                 if (colaboradores.SucursalesXcolaboradores.Count() != colaboradores.SucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count())
