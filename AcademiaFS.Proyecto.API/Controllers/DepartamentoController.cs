@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AcademiaFS.Proyecto.API._Features.Departamentos;
 using AcademiaFS.Proyecto.API._Features.Departamentos.Dto;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DepartamentoController : ControllerBase

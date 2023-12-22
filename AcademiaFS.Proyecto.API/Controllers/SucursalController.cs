@@ -1,10 +1,12 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Sucursales;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Dtos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SucursalController : ControllerBase

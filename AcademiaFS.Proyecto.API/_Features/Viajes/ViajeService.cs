@@ -149,32 +149,41 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
         {
             try
             {
-                var reporteEncabezado = from v in _unitOfWork.Repository<Viaje>().AsQueryable()
-                                        join tran in _unitOfWork.Repository<Transportista>().AsQueryable()
-                                        on v.IdTransportista equals tran.IdTransportista
-                                        join sucu in _unitOfWork.Repository<Sucursale>().AsQueryable()
-                                        on v.IdSucursal equals sucu.IdSucursal
-                                        where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date && v.IdTransportista == transportista
-                                        select new ViajeListarDto 
-                                        { IdViaje = v.IdViaje, 
-                                          IdSucursal = v.IdSucursal, 
-                                          NombreSucursal = sucu.Nombre,
-                                          IdTransportista = v.IdTransportista, 
-                                          NombreTransportista = $"{tran.Nombres} {tran.Apellidos}",
-                                          TarifaActual = v.TarifaActual,
-                                          TotalKm = v.TotalKm, 
-                                          TotalPagar = v.TarifaActual * v.TotalKm, 
-                                          FechaYhora = v.FechaYhora,
-                                          ViajesDetalles = _mapper.Map<List<ViajesDetalleListarDto>>(v.ViajesDetalles)
-                                        };
+                var transportistaReporte = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == transportista).FirstOrDefault();
 
-                var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
+                ViajeReporteRangoFechaDto reporteTotal = new ViajeReporteRangoFechaDto();
 
-                ViajeReporteRangoFechaDto reporteTotal = new ViajeReporteRangoFechaDto
+                if (transportistaReporte != null)
                 {
-                    totalAPagar = totalAPagar,
-                    reporte = reporteEncabezado
-                };
+                    var reporteEncabezado = from v in _unitOfWork.Repository<Viaje>().AsQueryable()
+                                            join tran in _unitOfWork.Repository<Transportista>().AsQueryable()
+                                            on v.IdTransportista equals tran.IdTransportista
+                                            join sucu in _unitOfWork.Repository<Sucursale>().AsQueryable()
+                                            on v.IdSucursal equals sucu.IdSucursal
+                                            where v.FechaYhora.Date >= fechaInicio.Date && v.FechaYhora.Date <= fechaFinal.Date && transportistaReporte.IdTransportista == transportista
+                                            select new ViajeListarDto
+                                            {
+                                                IdViaje = v.IdViaje,
+                                                IdSucursal = v.IdSucursal,
+                                                NombreSucursal = sucu.Nombre,
+                                                TarifaActual = v.TarifaActual,
+                                                TotalKm = v.TotalKm,
+                                                TotalPagar = v.TarifaActual * v.TotalKm,
+                                                FechaYhora = v.FechaYhora,
+                                                ViajesDetalles = _mapper.Map<List<ViajesDetalleListarDto>>(v.ViajesDetalles)
+                                            };
+
+                    var totalAPagar = reporteEncabezado.Sum(v => v.TotalPagar);
+
+                    reporteTotal = new ViajeReporteRangoFechaDto
+                    {
+                        totalAPagar = totalAPagar,
+                        IdTransportista = transportistaReporte.IdTransportista,
+                        NombreTransportista = $"{transportistaReporte.Nombres} {transportistaReporte.Apellidos}",
+                        reporte = reporteEncabezado
+                    };
+                }
+                
 
                 return Respuesta.Success(reporteTotal, Mensajes.PROCESO_EXITOSO, Codigos.Success);
             } catch

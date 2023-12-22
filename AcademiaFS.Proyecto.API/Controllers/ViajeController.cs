@@ -5,9 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ViajeController : ControllerBase
