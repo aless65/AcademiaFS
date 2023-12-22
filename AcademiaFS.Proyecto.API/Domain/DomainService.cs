@@ -1,6 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
-using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;

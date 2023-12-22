@@ -86,6 +86,9 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
         {
             try
             {
+                if (_unitOfWork.Repository<Transportista>().Where(x => x.Identidad == transportistaDto.Identidad && x.Identidad != transportistaDto.Identidad).Any())
+                    return Respuesta.Fault<TransportistaDto>(Mensajes.REPETIDO("Transportista"), Codigos.Error);
+
                 var transportista = _mapper.Map<Transportista>(transportistaDto);
 
                 TransportistaValidator validator = new TransportistaValidator();
@@ -101,7 +104,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
 
                 var transportistaAEditar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == transportista.IdTransportista).FirstOrDefault();
 
-                if (transportista != null)
+                if (transportistaAEditar != null)
                 {
                     transportistaAEditar.Nombres = transportista.Nombres;
                     transportistaAEditar.Apellidos = transportista.Apellidos;
@@ -127,24 +130,18 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
             {
                 var transportistaAEliminar = _unitOfWork.Repository<Transportista>().Where(x => x.IdTransportista == Id).FirstOrDefault();
 
-                transportistaAEliminar.Estado = false;
+                if(transportistaAEliminar != null)
+                    transportistaAEliminar.Estado = false;
 
                 _unitOfWork.SaveChanges();
 
 
-                return Respuesta.Success<string>(Mensajes.PROCESO_EXITOSO, Mensajes.PROCESO_EXITOSO, Codigos.Success);
+                return Respuesta.Success("", Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
             catch
             {
                 return Respuesta.Fault<string>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
         }
-
-        //private bool TransportistaExiste(string identidad)
-        //{
-        //    bool existe = _unitOfWork.Repository<Transportista>().Where(x => x.Identidad == identidad).Any();
-
-        //    return existe;
-        //}
     }
 }

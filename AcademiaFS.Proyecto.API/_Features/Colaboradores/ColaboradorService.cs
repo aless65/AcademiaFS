@@ -1,7 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
-using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
@@ -38,6 +38,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
             var colaboradoresList = (from colaboradores in _unitOfWork.Repository<Colaboradore>().AsQueryable()
                                      join muni in _unitOfWork.Repository<Municipio>().AsQueryable()
                                      on colaboradores.IdMunicipio equals muni.IdMunicipio
+                                     where colaboradores.Estado == true
                                      select new ColaboradoreListarDto
                                      {
                                          IdColaborador = colaboradores.IdColaborador,
@@ -66,7 +67,7 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
                                      }).ToList();
 
 
-            return Respuesta.Success(colaboradoresList, Mensajes.PROCESO_EXITOSO, Codigos.Error);
+            return Respuesta.Success(colaboradoresList, Mensajes.PROCESO_EXITOSO, Codigos.Success);
         }
 
         public Respuesta<ColaboradoreDto> InsertarColaboradores(ColaboradoreDto colaboradoresDto)

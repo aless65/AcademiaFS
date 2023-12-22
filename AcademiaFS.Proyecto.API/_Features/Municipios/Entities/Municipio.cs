@@ -1,8 +1,10 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 
-namespace AcademiaFS.Proyecto.API._Common.Entities
+namespace AcademiaFS.Proyecto.API._Features.Municipios.Entities
 {
     public class Municipio
     {
@@ -23,6 +25,10 @@ namespace AcademiaFS.Proyecto.API._Common.Entities
         public int? UsuaModificacion { get; set; }
 
         public DateTime? FechaModificacion { get; set; }
+        public virtual Departamento IdDepartamentoNavigation { get; set; } = null!;
+
         public virtual ICollection<Colaboradore> Colaboradores { get; set; } = new List<Colaboradore>();
+        public virtual ICollection<Sucursale> Sucursales { get; set; } = new List<Sucursale>();
+
     }
 }

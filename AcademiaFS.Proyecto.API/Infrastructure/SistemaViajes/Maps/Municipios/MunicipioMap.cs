@@ -1,4 +1,4 @@
-﻿using AcademiaFS.Proyecto.API._Common.Entities;
+﻿using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,6 +20,10 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Municipios
             builder.Property(e => e.FechaCreacion).HasColumnType("datetime");
             builder.Property(e => e.FechaModificacion).HasColumnType("datetime");
             builder.Property(e => e.Nombre).HasMaxLength(300);
+
+            builder.HasOne(d => d.IdDepartamentoNavigation).WithMany(p => p.Municipios)
+                .HasForeignKey(d => d.IdDepartamento)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

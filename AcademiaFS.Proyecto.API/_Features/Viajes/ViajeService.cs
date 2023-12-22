@@ -1,4 +1,4 @@
-﻿using AcademiaFS.Proyecto.API._Common.Entities;
+﻿//using AcademiaFS.Proyecto.API._Common.Entities;
 using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
@@ -41,6 +41,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                               on viaje.IdTransportista equals tran.IdTransportista
                               join sucu in _unitOfWork.Repository<Sucursale>().AsQueryable()
                               on viaje.IdSucursal equals sucu.IdSucursal
+                              where viaje.Estado == true
                               select new ViajeListarDto
                               {
                                   IdViaje = viaje.IdViaje,
@@ -125,7 +126,6 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes
                             item.FechaCreacion = DateTime.Now;
                         }
                     }
-
 
                     _unitOfWork.Repository<Viaje>().Add(viaje);
 

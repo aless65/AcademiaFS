@@ -1,5 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Dtos;
+using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
@@ -14,6 +16,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure
         {
             CreateMap<Transportista, TransportistaDto>().ReverseMap();
             CreateMap<Colaboradore, ColaboradoreDto>().ReverseMap();
+            CreateMap<Sucursale, SucursaleDto>().ReverseMap();
             CreateMap<SucursalesXcolaboradore, SucursalesXcolaboradoreDto>().ReverseMap();
             CreateMap<Viaje, ViajeDto>().ReverseMap();
             CreateMap<ViajesDetalle, ViajesDetalleListarDto>().ReverseMap();

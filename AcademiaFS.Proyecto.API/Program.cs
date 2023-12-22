@@ -47,11 +47,12 @@ builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddFsAuthService((options) =>
-{
-    options.Username = builder.Configuration.GetFromENV("FsIdentity:Username");
-    options.Password = builder.Configuration.GetFromENV("FsIdentity:Password");
-});
+//builder.Services.AddFsAuthService(configureOptions =>
+//{
+//    configureOptions.Username = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Username");
+//    configureOptions.Password = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Password");
+//});
+
 
 builder.Services.AddTransient<ColaboradorService>();
 builder.Services.AddTransient<SucursalService>();
@@ -77,7 +78,7 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseCors("AllowSpecificOrigin");
-app.UseFsAuthService();
+//app.UseFsAuthService();
 app.MapControllers();
 
 app.Run();

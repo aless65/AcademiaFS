@@ -20,9 +20,9 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Sucursales
             builder.Property(e => e.FechaModificacion).HasColumnType("datetime");
             builder.Property(e => e.Nombre).HasMaxLength(300);
 
-            //builder.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Sucursales)
-            //    .HasForeignKey(d => d.IdMunicipio)
-            //    .OnDelete(DeleteBehavior.ClientSetNull);
+            builder.HasOne(d => d.IdMunicipioNavigation).WithMany(p => p.Sucursales)
+                .HasForeignKey(d => d.IdMunicipio)
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             //entity.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursaleUsuaCreacionNavigations)
             //    .HasForeignKey(d => d.UsuaCreacion)
