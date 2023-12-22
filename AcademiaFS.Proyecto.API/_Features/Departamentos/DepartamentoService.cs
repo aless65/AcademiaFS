@@ -76,9 +76,6 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
         {
             try
             {
-                if (_domainService.DepartamentoExiste(departamentoDto.Codigo, departamentoDto.Nombre, departamentoDto.IdDepartamento))
-                    return Respuesta.Fault<DepartamentoDto>(Mensajes.REPETIDO("Departamento"), Codigos.Error);
-
                 var departamento = _mapper.Map<Departamento>(departamentoDto);
 
                 DepartamentoValidator validator = new DepartamentoValidator();
@@ -91,6 +88,9 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
                     string menssageValidation = string.Join(Environment.NewLine, errores);
                     return Respuesta.Fault<DepartamentoDto>(menssageValidation, Codigos.BadRequest);
                 }
+
+                if (_domainService.DepartamentoExiste(departamentoDto.Codigo, departamentoDto.Nombre, departamentoDto.IdDepartamento))
+                    return Respuesta.Fault<DepartamentoDto>(Mensajes.REPETIDO("Departamento"), Codigos.Error);
 
                 var departamentoAEditar = _unitOfWork.Repository<Departamento>().Where(x => x.IdDepartamento == departamento.IdDepartamento).FirstOrDefault();
 
