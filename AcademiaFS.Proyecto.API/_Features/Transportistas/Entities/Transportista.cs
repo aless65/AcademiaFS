@@ -1,4 +1,5 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using FluentValidation;
 
@@ -30,9 +31,9 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas.Entities
 
         public DateTime? FechaModificacion { get; set; }
 
-        //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+        public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
 
-        //public virtual Usuario? UsuaModificacionNavigation { get; set; }
+        public virtual Usuario? UsuaModificacionNavigation { get; set; }
         public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
     }
 

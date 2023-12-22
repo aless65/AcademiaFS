@@ -29,6 +29,15 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Viajes
                 .HasForeignKey(d => d.IdTransportista)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ViajeUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Viajes_Usuarios_UsuaCreacion_IdUsuario");
+
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.ViajeUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_Viajes_Usuarios_UsuaModificacion_IdUsuario");
+
         }
     }
 }

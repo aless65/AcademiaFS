@@ -25,14 +25,14 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.ViajesDetall
                 .HasForeignKey(d => d.IdViaje)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //entity.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ViajesDetalleUsuaCreacionNavigations)
-            //    .HasForeignKey(d => d.UsuaCreacion)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_ViajesDetalles_Usuarios_UsuaCreacion_IdUsuario");
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ViajesDetalleUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_ViajesDetalles_Usuarios_UsuaCreacion_IdUsuario");
 
-            //entity.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.ViajesDetalleUsuaModificacionNavigations)
-            //    .HasForeignKey(d => d.UsuaModificacion)
-            //    .HasConstraintName("FK_ViajesDetalles_Usuarios_UsuaModificacion_IdUsuario");
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.ViajesDetalleUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_ViajesDetalles_Usuarios_UsuaModificacion_IdUsuario");
         }
     }
 }

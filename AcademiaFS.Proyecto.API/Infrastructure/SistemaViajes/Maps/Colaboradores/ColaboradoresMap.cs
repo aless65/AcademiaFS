@@ -33,14 +33,14 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Colaboradore
                 .HasForeignKey(d => d.IdMunicipio)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ColaboradoreUsuaCreacionNavigations)
-            //    .HasForeignKey(d => d.UsuaCreacion)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_Colaboradores_Usuarios_UsuaCreacion_IdUsuario");
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.ColaboradoreUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Colaboradores_Usuarios_UsuaCreacion_IdUsuario");
 
-            //builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.ColaboradoreUsuaModificacionNavigations)
-            //    .HasForeignKey(d => d.UsuaModificacion)
-            //    .HasConstraintName("FK_Colaboradores_Usuarios_Modificacion_IdUsuario");
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.ColaboradoreUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_Colaboradores_Usuarios_Modificacion_IdUsuario");
         }
     }
 }

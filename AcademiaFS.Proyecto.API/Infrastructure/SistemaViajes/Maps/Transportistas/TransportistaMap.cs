@@ -29,14 +29,14 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Transportist
                 .IsFixedLength();
             builder.Property(e => e.TarifaKm).HasColumnType("decimal(18, 2)");
 
-            //builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.TransportistaUsuaCreacionNavigations)
-            //    .HasForeignKey(d => d.UsuaCreacion)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_Transportistas_Usuarios_UsuaCreacion_IdUsuario");
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.TransportistaUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Transportistas_Usuarios_UsuaCreacion_IdUsuario");
 
-            //builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.TransportistaUsuaModificacionNavigations)
-            //    .HasForeignKey(d => d.UsuaModificacion)
-            //    .HasConstraintName("FK_Transportistas_Usuarios_Modificacion_IdUsuario");
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.TransportistaUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_Transportistas_Usuarios_Modificacion_IdUsuario");
         }
     }
 }

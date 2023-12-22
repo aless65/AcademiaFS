@@ -2,6 +2,7 @@
 using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
+using AcademiaFS.Proyecto.API._Features.Usuarios.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using FluentValidation;
@@ -40,9 +41,9 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public virtual ICollection<SucursalesXcolaboradore> SucursalesXcolaboradores { get; set; } = new List<SucursalesXcolaboradore>();
 
-        //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+        public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
 
-        //public virtual Usuario? UsuaModificacionNavigation { get; set; }
+        public virtual Usuario? UsuaModificacionNavigation { get; set; }
 
         public virtual ICollection<ViajesDetalle> ViajesDetalles { get; set; } = new List<ViajesDetalle>();
     }

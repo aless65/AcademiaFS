@@ -18,12 +18,10 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Entities
 
         public DateTime FechaCreacion { get; set; }
 
-        [JsonIgnore]
         public virtual Colaboradore IdColaboradorNavigation { get; set; } = null!;
 
-        [JsonIgnore]
         public virtual Sucursale IdSucursalNavigation { get; set; } = null!;
 
-        //public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+        public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
     }
 }

@@ -20,6 +20,15 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Departamento
             builder.Property(e => e.FechaCreacion).HasColumnType("datetime");
             builder.Property(e => e.FechaModificacion).HasColumnType("datetime");
             builder.Property(e => e.Nombre).HasMaxLength(300);
+
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.DepartamentoUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Departamentos_Usuarios_UsuaCreacion_IdUsuario");
+
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.DepartamentoUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_Departamentos_Usuarios_UsuaModificacion_IdUsuario");
         }
     }
 }

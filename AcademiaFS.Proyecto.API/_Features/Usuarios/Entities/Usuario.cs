@@ -35,13 +35,26 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios.Entities
 
         public virtual Rol? role { get; set; }
 
-        public virtual ICollection<Colaboradore> Colaboradores { get; set; } = new List<Colaboradore>();
-        public virtual ICollection<Departamento> Departamentos { get; set; } = new List<Departamento>();
-        public virtual ICollection<Municipio> Municipios { get; set; } = new List<Municipio>();
-        public virtual ICollection<Sucursale> Sucursales { get; set; } = new List<Sucursale>();
-        public virtual ICollection<SucursalesXcolaboradore> SucursalesXColaboradores { get; set; } = new List<SucursalesXcolaboradore>();
-        public virtual ICollection<Transportista> Transportistas { get; set; } = new List<Transportista>();
-        public virtual ICollection<Viaje> Viajes { get; set; } = new List<Viaje>();
-        public virtual ICollection<ViajesDetalle> ViajesDetalles { get; set; } = new List<ViajesDetalle>();
+        public virtual ICollection<Colaboradore> ColaboradoreUsuaCreacionNavigations { get; set; } = new List<Colaboradore>();
+        public virtual ICollection<Colaboradore> ColaboradoreUsuaModificacionNavigations { get; set; } = new List<Colaboradore>();
+        public virtual ICollection<Departamento> DepartamentoUsuaCreacionNavigations { get; set; } = new List<Departamento>();
+        public virtual ICollection<Departamento> DepartamentoUsuaModificacionNavigations { get; set; } = new List<Departamento>();
+        public virtual ICollection<Municipio> MunicipioUsuaCreacionNavigations { get; set; } = new List<Municipio>();
+        public virtual ICollection<Municipio> MunicipioUsuaModificacionNavigations { get; set; } = new List<Municipio>();
+        public virtual ICollection<Sucursale> SucursaleUsuaCreacionNavigations { get; set; } = new List<Sucursale>();
+        public virtual ICollection<Sucursale> SucursaleUsuaModificacionNavigations { get; set; } = new List<Sucursale>();
+        public virtual ICollection<SucursalesXcolaboradore> SucursalesXColaboradoreUsuaCreacionNavigations { get; set; } = new List<SucursalesXcolaboradore>();
+        public virtual ICollection<Transportista> TransportistaUsuaCreacionNavigations { get; set; } = new List<Transportista>();
+        public virtual ICollection<Transportista> TransportistaUsuaModificacionNavigations { get; set; } = new List<Transportista>();
+        public virtual ICollection<Usuario> InverseUsuaCreacionNavigation { get; set; } = new List<Usuario>();
+
+        public virtual ICollection<Usuario> InverseUsuaModificacionNavigation { get; set; } = new List<Usuario>();
+        public virtual ICollection<Viaje>? ViajeUsuaCreacionNavigations { get; set; } = new List<Viaje>();
+        public virtual ICollection<Viaje>? ViajeUsuaModificacionNavigations { get; set; } = new List<Viaje>();
+        public virtual ICollection<ViajesDetalle> ViajesDetalleUsuaCreacionNavigations { get; set; } = new List<ViajesDetalle>();
+        public virtual ICollection<ViajesDetalle> ViajesDetalleUsuaModificacionNavigations { get; set; } = new List<ViajesDetalle>();
+        public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+
+        public virtual Usuario? UsuaModificacionNavigation { get; set; }
     }
 }

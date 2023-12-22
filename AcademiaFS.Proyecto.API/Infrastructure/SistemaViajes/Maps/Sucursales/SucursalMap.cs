@@ -24,14 +24,14 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Sucursales
                 .HasForeignKey(d => d.IdMunicipio)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //entity.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursaleUsuaCreacionNavigations)
-            //    .HasForeignKey(d => d.UsuaCreacion)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_Sucursales_Usuarios_UsuaCreacion_IdUsuario");
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursaleUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Sucursales_Usuarios_UsuaCreacion_IdUsuario");
 
-            //entity.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.SucursaleUsuaModificacionNavigations)
-            //    .HasForeignKey(d => d.UsuaModificacion)
-            //    .HasConstraintName("FK_Sucursales_Usuarios_Modificacion_IdUsuario");
+            builder.HasOne(d => d.UsuaModificacionNavigation).WithMany(p => p.SucursaleUsuaModificacionNavigations)
+                .HasForeignKey(d => d.UsuaModificacion)
+                .HasConstraintName("FK_Sucursales_Usuarios_Modificacion_IdUsuario");
         }
     }
 }

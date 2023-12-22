@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
+using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
 using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
@@ -35,9 +36,33 @@ namespace AcademiaFS.Proyecto.API.Domain
             return existe;
         }
 
-        public bool MunicipioExiste(int sucursal)
+        public bool DepartamentoExiste(string codigo, string nombre, int? id = null)
         {
-            bool existe = _unitOfWork.Repository<Municipio>().Where(x => x.IdMunicipio == sucursal).Any();
+            bool existe;
+
+            if(id == null)
+                existe = _unitOfWork.Repository<Departamento>().Where(x => x.Codigo == codigo || x.Nombre == nombre).Any();
+            else
+                existe = _unitOfWork.Repository<Departamento>().Where((x => x.Codigo == codigo || x.Nombre == nombre && x.IdDepartamento != id)).Any();
+
+            return existe;
+        }
+
+        public bool MunicipioExiste(string codigo, int depa, int? id = null)
+        {
+            bool existe;
+
+            if (id == null)
+                existe = _unitOfWork.Repository<Municipio>().Where(x => x.Codigo == codigo || x.IdDepartamento == depa).Any();
+            else
+                existe = _unitOfWork.Repository<Municipio>().Where(x => x.Codigo == codigo || x.IdDepartamento == depa && x.IdMunicipio != id).Any();
+
+            return existe;
+        }
+
+        public bool MunicipioExiste(int muni)
+        {
+            bool existe = _unitOfWork.Repository<Municipio>().Where(x => x.IdMunicipio == muni).Any();
 
             return existe;
         }

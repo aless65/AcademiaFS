@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using AcademiaFS.Proyecto.API.Domain;
 using Farsiman.Extensions.Configuration;
+using AcademiaFS.Proyecto.API._Features.Departamentos;
+using AcademiaFS.Proyecto.API._Features.Municipios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -55,6 +57,8 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 
 
 builder.Services.AddTransient<ColaboradorService>();
+builder.Services.AddTransient<DepartamentoService>();
+builder.Services.AddTransient<MunicipioService>();
 builder.Services.AddTransient<SucursalService>();
 builder.Services.AddTransient<TransportistaService>();
 builder.Services.AddTransient<UsuarioService>();

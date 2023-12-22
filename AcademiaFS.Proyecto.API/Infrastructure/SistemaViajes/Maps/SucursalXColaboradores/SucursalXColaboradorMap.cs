@@ -26,10 +26,10 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.SucursalXCol
                 .HasForeignKey(d => d.IdSucursal)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-            //builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursalesXcolaboradores)
-            //    .HasForeignKey(d => d.UsuaCreacion)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_SucursalesXColaboradores_Usuarios_UsuaCreacion_IdUsuario");
+            builder.HasOne(d => d.UsuaCreacionNavigation).WithMany(p => p.SucursalesXColaboradoreUsuaCreacionNavigations)
+                .HasForeignKey(d => d.UsuaCreacion)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_SucursalesXColaboradores_Usuarios_UsuaCreacion_IdUsuario");
         }
     }
 }
