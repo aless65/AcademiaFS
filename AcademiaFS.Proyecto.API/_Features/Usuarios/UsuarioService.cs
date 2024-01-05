@@ -34,11 +34,11 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
 
             if (respuesta != null)
             {
-                return Respuesta.Success(respuesta, "Sesión iniciada", Codigos.Success);
+                return Respuesta.Success(respuesta, Mensajes.LOGIN_EXITOSO, Codigos.Success);
             }
             else
             {
-                return Respuesta.Fault<UsuarioDto>("Usuario o contraseña incorrectos", Codigos.BadRequest);
+                return Respuesta.Fault<UsuarioDto>(Mensajes.LOGIN_FALLIDO, Codigos.BadRequest);
             }
         }
     }

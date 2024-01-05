@@ -6,7 +6,10 @@
         public const string PROCESO_FALLIDO = "Error. Intente más tarde";
         public const string DATOS_INCORRECTOS = "Los datos se han enviado de forma incorrecta. Revise llaves foráneas, constraints, nulos, etc";
         public const string SEXO_INVALIDO = "El sexo debe ser F o M";
-        //public const string CARACTERES_IDENTIDAD = "La identidad debe tener 13 caracteres";
+        public const string LOGIN_EXITOSO = "Sesión iniciada";
+        public const string LOGIN_FALLIDO = "El nombre de usuario o la contraseña son incorrectos";
+        public const string NO_AUTORIZADO = "No tiene los permisos para ejecutar esta acción";
+
         public static string OPERACION_EXITOSA(string nombreOperacion)
         {
             return $"El registro ha sido {nombreOperacion} correctamente";
