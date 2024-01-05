@@ -35,7 +35,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities
 
         public virtual Usuario? UsuaModificacionNavigation { get; set; }
 
-        public virtual ICollection<ViajesDetalle>? ViajesDetalles { get; set; } = new List<ViajesDetalle>();
+        public virtual ICollection<ViajesDetalle> ViajesDetalles { get; set; } = new List<ViajesDetalle>();
     }
 
     public class ViajeValidator : AbstractValidator<Viaje>
