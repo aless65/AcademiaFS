@@ -5,6 +5,6 @@ namespace AcademiaFS.Proyecto.API._Features.Usuarios
 {
     public interface IUsuarioService
     {
-        Respuesta<UsuarioDto> Login(string username, string password);
+        //Respuesta<UsuarioDto> Login(string username, string password);
     }
 }

@@ -13,6 +13,7 @@ using Farsiman.Extensions.Configuration;
 using AcademiaFS.Proyecto.API._Features.Departamentos;
 using AcademiaFS.Proyecto.API._Features.Municipios;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes;
+using AcademiaFS.Proyecto.API._Features.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -56,6 +57,7 @@ builder.Services.AddFsAuthService(configureOptions =>
 });
 
 
+builder.Services.AddTransient<AuthService>();
 builder.Services.AddTransient<ColaboradorService>();
 builder.Services.AddTransient<DepartamentoService>();
 builder.Services.AddTransient<MunicipioService>();

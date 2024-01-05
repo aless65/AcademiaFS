@@ -2,18 +2,18 @@
 {
     public class Rol
     {
-        public int RolId { get; set; }
+        public int IdRol { get; set; }
 
-        public required string RolNombre { get; set; }
+        public required string Nombre { get; set; }
 
-        public bool? RolEstado { get; set; }
+        public bool? Estado { get; set; }
 
-        public int RolUsuaCreacion { get; set; }
+        public int UsuaCreacion { get; set; }
 
-        public DateTime RolFechaCreacion { get; set; }
+        public DateTime FechaCreacion { get; set; }
 
-        public int? RolUsuaModificacion { get; set; }
-        public DateTime? RolFechaModificacion { get; set; }
+        public int? UsuaModificacion { get; set; }
+        public DateTime? FechaModificacion { get; set; }
 
         public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }

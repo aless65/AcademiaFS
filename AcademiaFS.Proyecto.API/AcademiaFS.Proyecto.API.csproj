@@ -30,8 +30,8 @@
     <Folder Include="kubernetes\" />
     <Folder Include="_Common\Dto\" />
     <Folder Include="_Common\Entities\" />
+    <Folder Include="_Features\Auth\Dtos\" />
     <Folder Include="_Features\Roles\Dtos\" />
-    <Folder Include="_Features\Usuarios\Dtos\" />
   </ItemGroup>
 
   <ItemGroup>

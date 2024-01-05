@@ -16,12 +16,12 @@ namespace AcademiaFS.Proyecto.API.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpPost("Login/{username}/{password}")]
-        public IActionResult Login(string username, string password)
-        {
-            var respuesta = _usuarioService.Login(username, password);
+        //[HttpPost("Login/{username}/{password}")]
+        //public IActionResult Login(string username, string password)
+        //{
+        //    var respuesta = _usuarioService.Login(username, password);
 
-            return Ok(respuesta);
-        }
+        //    return Ok(respuesta);
+        //}
     }
 }
