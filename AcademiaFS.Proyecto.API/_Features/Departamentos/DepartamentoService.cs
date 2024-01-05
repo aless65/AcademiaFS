@@ -1,9 +1,8 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Departamentos.Dto;
-using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
-using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps.Departamentos;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
@@ -11,7 +10,7 @@ using FluentValidation.Results;
 
 namespace AcademiaFS.Proyecto.API._Features.Departamentos
 {
-    public class DepartamentoService
+    public class DepartamentoService : IDepartamentoService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -66,7 +65,7 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
                 return Respuesta.Success(_mapper.Map<DepartamentoDto>(departamento), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<DepartamentoDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
@@ -106,7 +105,7 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
 
                 return Respuesta.Success(_mapper.Map<DepartamentoDto>(departamentoAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<DepartamentoDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }

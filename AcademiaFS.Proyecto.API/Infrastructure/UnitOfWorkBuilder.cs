@@ -1,4 +1,4 @@
-﻿using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+﻿using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes;
 using Farsiman.Domain.Core.Standard.Repositories;
 using Farsiman.Infraestructure.Core.Entity.Standard;
 using Microsoft.EntityFrameworkCore;

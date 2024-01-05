@@ -1,12 +1,9 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
-using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
-using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
-using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
@@ -20,7 +17,7 @@ using System;
 
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 {
-    public class ColaboradorService
+    public class ColaboradorService : IColaboradorService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;

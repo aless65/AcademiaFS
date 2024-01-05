@@ -1,8 +1,8 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
@@ -11,7 +11,7 @@ using FluentValidation.Results;
 
 namespace AcademiaFS.Proyecto.API._Features.Transportistas
 {
-    public class TransportistaService
+    public class TransportistaService : ITransportistaService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -70,7 +70,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportista), Mensajes.PROCESO_EXITOSO, Codigos.Success);
                 
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
@@ -112,7 +112,7 @@ namespace AcademiaFS.Proyecto.API._Features.Transportistas
 
                 return Respuesta.Success(_mapper.Map<TransportistaDto>(transportistaAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch (Exception ex)
+            catch
             {
                 return Respuesta.Fault<TransportistaDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }

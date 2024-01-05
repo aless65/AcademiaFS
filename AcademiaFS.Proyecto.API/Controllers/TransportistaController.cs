@@ -1,8 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Transportistas;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AcademiaFS.Proyecto.API.Controllers

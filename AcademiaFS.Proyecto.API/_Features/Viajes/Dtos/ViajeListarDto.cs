@@ -1,6 +1,4 @@
-﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
-using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
-
+﻿
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
     public class ViajeListarDto
@@ -24,6 +22,6 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
         public decimal TotalPagar { get; set; }
 
         //Detalles 
-        public List<ViajesDetalleListarDto>? ViajesDetalles { get; set; } = new List<ViajesDetalleListarDto>();
+        public List<ViajesDetalleListarDto> ViajesDetalles { get; set; } = new List<ViajesDetalleListarDto>();
     }
 }

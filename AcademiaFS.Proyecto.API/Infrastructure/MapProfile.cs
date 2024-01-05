@@ -1,15 +1,10 @@
 ﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
-using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
 using AcademiaFS.Proyecto.API._Features.Departamentos.Dto;
-using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
 using AcademiaFS.Proyecto.API._Features.Municipios.Dto;
-using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Dtos;
-using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
-using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 
 namespace AcademiaFS.Proyecto.API.Infrastructure

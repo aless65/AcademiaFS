@@ -1,6 +1,4 @@
-﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
-using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
-
+﻿
 namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
 {
     public class ViajeDto
@@ -14,7 +12,7 @@ namespace AcademiaFS.Proyecto.API._Features.Viajes.Dtos
         public int IdTransportista { get; set; }
 
         //Detalles 
-        public List<ViajesDetalleDto>? ViajesDetalles { get; set; } = new List<ViajesDetalleDto>();
+        public List<ViajesDetalleDto> ViajesDetalles { get; set; } = new List<ViajesDetalleDto>();
 
         //Info de usuario
         public bool Admin { get; set; }

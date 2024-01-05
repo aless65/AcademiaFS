@@ -1,5 +1,4 @@
-﻿using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
-
+﻿
 namespace AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos
 {
     public class ColaboradoreDto

@@ -1,9 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
-using AcademiaFS.Proyecto.API._Features.Transportistas;
-using AcademiaFS.Proyecto.API._Features.Viajes;
-using Microsoft.AspNetCore.Http;
+﻿using AcademiaFS.Proyecto.API._Features.Viajes;
 using Microsoft.AspNetCore.Mvc;
-using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
 using Microsoft.AspNetCore.Authorization;
 

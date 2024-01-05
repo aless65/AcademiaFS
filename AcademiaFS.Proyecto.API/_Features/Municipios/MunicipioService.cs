@@ -1,9 +1,8 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
-using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
 using AcademiaFS.Proyecto.API._Features.Municipios.Dto;
-using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
@@ -11,7 +10,7 @@ using FluentValidation.Results;
 
 namespace AcademiaFS.Proyecto.API._Features.Municipios
 {
-    public class MunicipioService
+    public class MunicipioService : IMunicipioService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -74,7 +73,7 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
                 return Respuesta.Success(_mapper.Map<MunicipioDto>(municipio), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<MunicipioDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
@@ -118,7 +117,7 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
 
                 return Respuesta.Success(_mapper.Map<MunicipioDto>(municipioAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<MunicipioDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }

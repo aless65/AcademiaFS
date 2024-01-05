@@ -1,4 +1,4 @@
-﻿using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+﻿using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes;
 using System.IdentityModel;
 using System.Linq.Expressions;
 

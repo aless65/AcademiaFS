@@ -1,12 +1,8 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
-using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Dtos;
-using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
-using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
@@ -14,7 +10,7 @@ using FluentValidation.Results;
 
 namespace AcademiaFS.Proyecto.API._Features.Sucursales
 {
-    public class SucursalService
+    public class SucursalService : ISucursalService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
@@ -76,7 +72,7 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales
                 return Respuesta.Success(_mapper.Map<SucursaleDto>(sucursal), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<SucursaleDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }
@@ -117,7 +113,7 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales
 
                 return Respuesta.Success(_mapper.Map<SucursaleDto>(sucursalAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch (Exception ex)
+            catch 
             {
                 return Respuesta.Fault<SucursaleDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
             }

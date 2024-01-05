@@ -4,7 +4,6 @@ using AcademiaFS.Proyecto.API._Features.Transportistas;
 using AcademiaFS.Proyecto.API._Features.Usuarios;
 using AcademiaFS.Proyecto.API._Features.Viajes;
 using AcademiaFS.Proyecto.API.Infrastructure;
-using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Maps;
 
 //using Farsiman.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +12,7 @@ using AcademiaFS.Proyecto.API.Domain;
 using Farsiman.Extensions.Configuration;
 using AcademiaFS.Proyecto.API._Features.Departamentos;
 using AcademiaFS.Proyecto.API._Features.Municipios;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes;
 
 var builder = WebApplication.CreateBuilder(args);
 

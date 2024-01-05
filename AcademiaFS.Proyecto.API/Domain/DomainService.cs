@@ -1,12 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
-using AcademiaFS.Proyecto.API._Features.Colaboradores.Entities;
-using AcademiaFS.Proyecto.API._Features.Departamentos.Entities;
-using AcademiaFS.Proyecto.API._Features.Municipios.Entities;
-using AcademiaFS.Proyecto.API._Features.Sucursales.Entities;
-using AcademiaFS.Proyecto.API._Features.Transportistas.Entities;
 using AcademiaFS.Proyecto.API._Features.Viajes.Dtos;
-using AcademiaFS.Proyecto.API._Features.Viajes.Entities;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
 using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
