@@ -15,6 +15,9 @@
         public int? UsuaModificacion { get; set; }
         public DateTime? FechaModificacion { get; set; }
 
+        public virtual Usuario UsuaCreacionNavigation { get; set; } = null!;
+        public virtual Usuario? UsuaModificacionNavigation { get; set; }
+
         public virtual ICollection<Usuario> Usuarios { get; set; } = new List<Usuario>();
     }
 }

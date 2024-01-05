@@ -27,6 +27,7 @@ namespace AcademiaFS.Proyecto.API._Features.Auth
                              select new UsuarioListarDto
                              {
                                  Nombre = usuario.Nombre,
+                                 Imagen = usuario.Imagen,
                                  EsAdmin = usuario.EsAdmin,
                                  IdUsuario = usuario.IdUsuario,
                                  IdRol = usuario.IdRol,

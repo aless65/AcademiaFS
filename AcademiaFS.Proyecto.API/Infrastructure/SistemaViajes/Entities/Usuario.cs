@@ -32,6 +32,8 @@
         public virtual ICollection<Departamento> DepartamentoUsuaModificacionNavigations { get; set; } = new List<Departamento>();
         public virtual ICollection<Municipio> MunicipioUsuaCreacionNavigations { get; set; } = new List<Municipio>();
         public virtual ICollection<Municipio> MunicipioUsuaModificacionNavigations { get; set; } = new List<Municipio>();
+        public virtual ICollection<Rol> RolUsuaCreacionNavigations { get; set; } = new List<Rol>();
+        public virtual ICollection<Rol> RolUsuaModificacionNavigations { get; set; } = new List<Rol>();
         public virtual ICollection<Sucursale> SucursaleUsuaCreacionNavigations { get; set; } = new List<Sucursale>();
         public virtual ICollection<Sucursale> SucursaleUsuaModificacionNavigations { get; set; } = new List<Sucursale>();
         public virtual ICollection<SucursalesXcolaboradore> SucursalesXColaboradoreUsuaCreacionNavigations { get; set; } = new List<SucursalesXcolaboradore>();

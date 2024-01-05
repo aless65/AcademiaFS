@@ -18,6 +18,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes
         public DbSet<Colaboradore> Colaboradores { get; set; }
         public DbSet<Departamento> Departamentos { get; set; }
         public DbSet<Municipio> Municipios { get; set; }
+        public DbSet<Rol> Roles { get; set; }
         public DbSet<Sucursale> Sucursales { get; set; }
         public DbSet<SucursalesXcolaboradore> SucursalesXColaboradores { get; set; }
         public DbSet<Transportista> Transportistas { get; set; }
@@ -30,6 +31,7 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes
             modelBuilder.ApplyConfiguration(new ColaboradoresMap());
             modelBuilder.ApplyConfiguration(new MunicipioMap());
             modelBuilder.ApplyConfiguration(new DepartamentoMap());
+            modelBuilder.ApplyConfiguration(new RolMap());
             modelBuilder.ApplyConfiguration(new SucursalMap());
             modelBuilder.ApplyConfiguration(new SucursalXColaboradorMap());
             modelBuilder.ApplyConfiguration(new TransportistaMap());
