@@ -7,6 +7,10 @@
         public const string DATOS_INCORRECTOS = "Los datos se han enviado de forma incorrecta. Revise llaves foráneas, constraints, nulos, etc";
         public const string SEXO_INVALIDO = "El sexo debe ser F o M";
         //public const string CARACTERES_IDENTIDAD = "La identidad debe tener 13 caracteres";
+        public static string OPERACION_EXITOSA(string nombreOperacion)
+        {
+            return $"El registro ha sido {nombreOperacion} correctamente";
+        }
 
         public static string CAMPO_VACIO(string nombrePropiedad)
         {
