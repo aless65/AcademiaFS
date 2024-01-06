@@ -21,13 +21,14 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly DomainService _domainService;
+        //private readonly DomainService _domainService;
+        private readonly ColaboradorDomainService _colaboradorDomainService;
 
-        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper, DomainService domainService)
+        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper, ColaboradorDomainService colaboradorDomainService)
         {
             _unitOfWork = unitOfWork.BuilderSistemaViajes();
             _mapper = mapper;
-            _domainService = domainService;
+            _colaboradorDomainService = colaboradorDomainService;   
         }
 
         public Respuesta<List<ColaboradoreListarDto>> ListaColaboradores()
@@ -71,6 +72,13 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
         {
             try
             {
+                var colaboradoresListado = _unitOfWork.Repository<Colaboradore>().AsQueryable().ToList();
+
+                Respuesta<bool> validar = _colaboradorDomainService.ValidarColaborador(colaboradoresListado, colaboradoresDto);
+
+                if(!validar.Ok)
+                    return Respuesta.Fault<ColaboradoreDto>(validar.Mensaje, validar.Codigo);
+
                 var colaboradores = _mapper.Map<Colaboradore>(colaboradoresDto);
 
                 ColaboradoreValidator validator = new ColaboradoreValidator();
@@ -84,19 +92,6 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
                     return Respuesta.Fault<ColaboradoreDto>(menssageValidation, Codigos.BadRequest);
                 }
 
-                if (_domainService.ColaboradorExiste(colaboradores.Identidad))
-                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.REPETIDO("Colaborador"), Codigos.Error);
-
-                if (!_domainService.MunicipioExiste(colaboradores.IdMunicipio))
-                    return Respuesta.Fault<ColaboradoreDto>(Mensajes.NO_EXISTE("Municipio"), Codigos.Error);
-
-                if (colaboradores.SucursalesXcolaboradores.Count() != colaboradores.SucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count())
-                    return Respuesta.Fault<ColaboradoreDto>("Todas las distancias deben ser mayor que 0 y menor o igual que 50", Codigos.BadRequest);
-
-                if (colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Count() !=
-                    colaboradores.SucursalesXcolaboradores.Select(g => g.IdSucursal).Distinct().Count())
-                    return Respuesta.Fault<ColaboradoreDto>("No puede ingresar dos veces la misma sucursal", Codigos.BadRequest);
-
                 //Solución temporal XD
                 colaboradores.UsuaCreacion = 1;
 
@@ -104,9 +99,6 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 foreach (var item in colaboradores.SucursalesXcolaboradores)
                 {
-                    if(!_domainService.SucursalExiste(item.IdSucursal))
-                        return Respuesta.Fault<ColaboradoreDto>(Mensajes.NO_EXISTE("Sucursal"), Codigos.BadRequest);
-
                     item.FechaCreacion = colaboradores.FechaCreacion;
                     item.UsuaCreacion = colaboradores.UsuaCreacion;
                 }

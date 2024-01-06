@@ -5,10 +5,13 @@
         public const string PROCESO_EXITOSO = "Operación exitosa";
         public const string PROCESO_FALLIDO = "Error. Intente más tarde";
         public const string DATOS_INCORRECTOS = "Los datos se han enviado de forma incorrecta. Revise llaves foráneas, constraints, nulos, etc";
+        public const string LLAVE_FORANEA = "Hay un conflicto con las llaves foráneas. Verifique los datos e intente de nuevo o comuníquese con programación.";
         public const string SEXO_INVALIDO = "El sexo debe ser F o M";
         public const string LOGIN_EXITOSO = "Sesión iniciada";
         public const string LOGIN_FALLIDO = "El nombre de usuario o la contraseña son incorrectos";
         public const string NO_AUTORIZADO = "No tiene los permisos para ejecutar esta acción";
+        public const string DISTANCIA_SUCURSALES = "Todas las distancias deben ser mayor que 0 y menor o igual a 50";
+        public const string REPETIR_SUCURSAL = "No puede ingresar dos veces la misma sucursal";
 
         public static string OPERACION_EXITOSA(string nombreOperacion)
         {

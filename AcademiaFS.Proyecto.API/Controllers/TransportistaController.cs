@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TransportistaController : ControllerBase

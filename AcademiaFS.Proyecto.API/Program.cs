@@ -32,12 +32,12 @@ builder.Services.AddCors(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSwaggerForFsIdentityServer(opt =>
-{
-    opt.Title = "Transporte";
-    opt.Description = "Wow";
-    opt.Version = "v1";
-});
+//builder.Services.AddSwaggerForFsIdentityServer(opt =>
+//{
+//    opt.Title = "Transporte";
+//    opt.Description = "Wow";
+//    opt.Version = "v1";
+//});
 
 //builder.Services.AddDbContext<ContextBellacoXD>(o => o.UseSqlServer(
 //        builder.Configuration.GetConnectionStringFromENV("BELLACA")
@@ -50,15 +50,18 @@ builder.Services.AddTransient<UnitOfWorkBuilder, UnitOfWorkBuilder>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddFsAuthService(configureOptions =>
-{
-    configureOptions.Username = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Username");
-    configureOptions.Password = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Password");
-});
+//builder.Services.AddFsAuthService(configureOptions =>
+//{
+//    configureOptions.Username = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Username");
+//    configureOptions.Password = builder.Configuration.GetFromENV("Configurations:FsIdentityServer:Password");
+//});
 
 
 builder.Services.AddTransient<AuthService>();
+
+builder.Services.AddTransient<ColaboradorDomainService>();
 builder.Services.AddTransient<ColaboradorService>();
+
 builder.Services.AddTransient<DepartamentoService>();
 builder.Services.AddTransient<MunicipioService>();
 builder.Services.AddTransient<SucursalService>();
@@ -77,14 +80,15 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwaggerWithFsIdentityServer();
+    //app.UseSwaggerWithFsIdentityServer();
+    app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseAuthorization();
 app.UseAuthentication();
 app.UseCors("AllowSpecificOrigin");
-app.UseFsAuthService();
+//app.UseFsAuthService();
 app.MapControllers();
 
 app.Run();

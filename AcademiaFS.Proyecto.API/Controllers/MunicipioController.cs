@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AcademiaFS.Proyecto.API.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MunicipioController : ControllerBase

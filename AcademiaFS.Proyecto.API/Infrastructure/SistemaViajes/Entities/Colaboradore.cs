@@ -1,5 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API.Infrastructure;
+using Farsiman.Application.Core.Standard.DTOs;
 using FluentValidation;
 
 namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities
@@ -53,6 +54,15 @@ namespace AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities
             RuleFor(r => r.Sexo).NotEmpty().MaximumLength(1).Must(x => x == "F" || x == "M").WithMessage(Mensajes.SEXO_INVALIDO);
             RuleFor(r => r.Direccion).NotEmpty().WithMessage(Mensajes.CAMPO_VACIO("Dirección"));
             RuleFor(r => r.FechaNacimiento).NotEmpty().WithMessage(Mensajes.CAMPO_VACIO("Fecha Nacimiento"));
+            RuleFor(r => r.SucursalesXcolaboradores).Must(DistanciasValidas).WithMessage(Mensajes.DISTANCIA_SUCURSALES);
+        }
+
+        private bool DistanciasValidas(ICollection<SucursalesXcolaboradore> sucursalesXcolaboradores)
+        {
+            if (sucursalesXcolaboradores.Count != sucursalesXcolaboradores.Where(x => x.DistanciaKm > 0 && x.DistanciaKm < 51).ToList().Count)
+                return false;
+            else
+                return true;
         }
     }
 }
