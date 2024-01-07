@@ -14,13 +14,13 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly DomainService _domainService;
+        private readonly MunicipioDomainService _municipioDomainService;
 
-        public MunicipioService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, DomainService domainService)
+        public MunicipioService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, MunicipioDomainService municipioDomainService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
-            _domainService = domainService;
+            _municipioDomainService = municipioDomainService;
         }
 
         public Respuesta<List<MunicipioListarDto>> ListarMunicipios()
@@ -45,8 +45,15 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
         {
             try
             {
+                List<Municipio> municipios = _unitOfWork.Repository<Municipio>().AsQueryable().ToList();
 
-                var municipio = _mapper.Map<Municipio>(municipioDto);
+                municipioDto.IdMunicipio = 0;
+                Respuesta<bool> validar = _municipioDomainService.ValidarMunicipios(municipioDto, municipios);
+
+                if (!validar.Ok)
+                    return Respuesta.Fault<MunicipioDto>(validar.Mensaje, validar.Codigo);
+
+                Municipio municipio = _mapper.Map<Municipio>(municipioDto);
                 municipio.UsuaCreacion = 1;
                 municipio.FechaCreacion = DateTime.Now;
 
@@ -61,11 +68,6 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
                     return Respuesta.Fault<MunicipioDto>(menssageValidation, Codigos.BadRequest);
                 }
 
-                if (!_unitOfWork.Repository<Departamento>().AsQueryable().Where(x => x.IdDepartamento == municipioDto.IdDepartamento).Any())
-                    return Respuesta.Fault<MunicipioDto>(Mensajes.NO_EXISTE("Departamento"), Codigos.Error);
-
-                if (_domainService.MunicipioExiste(municipioDto.Codigo, municipioDto.Nombre, municipioDto.IdDepartamento))
-                    return Respuesta.Fault<MunicipioDto>(Mensajes.REPETIDO("Municipio"), Codigos.Error);
 
                 _unitOfWork.Repository<Municipio>().Add(municipio);
                 _unitOfWork.SaveChanges();
@@ -83,6 +85,13 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
         {
             try
             {
+                List<Municipio> municipios = _unitOfWork.Repository<Municipio>().AsQueryable().ToList();
+
+                Respuesta<bool> validar = _municipioDomainService.ValidarMunicipios(municipioDto, municipios);
+
+                if (!validar.Ok)
+                    return Respuesta.Fault<MunicipioDto>(validar.Mensaje, validar.Codigo);
+
                 var municipio = _mapper.Map<Municipio>(municipioDto);
 
                 MunicipioValidator validator = new MunicipioValidator();
@@ -95,12 +104,6 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
                     string menssageValidation = string.Join(Environment.NewLine, errores);
                     return Respuesta.Fault<MunicipioDto>(menssageValidation, Codigos.BadRequest);
                 }
-
-                if (!_unitOfWork.Repository<Departamento>().AsQueryable().Where(x => x.IdDepartamento == municipioDto.IdDepartamento).Any())
-                    return Respuesta.Fault<MunicipioDto>(Mensajes.NO_EXISTE("Departamento"), Codigos.Error);
-
-                if (_domainService.MunicipioExiste(municipioDto.Codigo, municipioDto.Nombre, municipioDto.IdDepartamento, municipioDto.IdMunicipio))
-                    return Respuesta.Fault<MunicipioDto>(Mensajes.REPETIDO("Municipio"), Codigos.Error);
 
                 var municipioAEditar = _unitOfWork.Repository<Municipio>().Where(x => x.IdMunicipio == municipio.IdMunicipio).FirstOrDefault();
 

@@ -23,15 +23,15 @@ namespace Academia.Proyecto.API._Common
             if (innerException is SqlException sqlException)
             {
 
-                _unitOfWork.Repository<ErroresDb>()
-                .Add(new ErroresDb
-                {
-                    FechaYHora = DateTime.Now,
-                    Codigo = sqlException.Number.ToString(),
-                    Mensaje = sqlException.Message,
-                });
+                //_unitOfWork.Repository<ErroresDb>()
+                //.Add(new ErroresDb
+                //{
+                //    FechaYHora = DateTime.Now,
+                //    Codigo = sqlException.Number.ToString(),
+                //    Mensaje = sqlException.Message,
+                //});
 
-                _unitOfWork.SaveChanges();
+                //_unitOfWork.SaveChanges();
 
                 if (sqlException.Number == 2601 || sqlException.Number == 2627)
                     return Respuesta.Fault<T>(Codigos.Error, Mensajes.REPETIDO(objeto));

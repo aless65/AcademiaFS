@@ -1,4 +1,6 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Features.Colaboradores;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Sucursales.Dtos;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
@@ -15,12 +17,14 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly DomainService _domainService;
+        private readonly SucursalDomainService _sucursalDomainService;
 
-        public SucursalService(UnitOfWorkBuilder unitOfWork, IMapper mapper, DomainService domainService)
+        public SucursalService(UnitOfWorkBuilder unitOfWork, IMapper mapper, DomainService domainService, SucursalDomainService sucursalDomainService)
         {
             _unitOfWork = unitOfWork.BuilderSistemaViajes();
             _mapper = mapper;
             _domainService = domainService;
+            _sucursalDomainService = sucursalDomainService;
         }
 
         public Respuesta<List<SucursaleListarDto>> ListarSucursales()
@@ -45,11 +49,12 @@ namespace AcademiaFS.Proyecto.API._Features.Sucursales
         {
             try
             {
-                if (!_domainService.MunicipioExiste(sucursalDto.IdMunicipio))
-                    return Respuesta.Fault<SucursaleDto>(Mensajes.NO_EXISTE("Municipio"), Codigos.Error);
+                var sucursalesListado = _unitOfWork.Repository<Sucursale>().AsQueryable().ToList();
 
-                if(_unitOfWork.Repository<Sucursale>().Where(x => x.Nombre == sucursalDto.Nombre).Any())
-                    return Respuesta.Fault<SucursaleDto>(Mensajes.REPETIDO("Sucursal"), Codigos.Error);
+                Respuesta<bool> validar = _sucursalDomainService.ValidarSucursal(sucursalesListado, sucursalDto);
+
+                if (!validar.Ok)
+                    return Respuesta.Fault<SucursaleDto>(validar.Mensaje, validar.Codigo);
 
                 var sucursal = _mapper.Map<Sucursale>(sucursalDto);
                 sucursal.UsuaCreacion = 1;

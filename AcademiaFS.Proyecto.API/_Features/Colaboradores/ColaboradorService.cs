@@ -1,4 +1,5 @@
-﻿using AcademiaFS.Proyecto.API._Common;
+﻿using Academia.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Transportistas.Dtos;
 using AcademiaFS.Proyecto.API.Domain;
@@ -21,14 +22,15 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        //private readonly DomainService _domainService;
+        private readonly CommonService _commonService;
         private readonly ColaboradorDomainService _colaboradorDomainService;
 
-        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper, ColaboradorDomainService colaboradorDomainService)
+        public ColaboradorService(UnitOfWorkBuilder unitOfWork, IMapper mapper, ColaboradorDomainService colaboradorDomainService, CommonService commonService)
         {
             _unitOfWork = unitOfWork.BuilderSistemaViajes();
             _mapper = mapper;
-            _colaboradorDomainService = colaboradorDomainService;   
+            _colaboradorDomainService = colaboradorDomainService;
+            _commonService = commonService;
         }
 
         public Respuesta<List<ColaboradoreListarDto>> ListaColaboradores()
@@ -109,9 +111,9 @@ namespace AcademiaFS.Proyecto.API._Features.Colaboradores
 
                 return Respuesta.Success(_mapper.Map<ColaboradoreDto>(colaboradores), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch(Exception ex) 
+            catch(DbUpdateException ex) 
             {
-                return _domainService.ValidacionCambiosBase<ColaboradoreDto>(ex);
+                return _commonService.RespuestasCatch<ColaboradoreDto>(ex, "salida");
             }
         }
     }

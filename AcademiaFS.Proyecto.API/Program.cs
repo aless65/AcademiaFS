@@ -14,6 +14,7 @@ using AcademiaFS.Proyecto.API._Features.Departamentos;
 using AcademiaFS.Proyecto.API._Features.Municipios;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes;
 using AcademiaFS.Proyecto.API._Features.Auth;
+using Academia.Proyecto.API._Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,9 +63,16 @@ builder.Services.AddTransient<AuthService>();
 builder.Services.AddTransient<ColaboradorDomainService>();
 builder.Services.AddTransient<ColaboradorService>();
 
+builder.Services.AddTransient<CommonService>();
+
 builder.Services.AddTransient<DepartamentoService>();
+
+builder.Services.AddTransient<MunicipioDomainService>();
 builder.Services.AddTransient<MunicipioService>();
+
+builder.Services.AddTransient<SucursalDomainService>();
 builder.Services.AddTransient<SucursalService>();
+
 builder.Services.AddTransient<TransportistaService>();
 builder.Services.AddTransient<UsuarioService>();
 builder.Services.AddTransient<ViajeService>();
