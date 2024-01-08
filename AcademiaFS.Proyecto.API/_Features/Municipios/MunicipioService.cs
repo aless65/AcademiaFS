@@ -1,4 +1,6 @@
-﻿using AcademiaFS.Proyecto.API._Common;
+﻿using Academia.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Common;
+using AcademiaFS.Proyecto.API._Features.Colaboradores.Dtos;
 using AcademiaFS.Proyecto.API._Features.Municipios.Dto;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
@@ -7,6 +9,7 @@ using AutoMapper;
 using Farsiman.Application.Core.Standard.DTOs;
 using Farsiman.Domain.Core.Standard.Repositories;
 using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcademiaFS.Proyecto.API._Features.Municipios
 {
@@ -14,13 +17,15 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly CommonService _commonService;
         private readonly MunicipioDomainService _municipioDomainService;
 
-        public MunicipioService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, MunicipioDomainService municipioDomainService)
+        public MunicipioService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, MunicipioDomainService municipioDomainService, CommonService commonService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
             _municipioDomainService = municipioDomainService;
+            _commonService = commonService;
         }
 
         public Respuesta<List<MunicipioListarDto>> ListarMunicipios()
@@ -75,9 +80,9 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
                 return Respuesta.Success(_mapper.Map<MunicipioDto>(municipio), Mensajes.PROCESO_EXITOSO, Codigos.Success);
 
             }
-            catch 
+            catch (DbUpdateException ex)
             {
-                return Respuesta.Fault<MunicipioDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
+                return _commonService.RespuestasCatch<MunicipioDto>(ex, "municipio");
             }
         }
 
@@ -120,9 +125,9 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
 
                 return Respuesta.Success(_mapper.Map<MunicipioDto>(municipioAEditar), Mensajes.PROCESO_EXITOSO, Codigos.Success);
             }
-            catch 
+            catch (DbUpdateException ex)
             {
-                return Respuesta.Fault<MunicipioDto>(Mensajes.PROCESO_FALLIDO, Codigos.Error);
+                return _commonService.RespuestasCatch<MunicipioDto>(ex, "municipio");
             }
         }
 

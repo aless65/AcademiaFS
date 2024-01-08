@@ -58,24 +58,25 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 //});
 
 
-builder.Services.AddTransient<AuthService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 
 builder.Services.AddTransient<ColaboradorDomainService>();
-builder.Services.AddTransient<ColaboradorService>();
+builder.Services.AddTransient<IColaboradorService, ColaboradorService>();
 
 builder.Services.AddTransient<CommonService>();
 
-builder.Services.AddTransient<DepartamentoService>();
+builder.Services.AddTransient<DepartamentoDomainService>();
+builder.Services.AddTransient<IDepartamentoService, DepartamentoService>();
 
 builder.Services.AddTransient<MunicipioDomainService>();
-builder.Services.AddTransient<MunicipioService>();
+builder.Services.AddTransient<IMunicipioService, MunicipioService>();
 
 builder.Services.AddTransient<SucursalDomainService>();
-builder.Services.AddTransient<SucursalService>();
+builder.Services.AddTransient<ISucursalService, SucursalService>();
 
-builder.Services.AddTransient<TransportistaService>();
-builder.Services.AddTransient<UsuarioService>();
-builder.Services.AddTransient<ViajeService>();
+builder.Services.AddTransient<ITransportistaService, TransportistaService>();
+builder.Services.AddTransient<IUsuarioService, UsuarioService>();
+builder.Services.AddTransient<IViajeService, ViajeService>();
 
 builder.Services.AddTransient<DomainService>();
 

@@ -12,7 +12,7 @@ namespace AcademiaFS.Proyecto.API._Features.Municipios
         {
             bool existe;
 
-            if (municipio.IdMunicipio > 0)
+            if (municipio.IdMunicipio < 1)
                 existe = municipios.Where(x => x.Nombre == municipio.Nombre && x.IdDepartamento == municipio.IdDepartamento || x.Codigo == municipio.Codigo).Any();
             else
                 existe = municipios.Where(x => (x.Nombre == municipio.Nombre && x.IdDepartamento == municipio.IdDepartamento || x.Codigo == municipio.Codigo) && x.IdMunicipio != municipio.IdMunicipio).Any();

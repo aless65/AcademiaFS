@@ -1,5 +1,7 @@
 ﻿using AcademiaFS.Proyecto.API._Common;
 using AcademiaFS.Proyecto.API._Features.Departamentos.Dto;
+using AcademiaFS.Proyecto.API._Features.Municipios.Dto;
+using AcademiaFS.Proyecto.API._Features.Municipios;
 using AcademiaFS.Proyecto.API.Domain;
 using AcademiaFS.Proyecto.API.Infrastructure;
 using AcademiaFS.Proyecto.API.Infrastructure.SistemaViajes.Entities;
@@ -14,13 +16,13 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private readonly DomainService _domainService;
+        private readonly DepartamentoDomainService _departamentoDomainService;
 
-        public DepartamentoService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, DomainService domainService)
+        public DepartamentoService(IMapper mapper, UnitOfWorkBuilder unitOfWorkBuilder, DepartamentoDomainService departamentoDomainService)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWorkBuilder.BuilderSistemaViajes();
-            _domainService = domainService;
+            _departamentoDomainService = departamentoDomainService;
         }
 
         public Respuesta<List<DepartamentoDto>> ListarDepartamentos()
@@ -41,8 +43,12 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
         {
             try
             {
-                if (_domainService.DepartamentoExiste(departamentoDto.Codigo, departamentoDto.Nombre))
-                    return Respuesta.Fault<DepartamentoDto>(Mensajes.REPETIDO("Departamento"), Codigos.Error);
+                List<Departamento> departamentos = _unitOfWork.Repository<Departamento>().AsQueryable().ToList();
+                departamentoDto.IdDepartamento = 0;
+                Respuesta<bool> validar = _departamentoDomainService.ValidarDepartamentos(departamentoDto, departamentos);
+
+                if (!validar.Ok)
+                    return Respuesta.Fault<DepartamentoDto>(validar.Mensaje, validar.Codigo);
 
                 var departamento = _mapper.Map<Departamento>(departamentoDto);
                 departamento.UsuaCreacion = 1;
@@ -75,6 +81,13 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
         {
             try
             {
+                List<Departamento> departamentos = _unitOfWork.Repository<Departamento>().AsQueryable().ToList();
+                departamentoDto.IdDepartamento = 0;
+                Respuesta<bool> validar = _departamentoDomainService.ValidarDepartamentos(departamentoDto, departamentos);
+
+                if (!validar.Ok)
+                    return Respuesta.Fault<DepartamentoDto>(validar.Mensaje, validar.Codigo);
+
                 var departamento = _mapper.Map<Departamento>(departamentoDto);
 
                 DepartamentoValidator validator = new DepartamentoValidator();
@@ -87,9 +100,6 @@ namespace AcademiaFS.Proyecto.API._Features.Departamentos
                     string menssageValidation = string.Join(Environment.NewLine, errores);
                     return Respuesta.Fault<DepartamentoDto>(menssageValidation, Codigos.BadRequest);
                 }
-
-                if (_domainService.DepartamentoExiste(departamentoDto.Codigo, departamentoDto.Nombre, departamentoDto.IdDepartamento))
-                    return Respuesta.Fault<DepartamentoDto>(Mensajes.REPETIDO("Departamento"), Codigos.Error);
 
                 var departamentoAEditar = _unitOfWork.Repository<Departamento>().Where(x => x.IdDepartamento == departamento.IdDepartamento).FirstOrDefault();
 

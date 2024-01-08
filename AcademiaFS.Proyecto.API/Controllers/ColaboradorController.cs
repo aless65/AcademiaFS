@@ -10,9 +10,9 @@ namespace AcademiaFS.Proyecto.API.Controllers
     [ApiController]
     public class ColaboradorController : ControllerBase
     {
-        private readonly ColaboradorService _colaboradorService;
+        private readonly IColaboradorService _colaboradorService;
 
-        public ColaboradorController(ColaboradorService colaboradorService)
+        public ColaboradorController(IColaboradorService colaboradorService)
         {
             _colaboradorService = colaboradorService;
         }

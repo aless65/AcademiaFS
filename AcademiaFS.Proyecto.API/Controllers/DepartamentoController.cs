@@ -13,9 +13,9 @@ namespace AcademiaFS.Proyecto.API.Controllers
     [ApiController]
     public class DepartamentoController : ControllerBase
     {
-        private readonly DepartamentoService _departamentoService;
+        private readonly IDepartamentoService _departamentoService;
 
-        public DepartamentoController(DepartamentoService departamentoService)
+        public DepartamentoController(IDepartamentoService departamentoService)
         {
             _departamentoService = departamentoService;
         }

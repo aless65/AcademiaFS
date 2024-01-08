@@ -10,9 +10,9 @@ namespace AcademiaFS.Proyecto.API.Controllers
     [ApiController]
     public class ViajeController : ControllerBase
     {
-        private readonly ViajeService _viajeService;
+        private readonly IViajeService _viajeService;
 
-        public ViajeController(ViajeService viajeService)
+        public ViajeController(IViajeService viajeService)
         {
             _viajeService = viajeService;
         }

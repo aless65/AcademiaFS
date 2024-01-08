@@ -13,9 +13,9 @@ namespace AcademiaFS.Proyecto.API.Controllers
     [ApiController]
     public class MunicipioController : ControllerBase
     {
-        private readonly MunicipioService _municipioService;
+        private readonly IMunicipioService _municipioService;
 
-        public MunicipioController(MunicipioService municipioService)
+        public MunicipioController(IMunicipioService municipioService)
         {
             _municipioService = municipioService;
         }

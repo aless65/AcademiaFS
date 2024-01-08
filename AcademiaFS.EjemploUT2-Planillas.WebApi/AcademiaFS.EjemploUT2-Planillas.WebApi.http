@@ -1,0 +1,6 @@
+@AcademiaFS.EjemploUT2_Planillas.WebApi_HostAddress = http://localhost:5259
+
+GET {{AcademiaFS.EjemploUT2_Planillas.WebApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
