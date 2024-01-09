@@ -1,9 +1,10 @@
-﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
+﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Common;
+using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
 
 namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
 {
     public interface IEmpleadoService
     {
-        EmpleadoPlanillaDto ObtenerPlanilla(EmpleadoDto empleadoDto);
+        Respuesta ObtenerPlanilla(EmpleadoDto empleadoDto);
     }
 }

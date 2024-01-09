@@ -5954,37 +5954,34 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\amedina\\.nuget\\packages\\": {}
+    "C:\\Users\\PC\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
       "projectName": "AcademiaFS.EjemploUT.UnitTest",
-      "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
-      "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\obj\\",
+      "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\amedina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://sertfs.grupofarsiman.com/FarsimanPackages/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
-              "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj"
+            "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
+              "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj"
             }
           }
         }
@@ -5993,6 +5990,9 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "default"
       }
     },
     "frameworks": {
@@ -6039,13 +6039,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1803",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Está ejecutando la operación \"restore\" con un origen \"HTTP\", \"http://sertfs.grupofarsiman.com/FarsimanPackages/nuget\". El acceso que no sea HTTPS se quitará en una versión futura. Considere la posibilidad de migrar a un origen \"HTTPS\"."
-    }
-  ]
+  }
 }

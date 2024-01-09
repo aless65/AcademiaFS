@@ -1,38 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj": {}
+    "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj": {
+    "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
         "projectName": "AcademiaFS.EjemploUT.UnitTest",
-        "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
-        "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\AcademiaFS.EjemploUT.UnitTest.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.UnitTest\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amedina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://sertfs.grupofarsiman.com/FarsimanPackages/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
-                "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj"
+              "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
+                "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj"
               }
             }
           }
@@ -41,6 +38,9 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "default"
         }
       },
       "frameworks": {
@@ -88,27 +88,24 @@
         }
       }
     },
-    "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
+    "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj",
+        "projectUniqueName": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj",
         "projectName": "AcademiaFS.EjemploUT.WebApi",
-        "projectPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj",
-        "packagesPath": "C:\\Users\\amedina\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\amedina\\Desktop\\GitHub\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\obj\\",
+        "projectPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\AcademiaFS.EjemploUT.WebApi.csproj",
+        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\PC\\Desktop\\Prácticas\\Viajes\\AcademiaFS\\AcademiaFS.EjemploUT.WebApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\amedina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.2.config",
+          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\DevExpress 18.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "http://sertfs.grupofarsiman.com/FarsimanPackages/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -121,6 +118,9 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "default"
         }
       },
       "frameworks": {

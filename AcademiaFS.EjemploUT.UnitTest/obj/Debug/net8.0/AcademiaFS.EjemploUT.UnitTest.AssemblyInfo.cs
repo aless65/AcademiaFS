@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcademiaFS.EjemploUT.UnitTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3468e769f3eda7cb212e4c7313e1a1fa6afcb1c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a57161171ad6b31bebfb9626708f99b01f53df1")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcademiaFS.EjemploUT.UnitTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcademiaFS.EjemploUT.UnitTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,4 +1,5 @@
-﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
+﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Common;
+using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
 
 namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
 {
@@ -10,14 +11,36 @@ namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
         {
             _empleadoDomainService = empleadoDomainService;
         }
-        public (EmpleadoPlanillaDto, string) ObtenerPlanilla(EmpleadoDto empleadoDto)
+        public Respuesta ObtenerPlanilla(EmpleadoDto empleadoDto)
         {
-            EmpleadoPlanillaDto empleadoPlanillaDto = new();
+            EmpleadoPlanillaDto empleadoPlanillaDto;
+            Respuesta respuesta = new();
 
-            if (_empleadoDomainService.ValidarEmpleado(empleadoDto))
-                return (empleadoPlanillaDto, "Datos inválidos");
+            if (!_empleadoDomainService.ValidarEmpleado(empleadoDto))
+            {
+                respuesta.Mensaje = "Datos inválidos";
+                return respuesta;
 
-            throw new NotImplementedException();
+            }
+
+            decimal salarioBruto = _empleadoDomainService.ObtenerSalarioBruto(empleadoDto);
+            decimal deducciones = _empleadoDomainService.ObtenerDeducciones(salarioBruto);
+
+            empleadoPlanillaDto = new EmpleadoPlanillaDto
+            {
+                IdEmpleado = empleadoDto.IdEmpleado,
+                Nombre = empleadoDto.Nombre,
+                Identidad = empleadoDto.Identidad,
+                PagoPorHora = empleadoDto.PagoPorHora,
+                HorasTrabajadas = empleadoDto.HorasTrabajadas,
+                SalarioBruto = salarioBruto,
+                Deducciones = deducciones,
+                SueldoAPagar = salarioBruto - deducciones
+            };
+
+            respuesta.Mensaje = "Operación completada exitosamente";
+            respuesta.Objeto = empleadoPlanillaDto;
+            return respuesta;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
+﻿using AcademiaFS.EjemploUT2_Planillas.WebApi._Common;
+using AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados.Dtos;
 
 namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
 {
@@ -22,16 +23,20 @@ namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
         {
             decimal salarioBruto = empleadoDto.PagoPorHora * empleadoDto.HorasTrabajadas;
 
+            salarioBruto = Math.Round(salarioBruto, 2);
+
             return salarioBruto;
         }
 
         public decimal ObtenerDeducciones(decimal salarioBruto)
         {
-            decimal seguroSocial = salarioBruto * 0.0975m;
-            decimal seguroEducativo = salarioBruto * 0.0125m;
-            decimal impuestoSobreLaRenta = salarioBruto * 0.010m;
+            decimal seguroSocial = salarioBruto * Deducciones.SeguroSocial;
+            decimal seguroEducativo = salarioBruto * Deducciones.SeguroEducativo;
+            decimal impuestoSobreLaRenta = salarioBruto * Deducciones.ImpuestoSobreLaRenta;
 
             decimal totalDeducciones = seguroSocial + seguroEducativo + impuestoSobreLaRenta;
+
+            totalDeducciones = Math.Round(totalDeducciones, 2);
 
             return totalDeducciones;
         }

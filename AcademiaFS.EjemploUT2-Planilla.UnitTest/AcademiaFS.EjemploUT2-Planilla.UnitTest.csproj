@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AcademiaFS.EjemploUT2-Planillas.WebApi\AcademiaFS.EjemploUT2-Planillas.WebApi.csproj" />
+  </ItemGroup>
+
 </Project>

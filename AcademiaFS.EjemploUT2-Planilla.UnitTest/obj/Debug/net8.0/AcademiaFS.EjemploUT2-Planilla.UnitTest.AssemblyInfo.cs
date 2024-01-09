@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AcademiaFS.EjemploUT2-Planilla.UnitTest")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a57161171ad6b31bebfb9626708f99b01f53df1")]
 [assembly: System.Reflection.AssemblyProductAttribute("AcademiaFS.EjemploUT2-Planilla.UnitTest")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AcademiaFS.EjemploUT2-Planilla.UnitTest")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
