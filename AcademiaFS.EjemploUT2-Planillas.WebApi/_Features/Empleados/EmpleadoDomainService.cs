@@ -7,7 +7,10 @@ namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
     {
         public bool ValidarEmpleado (EmpleadoDto empleadoDto)
         {
-            if(empleadoDto.Identidad.Length != 13)
+            if(empleadoDto.Nombre.Trim() == "")
+                return false;
+
+            if (empleadoDto.Identidad.Length != 13)
                 return false;
 
             if (empleadoDto.HorasTrabajadas < 1)

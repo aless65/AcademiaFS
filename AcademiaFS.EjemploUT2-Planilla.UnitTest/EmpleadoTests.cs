@@ -72,19 +72,13 @@ namespace AcademiaFS.EjemploUT2_Planilla.UnitTest
         public void ObtenerDeducciones_Resultado()
         {
             //Arrange
-            EmpleadoDto empleadoDto = new EmpleadoDto
-            {
-                Nombre = "Nombre",
-                Identidad = "0501200506728",
-                HorasTrabajadas = 44,
-                PagoPorHora = 30
-            };
+            decimal salarioBruto = 15840;
 
             //Act 
-            decimal respuesta = empleadoDomainService.ObtenerSalarioBruto(empleadoDto);
+            decimal respuesta = empleadoDomainService.ObtenerDeducciones(salarioBruto);
 
             //Assert
-            Assert.Equal(158.4m, respuesta);
+            Assert.Equal(3326.4m, respuesta);
         }
     }
 }

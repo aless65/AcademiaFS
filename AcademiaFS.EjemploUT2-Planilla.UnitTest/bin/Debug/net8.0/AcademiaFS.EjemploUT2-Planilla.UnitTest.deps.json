@@ -1133,7 +1133,6 @@
       "AcademiaFS.EjemploUT2-Planillas.WebApi/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "8.0.0",
-          "Microsoft.NET.Test.Sdk": "17.6.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {

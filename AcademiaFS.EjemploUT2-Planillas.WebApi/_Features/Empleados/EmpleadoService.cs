@@ -28,7 +28,6 @@ namespace AcademiaFS.EjemploUT2_Planillas.WebApi._Features.Empleados
 
             empleadoPlanillaDto = new EmpleadoPlanillaDto
             {
-                IdEmpleado = empleadoDto.IdEmpleado,
                 Nombre = empleadoDto.Nombre,
                 Identidad = empleadoDto.Identidad,
                 PagoPorHora = empleadoDto.PagoPorHora,
